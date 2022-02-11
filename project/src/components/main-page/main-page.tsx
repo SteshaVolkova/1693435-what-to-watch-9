@@ -1,5 +1,8 @@
 import SmallFilmCard from '../small-film-card/small-film-card';
-import Header from '../header/header';
+import HeaderLogo from '../header-logo/header-logo';
+import HeaderSignOut from '../header-sign-out/header-sign-out';
+import PlayFilmButton from '../play-filn-button/play-filn-button';
+import AddToMyListButton from '../add-to-my-list-button/add-to-my-list-button';
 import Footer from '../footer/footer';
 
 type MainPageProps = {
@@ -13,17 +16,20 @@ function MainPage({filmCardTitle, filmCardGenre, filmCardYear}: MainPageProps): 
     <>
       <section className="film-card">
         <div className="film-card__bg">
-          <img src="img/bg-the-grand-budapest-hotel.jpg" alt="The Grand Budapest Hotel" />
+          <img src="img/bg-the-grand-budapest-hotel.jpg" alt={filmCardTitle} />
         </div>
 
         <h1 className="visually-hidden">WTW</h1>
 
-        <Header />
+        <header className="page-header film-card__head">
+          <HeaderLogo />
+          <HeaderSignOut />
+        </header>
 
         <div className="film-card__wrap">
           <div className="film-card__info">
             <div className="film-card__poster">
-              <img src="img/the-grand-budapest-hotel-poster.jpg" alt="The Grand Budapest Hotel poster" width="218" height="327" />
+              <img src="img/the-grand-budapest-hotel-poster.jpg" alt={filmCardTitle} width="218" height="327" />
             </div>
 
             <div className="film-card__desc">
@@ -34,18 +40,8 @@ function MainPage({filmCardTitle, filmCardGenre, filmCardYear}: MainPageProps): 
               </p>
 
               <div className="film-card__buttons">
-                <button className="btn btn--play film-card__button" type="button">
-                  <svg viewBox="0 0 19 19" width="19" height="19">
-                    <use xlinkHref="#play-s"></use>
-                  </svg>
-                  <span>Play</span>
-                </button>
-                <button className="btn btn--list film-card__button" type="button">
-                  <svg viewBox="0 0 19 20" width="19" height="20">
-                    <use xlinkHref="#add"></use>
-                  </svg>
-                  <span>My list</span>
-                </button>
+                <PlayFilmButton />
+                <AddToMyListButton />
               </div>
             </div>
           </div>

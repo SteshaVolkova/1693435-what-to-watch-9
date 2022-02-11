@@ -1,4 +1,3 @@
-
 import MainPage from '../main-page/main-page';
 
 type AppScreenProps = {
