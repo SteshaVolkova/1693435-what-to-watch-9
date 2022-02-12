@@ -1,49 +1,21 @@
-import HeaderLogo from '../header-logo/header-logo';
-import HeaderSignOut from '../header-sign-out/header-sign-out';
 import Footer from '../footer/footer';
 import SmallFilmCard from '../small-film-card/small-film-card';
-import PlayFilmButton from '../play-filn-button/play-filn-button';
-import AddToMyListButton from '../add-to-my-list-button/add-to-my-list-button';
+import FilmNavigationItem from '../film-navigation-item/film-navigation-item';
+import MoviePageTopBlock from '../movie-page-top-block/movie-page-top-block';
+
 
 type MoviePageProps = {
+  filmCardSrc: string,
   filmCardTitle: string,
   filmCardGenre: string,
   filmCardYear: number
 };
 
-function MoviePage({filmCardTitle, filmCardGenre, filmCardYear}: MoviePageProps): JSX.Element {
+function MoviePage({filmCardSrc, filmCardTitle, filmCardGenre, filmCardYear}: MoviePageProps): JSX.Element {
   return (
     <>
       <section className="film-card film-card--full">
-        <div className="film-card__hero">
-          <div className="film-card__bg">
-            <img src="img/bg-the-grand-budapest-hotel.jpg" alt={filmCardTitle} />
-          </div>
-
-          <h1 className="visually-hidden">WTW</h1>
-
-          <header className="page-header film-card__head">
-            <HeaderLogo />
-
-            <HeaderSignOut />
-          </header>
-
-          <div className="film-card__wrap">
-            <div className="film-card__desc">
-              <h2 className="film-card__title">{filmCardTitle}</h2>
-              <p className="film-card__meta">
-                <span className="film-card__genre">{filmCardGenre}</span>
-                <span className="film-card__year">{filmCardYear}</span>
-              </p>
-
-              <div className="film-card__buttons">
-                <PlayFilmButton />
-                <AddToMyListButton />
-                <a href="add-review.html" className="btn film-card__button">Add review</a>
-              </div>
-            </div>
-          </div>
-        </div>
+        <MoviePageTopBlock filmCardSrc={filmCardSrc} filmCardTitle={filmCardTitle} filmCardGenre={filmCardGenre} filmCardYear={filmCardYear} />
 
         <div className="film-card__wrap film-card__translate-top">
           <div className="film-card__info">
@@ -54,15 +26,9 @@ function MoviePage({filmCardTitle, filmCardGenre, filmCardYear}: MoviePageProps)
             <div className="film-card__desc">
               <nav className="film-nav film-card__nav">
                 <ul className="film-nav__list">
-                  <li className="film-nav__item film-nav__item--active">
-                    <a href="/overview" className="film-nav__link">Overview</a>
-                  </li>
-                  <li className="film-nav__item">
-                    <a href="/details" className="film-nav__link">Details</a>
-                  </li>
-                  <li className="film-nav__item">
-                    <a href="/review" className="film-nav__link">Reviews</a>
-                  </li>
+                  <FilmNavigationItem className={'film-nav__item film-nav__item--active'} filmNavLink={'/overview'} filmNavTitle={'Overview'} />
+                  <FilmNavigationItem className={'film-nav__item'} filmNavLink={'/details'} filmNavTitle={'Details'} />
+                  <FilmNavigationItem className={'film-nav__item'} filmNavLink={'/review'} filmNavTitle={'Reviews'} />
                 </ul>
               </nav>
 

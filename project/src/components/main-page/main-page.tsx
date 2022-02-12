@@ -3,20 +3,23 @@ import HeaderLogo from '../header-logo/header-logo';
 import HeaderSignOut from '../header-sign-out/header-sign-out';
 import PlayFilmButton from '../play-filn-button/play-filn-button';
 import AddToMyListButton from '../add-to-my-list-button/add-to-my-list-button';
+import CatalogGenresItem from '../catalog-genres-item/catalog-genres-item';
+import FilmCardMeta from '../film-card-meta/film-card-meta';
 import Footer from '../footer/footer';
 
 type MainPageProps = {
+  filmCardSrc: string,
   filmCardTitle: string,
   filmCardGenre: string,
   filmCardYear: number
 };
 
-function MainPage({filmCardTitle, filmCardGenre, filmCardYear}: MainPageProps): JSX.Element {
+function MainPage({filmCardSrc, filmCardTitle, filmCardGenre, filmCardYear}: MainPageProps): JSX.Element {
   return (
     <>
       <section className="film-card">
         <div className="film-card__bg">
-          <img src="img/bg-the-grand-budapest-hotel.jpg" alt={filmCardTitle} />
+          <img src={filmCardSrc} alt={filmCardTitle} />
         </div>
 
         <h1 className="visually-hidden">WTW</h1>
@@ -29,15 +32,12 @@ function MainPage({filmCardTitle, filmCardGenre, filmCardYear}: MainPageProps): 
         <div className="film-card__wrap">
           <div className="film-card__info">
             <div className="film-card__poster">
-              <img src="img/the-grand-budapest-hotel-poster.jpg" alt={filmCardTitle} width="218" height="327" />
+              <img src={filmCardSrc} alt={filmCardTitle} width="218" height="327" />
             </div>
 
             <div className="film-card__desc">
               <h2 className="film-card__title">{filmCardTitle}</h2>
-              <p className="film-card__meta">
-                <span className="film-card__genre">{filmCardGenre}</span>
-                <span className="film-card__year">{filmCardYear}</span>
-              </p>
+              <FilmCardMeta filmCardGenre={filmCardGenre} filmCardYear={filmCardYear} />
 
               <div className="film-card__buttons">
                 <PlayFilmButton />
@@ -53,36 +53,16 @@ function MainPage({filmCardTitle, filmCardGenre, filmCardYear}: MainPageProps): 
           <h2 className="catalog__title visually-hidden">Catalog</h2>
 
           <ul className="catalog__genres-list">
-            <li className="catalog__genres-item catalog__genres-item--active">
-              <a href="/all-gener" className="catalog__genres-link">All genres</a>
-            </li>
-            <li className="catalog__genres-item">
-              <a href="/comedies" className="catalog__genres-link">Comedies</a>
-            </li>
-            <li className="catalog__genres-item">
-              <a href="/crime" className="catalog__genres-link">Crime</a>
-            </li>
-            <li className="catalog__genres-item">
-              <a href="/documentry" className="catalog__genres-link">Documentary</a>
-            </li>
-            <li className="catalog__genres-item">
-              <a href="/drams" className="catalog__genres-link">Dramas</a>
-            </li>
-            <li className="catalog__genres-item">
-              <a href="/horror" className="catalog__genres-link">Horror</a>
-            </li>
-            <li className="catalog__genres-item">
-              <a href="/kid-familly" className="catalog__genres-link">Kids & Family</a>
-            </li>
-            <li className="catalog__genres-item">
-              <a href="/romance" className="catalog__genres-link">Romance</a>
-            </li>
-            <li className="catalog__genres-item">
-              <a href="/sci-fi" className="catalog__genres-link">Sci-Fi</a>
-            </li>
-            <li className="catalog__genres-item">
-              <a href="/thrillers" className="catalog__genres-link">Thrillers</a>
-            </li>
+            <CatalogGenresItem className={'catalog__genres-item catalog__genres-item--active'} genreItemLink={'/all-gener'} genreItemTitle={'All genres'} />
+            <CatalogGenresItem className={'catalog__genres-item'} genreItemLink={'/comedies'} genreItemTitle={'Comedies'} />
+            <CatalogGenresItem className={'catalog__genres-item'} genreItemLink={'/crime'} genreItemTitle={'Crime'} />
+            <CatalogGenresItem className={'catalog__genres-item'} genreItemLink={'documentry'} genreItemTitle={'Documentary'} />
+            <CatalogGenresItem className={'catalog__genres-item'} genreItemLink={'/drams'} genreItemTitle={'Dramas'} />
+            <CatalogGenresItem className={'catalog__genres-item'} genreItemLink={'/horror'} genreItemTitle={'Horror'} />
+            <CatalogGenresItem className={'catalog__genres-item'} genreItemLink={'/kid-familly'} genreItemTitle={'Kids & Family'} />
+            <CatalogGenresItem className={'catalog__genres-item'} genreItemLink={'/romance'} genreItemTitle={'Romance'} />
+            <CatalogGenresItem className={'catalog__genres-item'} genreItemLink={'/sci-fi'} genreItemTitle={'Sci-Fi'} />
+            <CatalogGenresItem className={'catalog__genres-item'} genreItemLink={'/thrillers'} genreItemTitle={'Thrillers'} />
           </ul>
 
           <div className="catalog__films-list">
