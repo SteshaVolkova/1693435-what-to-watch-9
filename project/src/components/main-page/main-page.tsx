@@ -3,7 +3,7 @@ import HeaderLogo from '../header-logo/header-logo';
 import HeaderSignOut from '../header-sign-out/header-sign-out';
 import PlayFilmButton from '../play-filn-button/play-filn-button';
 import AddToMyListButton from '../add-to-my-list-button/add-to-my-list-button';
-import CatalogGenresItem from '../catalog-genres-item/catalog-genres-item';
+import CatalogGenresList from '../catalog-genres-list/catalog-genres-list';
 import FilmCardMeta from '../film-card-meta/film-card-meta';
 import Footer from '../footer/footer';
 
@@ -53,16 +53,7 @@ function MainPage({filmCardSrc, filmCardTitle, filmCardGenre, filmCardYear}: Mai
           <h2 className="catalog__title visually-hidden">Catalog</h2>
 
           <ul className="catalog__genres-list">
-            <CatalogGenresItem className={'catalog__genres-item catalog__genres-item--active'} genreItemLink={'/all-gener'} genreItemTitle={'All genres'} />
-            <CatalogGenresItem className={'catalog__genres-item'} genreItemLink={'/comedies'} genreItemTitle={'Comedies'} />
-            <CatalogGenresItem className={'catalog__genres-item'} genreItemLink={'/crime'} genreItemTitle={'Crime'} />
-            <CatalogGenresItem className={'catalog__genres-item'} genreItemLink={'documentry'} genreItemTitle={'Documentary'} />
-            <CatalogGenresItem className={'catalog__genres-item'} genreItemLink={'/drams'} genreItemTitle={'Dramas'} />
-            <CatalogGenresItem className={'catalog__genres-item'} genreItemLink={'/horror'} genreItemTitle={'Horror'} />
-            <CatalogGenresItem className={'catalog__genres-item'} genreItemLink={'/kid-familly'} genreItemTitle={'Kids & Family'} />
-            <CatalogGenresItem className={'catalog__genres-item'} genreItemLink={'/romance'} genreItemTitle={'Romance'} />
-            <CatalogGenresItem className={'catalog__genres-item'} genreItemLink={'/sci-fi'} genreItemTitle={'Sci-Fi'} />
-            <CatalogGenresItem className={'catalog__genres-item'} genreItemLink={'/thrillers'} genreItemTitle={'Thrillers'} />
+            <CatalogGenresList />
           </ul>
 
           <div className="catalog__films-list">
