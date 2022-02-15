@@ -1,7 +1,7 @@
-import HeaderLogo from '../header-logo/header-logo';
-import HeaderSignOut from '../header-sign-out/header-sign-out';
-import Footer from '../footer/footer';
-import SmallFilmCard from '../small-film-card/small-film-card';
+import HeaderLogo from '../../components/header-logo/header-logo';
+import HeaderSignOut from '../../components/header-sign-out/header-sign-out';
+import Footer from '../../components/footer/footer';
+import SmallFilmCard from '../../components/small-film-card/small-film-card';
 
 function MyListPage(): JSX.Element {
   return (

@@ -1,7 +1,7 @@
-import Footer from '../footer/footer';
-import SmallFilmCard from '../small-film-card/small-film-card';
-import FilmNavigationItem from '../film-navigation-item/film-navigation-item';
-import MoviePageTopBlock from '../movie-page-top-block/movie-page-top-block';
+import Footer from '../../components/footer/footer';
+import SmallFilmCard from '../../components/small-film-card/small-film-card';
+import FilmNavigationItem from '../../components/film-navigation-item/film-navigation-item';
+import MoviePageTopBlock from '../../components/movie-page-top-block/movie-page-top-block';
 
 
 type MoviePageProps = {

@@ -1,8 +1,8 @@
-import MoviePageTopBlock from '../movie-page-top-block/movie-page-top-block';
-import MovieReview from '../movie-review/movie-review';
-import SmallFilmCard from '../small-film-card/small-film-card';
-import FilmNavigationItem from '../film-navigation-item/film-navigation-item';
-import Footer from '../footer/footer';
+import MoviePageTopBlock from '../../components/movie-page-top-block/movie-page-top-block';
+import MovieReview from '../../components/movie-review/movie-review';
+import SmallFilmCard from '../../components/small-film-card/small-film-card';
+import FilmNavigationItem from '../../components/film-navigation-item/film-navigation-item';
+import Footer from '../../components/footer/footer';
 
 type MoviePageReviewsProps = {
   filmCardSrc: string,

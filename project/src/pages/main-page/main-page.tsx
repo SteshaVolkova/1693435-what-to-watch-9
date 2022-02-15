@@ -1,9 +1,9 @@
-import SmallFilmCard from '../small-film-card/small-film-card';
-import HeaderLogo from '../header-logo/header-logo';
-import HeaderSignOut from '../header-sign-out/header-sign-out';
-import CatalogGenresList from '../catalog-genres-list/catalog-genres-list';
-import FilmCardDescription from '../film-card-description/film-card-description';
-import Footer from '../footer/footer';
+import SmallFilmCard from '../../components/small-film-card/small-film-card';
+import HeaderLogo from '../../components/header-logo/header-logo';
+import HeaderSignOut from '../../components/header-sign-out/header-sign-out';
+import CatalogGenresList from '../../components/catalog-genres-list/catalog-genres-list';
+import FilmCardDescription from '../../components/film-card-description/film-card-description';
+import Footer from '../../components/footer/footer';
 
 type MainPageProps = {
   filmCardSrc: string,
