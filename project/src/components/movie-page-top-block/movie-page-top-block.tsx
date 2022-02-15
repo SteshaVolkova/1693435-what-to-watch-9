@@ -1,3 +1,4 @@
+import {Link} from 'react-router-dom';
 import HeaderLogo from '../header-logo/header-logo';
 import HeaderSignOut from '../header-sign-out/header-sign-out';
 import FilmCardDescription from '../film-card-description/film-card-description';
@@ -25,7 +26,7 @@ function MoviePageTopBlock({filmCardSrc, filmCardTitle, filmCardGenre, filmCardY
 
       <div className="film-card__wrap">
         <FilmCardDescription filmCardTitle={filmCardTitle} filmCardGenre={filmCardGenre} filmCardYear={filmCardYear}>
-          <a href="add-review.html" className="btn film-card__button">Add review</a>
+          <Link to="/films/1/review" className="btn film-card__button">Add review</Link>
         </FilmCardDescription>
       </div>
     </div>

@@ -1,8 +1,7 @@
-import MoviePageTopBlock from '../../components/movie-page-top-block/movie-page-top-block';
-import MovieReview from '../../components/movie-review/movie-review';
-import SmallFilmCard from '../../components/small-film-card/small-film-card';
-import FilmNavigationItem from '../../components/film-navigation-item/film-navigation-item';
-import Footer from '../../components/footer/footer';
+import {Link} from 'react-router-dom';
+import HeaderLogo from '../../components/header-logo/header-logo';
+import HeaderSignOut from '../../components/header-sign-out/header-sign-out';
+import RatingStarsItem from '../../components/rating-stars-item/rating-stars-item';
 
 type MoviePageReviewsProps = {
   filmCardSrc: string,
@@ -13,94 +12,75 @@ type MoviePageReviewsProps = {
 
 function MoviePageReviews({filmCardSrc ,filmCardTitle, filmCardGenre, filmCardYear}: MoviePageReviewsProps): JSX.Element {
   return (
-    <>
-      <section className="film-card film-card--full">
-        <MoviePageTopBlock filmCardSrc={filmCardSrc} filmCardTitle={filmCardTitle} filmCardGenre={filmCardGenre} filmCardYear={filmCardYear} />
-
-        <div className="film-card__wrap film-card__translate-top">
-          <div className="film-card__info">
-            <div className="film-card__poster film-card__poster--big">
-              <img src={filmCardSrc} alt="The Grand Budapest Hotel poster" width="218" height="327" />
-            </div>
-
-            <div className="film-card__desc">
-              <nav className="film-nav film-card__nav">
-                <ul className="film-nav__list">
-                  <FilmNavigationItem className={'film-nav__item film-nav__item--active'} filmNavLink={'/overview'} filmNavTitle={'Overview'} />
-                  <FilmNavigationItem className={'film-nav__item'} filmNavLink={'/details'} filmNavTitle={'Details'} />
-                  <FilmNavigationItem className={'film-nav__item'} filmNavLink={'/review'} filmNavTitle={'Reviews'} />
-                </ul>
-              </nav>
-
-              <div className="film-card__reviews film-card__row">
-                <div className="film-card__reviews-col">
-                  <MovieReview
-                    reviewText={'Discerning travellers and Wes Anderson fans will luxuriate in the glorious Mittel-European kitsch of one of the director\'s funniest and most exquisitely designed films in years.'}
-                    reviewAuthor={'Kate Muir'}
-                    reviewData={'December 24, 2016'}
-                    reviewRating={8.9}
-                  />
-
-                  <MovieReview
-                    reviewText={'Anderson\'s films are too precious for some, but for those of us willing to lose ourselves in them, they\'re a delight. \'The Grand Budapest Hotel\' is no different, except that he has added a hint of gravitas to the mix, improving the recipe.'}
-                    reviewAuthor={'Bill Goodykoontz'}
-                    reviewData={'November 18, 2015'}
-                    reviewRating={8.0}
-                  />
-
-                  <MovieReview
-                    reviewText={'I didn\'t find it amusing, and while I can appreciate the creativity, it\'s an hour and 40 minutes I wish I could take back.'}
-                    reviewAuthor={'Amanda Greever'}
-                    reviewData={'November 18, 2015'}
-                    reviewRating={8.0}
-                  />
-                </div>
-                <div className="film-card__reviews-col">
-                  <MovieReview
-                    reviewText={'The mannered, madcap proceedings are often delightful, occasionally silly, and here and there, gruesome and/or heartbreaking.'}
-                    reviewAuthor={'Matthew Lickona'}
-                    reviewData={'2016-12-20'}
-                    reviewRating={7.2}
-                  />
-
-                  <MovieReview
-                    reviewText={'It is certainly a magical and childlike way of storytelling, even if the content is a little more adult.'}
-                    reviewAuthor={'Paula Fleri-Soler'}
-                    reviewData={'December 20, 2016'}
-                    reviewRating={7.6}
-                  />
-
-                  <MovieReview
-                    reviewText={'It is certainly a magical and childlike way of storytelling, even if the content is a little more adult.'}
-                    reviewAuthor={'Paula Fleri-Soler'}
-                    reviewData={'December 20, 2016'}
-                    reviewRating={7.0}
-                  />
-                </div>
-              </div>
-            </div>
-          </div>
+    <section className="film-card film-card--full">
+      <div className="film-card__header">
+        <div className="film-card__bg">
+          <img src="img/bg-the-grand-budapest-hotel.jpg" alt="The Grand Budapest Hotel" />
         </div>
-      </section>
 
-      <div className="page-content">
-        <section className="catalog catalog--like-this">
-          <h2 className="catalog__title">More like this</h2>
+        <h1 className="visually-hidden">WTW</h1>
 
-          <div className="catalog__films-list">
-            <SmallFilmCard smallFilmCardSrc={'img/fantastic-beasts-the-crimes-of-grindelwald.jpg'} smallFilmCardName={'Fantastic Beasts: The Crimes of Grindelwald'} />
-
-            <SmallFilmCard smallFilmCardSrc={'img/bohemian-rhapsody.jpg'} smallFilmCardName={'Bohemian Rhapsody'} />
-
-            <SmallFilmCard smallFilmCardSrc={'img/macbeth.jpg'} smallFilmCardName={'Macbeth'} />
-
-            <SmallFilmCard smallFilmCardSrc={'img/aviator.jpg'} smallFilmCardName={'Aviator'} />
+        <header className="page-header">
+          <div className="logo">
+            <HeaderLogo />
           </div>
-        </section>
 
-        <Footer />
+          <nav className="breadcrumbs">
+            <ul className="breadcrumbs__list">
+              <li className="breadcrumbs__item">
+                <Link to="/films/1" className="breadcrumbs__link">The Grand Budapest Hotel</Link>
+              </li>
+              <li className="breadcrumbs__item">
+                <Link to='/films/1/review' className="breadcrumbs__link">Add review</Link>
+              </li>
+            </ul>
+          </nav>
+
+          <HeaderSignOut />
+        </header>
+
+        <div className="film-card__poster film-card__poster--small">
+          <img src="img/the-grand-budapest-hotel-poster.jpg" alt="The Grand Budapest Hotel poster" width="218" height="327" />
+        </div>
       </div>
-    </>
+
+      <div className="add-review">
+        <form action="#" className="add-review__form">
+          <div className="rating">
+            <div className="rating__stars">
+              <RatingStarsItem starId={'star-10'} starValue={10} starTitle={'Rating 10'} />
+
+              <RatingStarsItem starId={'star-9'} starValue={9} starTitle={'Rating 9'} />
+
+              <RatingStarsItem starId={'star-8'} starValue={8} starTitle={'Rating 8'} />
+
+              <RatingStarsItem starId={'star-7'} starValue={7} starTitle={'Rating 7'} />
+
+              <RatingStarsItem starId={'star-6'} starValue={6} starTitle={'Rating 6'} />
+
+              <RatingStarsItem starId={'star-5'} starValue={5} starTitle={'Rating 5'} />
+
+              <RatingStarsItem starId={'star-4'} starValue={4} starTitle={'Rating 4'} />
+
+              <RatingStarsItem starId={'star-3'} starValue={3} starTitle={'Rating 3'} />
+
+              <RatingStarsItem starId={'star-2'} starValue={2} starTitle={'Rating 2'} />
+
+              <RatingStarsItem starId={'star-1'} starValue={1} starTitle={'Rating 1'} />
+            </div>
+          </div>
+
+          <div className="add-review__text">
+            <textarea className="add-review__textarea" name="review-text" id="review-text" placeholder="Review text"></textarea>
+            <div className="add-review__submit">
+              <button className="add-review__btn" type="submit">Post</button>
+            </div>
+
+          </div>
+        </form>
+      </div>
+
+    </section>
   );
 }
 
