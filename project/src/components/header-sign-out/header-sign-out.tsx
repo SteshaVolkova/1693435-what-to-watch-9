@@ -1,3 +1,5 @@
+import {Link} from 'react-router-dom';
+
 function HeaderSignOut(): JSX.Element {
   return (
     <ul className="user-block">
@@ -7,7 +9,7 @@ function HeaderSignOut(): JSX.Element {
         </div>
       </li>
       <li className="user-block__item">
-        <a href="/sign-out" className="user-block__link">Sign out</a>
+        <Link to="/sign-out" className="user-block__link">Sign out</Link>
       </li>
     </ul>
   );

@@ -1,11 +1,9 @@
-import SmallFilmCard from '../small-film-card/small-film-card';
-import HeaderLogo from '../header-logo/header-logo';
-import HeaderSignOut from '../header-sign-out/header-sign-out';
-import PlayFilmButton from '../play-filn-button/play-filn-button';
-import AddToMyListButton from '../add-to-my-list-button/add-to-my-list-button';
-import CatalogGenresList from '../catalog-genres-list/catalog-genres-list';
-import FilmCardMeta from '../film-card-meta/film-card-meta';
-import Footer from '../footer/footer';
+import SmallFilmCard from '../../components/small-film-card/small-film-card';
+import HeaderLogo from '../../components/header-logo/header-logo';
+import HeaderSignOut from '../../components/header-sign-out/header-sign-out';
+import CatalogGenresList from '../../components/catalog-genres-list/catalog-genres-list';
+import FilmCardDescription from '../../components/film-card-description/film-card-description';
+import Footer from '../../components/footer/footer';
 
 type MainPageProps = {
   filmCardSrc: string,
@@ -35,15 +33,7 @@ function MainPage({filmCardSrc, filmCardTitle, filmCardGenre, filmCardYear}: Mai
               <img src={filmCardSrc} alt={filmCardTitle} width="218" height="327" />
             </div>
 
-            <div className="film-card__desc">
-              <h2 className="film-card__title">{filmCardTitle}</h2>
-              <FilmCardMeta filmCardGenre={filmCardGenre} filmCardYear={filmCardYear} />
-
-              <div className="film-card__buttons">
-                <PlayFilmButton />
-                <AddToMyListButton />
-              </div>
-            </div>
+            <FilmCardDescription filmCardTitle={filmCardTitle} filmCardGenre={filmCardGenre} filmCardYear={filmCardYear} />
           </div>
         </div>
       </section>

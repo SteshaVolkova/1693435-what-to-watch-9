@@ -1,3 +1,5 @@
+import {Link} from 'react-router-dom';
+
 type CatalogGenresItemProps = {
     className: string,
     genreItemLink: string,
@@ -7,7 +9,7 @@ type CatalogGenresItemProps = {
 function CatalogGenresItem({className, genreItemLink, genreItemTitle}: CatalogGenresItemProps): JSX.Element {
   return (
     <li className={className}>
-      <a href={genreItemLink} className="catalog__genres-link">{genreItemTitle}</a>
+      <Link to={genreItemLink} className="catalog__genres-link">{genreItemTitle}</Link>
     </li>
   );
 }

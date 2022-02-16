@@ -1,5 +1,5 @@
-import HeaderLogo from '../header-logo/header-logo';
-import Footer from '../footer/footer';
+import HeaderLogo from '../../components/header-logo/header-logo';
+import Footer from '../../components/footer/footer';
 
 function SignInPage(): JSX.Element {
   return (

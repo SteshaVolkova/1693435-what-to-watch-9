@@ -1,3 +1,5 @@
+import {Link} from 'react-router-dom';
+
 type FilmNavigationItemProps = {
     className: string,
     filmNavLink: string,
@@ -7,7 +9,7 @@ type FilmNavigationItemProps = {
 function FilmNavigationItem({className, filmNavLink, filmNavTitle}: FilmNavigationItemProps): JSX.Element {
   return (
     <li className={className}>
-      <a href={filmNavLink} className="film-nav__link">{filmNavTitle}</a>
+      <Link to={filmNavLink} className="film-nav__link">{filmNavTitle}</Link>
     </li>
   );
 }
