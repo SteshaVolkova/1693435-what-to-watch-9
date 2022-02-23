@@ -2,20 +2,20 @@ import {Link} from 'react-router-dom';
 import HeaderLogo from '../../components/header-logo/header-logo';
 import HeaderSignOut from '../../components/header-sign-out/header-sign-out';
 import RatingStarsItem from '../../components/rating-stars-item/rating-stars-item';
+import {Film} from '../../types/films';
 
 type MoviePageReviewsProps = {
-  filmCardSrc: string,
-  filmCardTitle: string,
-  filmCardGenre: string,
-  filmCardYear: number
+  film: Film,
 };
 
-function MoviePageReviews({filmCardSrc ,filmCardTitle, filmCardGenre, filmCardYear}: MoviePageReviewsProps): JSX.Element {
+function MoviePageReviews({film}: MoviePageReviewsProps): JSX.Element {
+  const {name, backgroundImage, id, posterImage} = film;
+
   return (
     <section className="film-card film-card--full">
       <div className="film-card__header">
         <div className="film-card__bg">
-          <img src="img/bg-the-grand-budapest-hotel.jpg" alt="The Grand Budapest Hotel" />
+          <img src={backgroundImage} alt={name} />
         </div>
 
         <h1 className="visually-hidden">WTW</h1>
@@ -28,10 +28,10 @@ function MoviePageReviews({filmCardSrc ,filmCardTitle, filmCardGenre, filmCardYe
           <nav className="breadcrumbs">
             <ul className="breadcrumbs__list">
               <li className="breadcrumbs__item">
-                <Link to="/films/1" className="breadcrumbs__link">The Grand Budapest Hotel</Link>
+                <Link to={`/films/${id}`} className="breadcrumbs__link">{name}</Link>
               </li>
               <li className="breadcrumbs__item">
-                <Link to='/films/1/review' className="breadcrumbs__link">Add review</Link>
+                <Link to={`/films/${id}/review`} className="breadcrumbs__link">Add review</Link>
               </li>
             </ul>
           </nav>
@@ -40,7 +40,7 @@ function MoviePageReviews({filmCardSrc ,filmCardTitle, filmCardGenre, filmCardYe
         </header>
 
         <div className="film-card__poster film-card__poster--small">
-          <img src="img/the-grand-budapest-hotel-poster.jpg" alt="The Grand Budapest Hotel poster" width="218" height="327" />
+          <img src={posterImage} alt={name} width="218" height="327" />
         </div>
       </div>
 
