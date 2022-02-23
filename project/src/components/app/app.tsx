@@ -8,18 +8,16 @@ import MyListPage from '../../pages/my-list-page/my-list-page';
 import SignInPage from '../../pages/sign-in-page/sign-in-page';
 import PrivateRoute from '../private-route/private-route';
 import NotFoundPage from '../../pages/not-found-page/not-found-page';
+import {Star} from '../../types/rating-stars';
 import {Film} from '../../types/films';
 
 type AppScreenProps = {
-  filmCardSrc: string,
-  filmCardTitle: string,
-  filmCardGenre: string,
-  filmCardYear: number,
   film: Film,
   films: Film[],
+  stars: Star[],
 }
 
-function App({filmCardSrc ,filmCardTitle, filmCardGenre, filmCardYear, film, films}: AppScreenProps): JSX.Element {
+function App({stars, film, films}: AppScreenProps): JSX.Element {
 
   return (
     <BrowserRouter>
@@ -38,7 +36,7 @@ function App({filmCardSrc ,filmCardTitle, filmCardGenre, filmCardYear, film, fil
           />
           <Route
             path={AppRoute.FilmReview}
-            element={<MoviePageReviews film={film} />}
+            element={<MoviePageReviews film={film} stars={stars} />}
           />
         </Route>
 
