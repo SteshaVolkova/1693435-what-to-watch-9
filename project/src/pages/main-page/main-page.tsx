@@ -12,7 +12,7 @@ type MainPageProps = {
 };
 
 function MainPage({film, films}: MainPageProps): JSX.Element {
-  const {backgroundImage, name, posterImage, genre, released} = film;
+  const {backgroundImage, name, posterImage} = film;
   return (
     <>
       <section className="film-card">
@@ -33,7 +33,7 @@ function MainPage({film, films}: MainPageProps): JSX.Element {
               <img src={posterImage} alt={name} width="218" height="327" />
             </div>
 
-            <FilmCardDescription filmCardTitle={name} filmCardGenre={genre} filmCardYear={released} />
+            <FilmCardDescription film={film} />
           </div>
         </div>
       </section>

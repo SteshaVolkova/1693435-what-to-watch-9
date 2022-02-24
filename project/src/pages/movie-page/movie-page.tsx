@@ -10,12 +10,12 @@ type MoviePageProps = {
 };
 
 function MoviePage({film, films}: MoviePageProps): JSX.Element {
-  const {backgroundImage, name, genre, released, rating, scoresCount, description, director, starring} = film;
+  const {name, rating, scoresCount, description, director, starring} = film;
 
   return (
     <>
       <section className="film-card film-card--full">
-        <MoviePageTopBlock filmCardSrc={backgroundImage} filmCardTitle={name} filmCardGenre={genre} filmCardYear={released} />
+        <MoviePageTopBlock film={film} />
 
         <div className="film-card__wrap film-card__translate-top">
           <div className="film-card__info">
@@ -26,9 +26,9 @@ function MoviePage({film, films}: MoviePageProps): JSX.Element {
             <div className="film-card__desc">
               <nav className="film-nav film-card__nav">
                 <ul className="film-nav__list">
-                  <FilmNavigationItem className={'film-nav__item film-nav__item--active'} filmNavLink={'/overview'} filmNavTitle={'Overview'} />
-                  <FilmNavigationItem className={'film-nav__item'} filmNavLink={'/details'} filmNavTitle={'Details'} />
-                  <FilmNavigationItem className={'film-nav__item'} filmNavLink={'/review'} filmNavTitle={'Reviews'} />
+                  <FilmNavigationItem className={'film-nav__item film-nav__item--active'} filmNavLink={'overview'} filmNavTitle={'Overview'} />
+                  <FilmNavigationItem className={'film-nav__item'} filmNavLink={'details'} filmNavTitle={'Details'} />
+                  <FilmNavigationItem className={'film-nav__item'} filmNavLink={'reviews'} filmNavTitle={'Reviews'} />
                 </ul>
               </nav>
 
