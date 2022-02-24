@@ -10,7 +10,7 @@ type MoviePageProps = {
 };
 
 function MoviePage({film, films}: MoviePageProps): JSX.Element {
-  const {name, rating, scoresCount, description, director, starring} = film;
+  const {posterImage, name, rating, scoresCount, description, director, starring} = film;
 
   return (
     <>
@@ -20,7 +20,7 @@ function MoviePage({film, films}: MoviePageProps): JSX.Element {
         <div className="film-card__wrap film-card__translate-top">
           <div className="film-card__info">
             <div className="film-card__poster film-card__poster--big">
-              <img src="img/the-grand-budapest-hotel-poster.jpg" alt={name} width="218" height="327" />
+              <img src={posterImage} alt={name} width="218" height="327" />
             </div>
 
             <div className="film-card__desc">
