@@ -1,23 +1,25 @@
+import {FilmReview} from '../../types/films';
+
 type MovieReviewProps = {
-    reviewText: string,
-    reviewAuthor: string,
-    reviewData: string,
-    reviewRating: number
+    review: FilmReview,
 }
 
-function MovieReview({reviewText, reviewAuthor, reviewData, reviewRating}: MovieReviewProps): JSX.Element {
+function MovieReview({review}: MovieReviewProps): JSX.Element {
+  const {comment, date, user, rating} = review;
+  const {name} = user;
+
   return (
     <div className="review">
       <blockquote className="review__quote">
-        <p className="review__text">{reviewText}</p>
+        <p className="review__text">{comment}</p>
 
         <footer className="review__details">
-          <cite className="review__author">{reviewAuthor}</cite>
-          <time className="review__date" dateTime={reviewData}>{reviewData}</time>
+          <cite className="review__author">{name}</cite>
+          <time className="review__date" dateTime={date}>{date}</time>
         </footer>
       </blockquote>
 
-      <div className="review__rating">{reviewRating}</div>
+      <div className="review__rating">{rating}</div>
     </div>
   );
 }
