@@ -3,13 +3,16 @@ import FilmNavigationItem from '../../components/film-navigation-item/film-navig
 import MoviePageTopBlock from '../../components/movie-page-top-block/movie-page-top-block';
 import FilmsList from '../../components/films-list/films-list';
 import {Film} from '../../types/films';
+import {useParams} from 'react-router-dom';
 
 type MoviePageProps = {
-  film: Film,
   films: Film[],
 };
 
-function MoviePage({film, films}: MoviePageProps): JSX.Element {
+function MoviePage({films}: MoviePageProps): JSX.Element {
+  const params = useParams();
+  const filmId = Number(params.id);
+  const film = films[filmId - 1];
   const {posterImage, name, rating, scoresCount, description, director, starring} = film;
 
   return (

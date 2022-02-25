@@ -32,11 +32,11 @@ function App({stars, film, films}: AppScreenProps): JSX.Element {
         >
           <Route
             index
-            element={<MoviePage film={film} films={films}/>}
+            element={<MoviePage films={films}/>}
           />
           <Route
             path={AppRoute.FilmReview}
-            element={<MoviePageReviews film={film} stars={stars} />}
+            element={<MoviePageReviews films={films} stars={stars} />}
           />
         </Route>
 
@@ -58,7 +58,7 @@ function App({stars, film, films}: AppScreenProps): JSX.Element {
 
         <Route
           path={AppRoute.Player}
-          element={<MoviePlayer film={film}/>}
+          element={<MoviePlayer films={films}/>}
         />
 
         <Route
