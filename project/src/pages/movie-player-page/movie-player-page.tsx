@@ -1,10 +1,14 @@
+import { useParams } from 'react-router-dom';
 import {Film} from '../../types/films';
 
 type MoviePlayerProps = {
-  film: Film,
+  films: Film[],
 }
 
-function MoviePlayer({film}: MoviePlayerProps): JSX.Element {
+function MoviePlayer({films}: MoviePlayerProps): JSX.Element {
+  const params = useParams();
+  const filmId = Number(params.id);
+  const film = films[filmId - 1];
   const {videoLink, posterImage} = film;
 
   return (

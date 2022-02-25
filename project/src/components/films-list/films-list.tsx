@@ -12,6 +12,7 @@ function FilmsList({films}: FilmsListProps): JSX.Element {
     setSelectedFilm(id);
   };
 
+
   return (
     <div className="catalog__films-list">
       {films.map((film) => (
