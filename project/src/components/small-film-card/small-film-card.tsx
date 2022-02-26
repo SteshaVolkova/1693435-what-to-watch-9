@@ -1,22 +1,15 @@
-import {Link} from 'react-router-dom';
+
 import {Film} from '../../types/films';
+import VideoPlayer from '../video-player/video-player';
 
 type SmallFilmCardProps = {
     film: Film,
 };
 
 function SmallFilmCard({film}: SmallFilmCardProps): JSX.Element {
-  const {previewImage, name, id} = film;
 
   return (
-    <>
-      <div className="small-film-card__image">
-        <img src={previewImage} alt={name} width="280" height="175" />
-      </div>
-      <h3 className="small-film-card__title">
-        <Link className="small-film-card__link" to={`/films/${id}`}>{name}</Link>
-      </h3>
-    </>
+    <VideoPlayer autoPlay={false} film={film} />
   );
 }
 

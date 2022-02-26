@@ -28,10 +28,10 @@ function AddCommentForm({stars}: AddCommentFormProps): JSX.Element {
       <div className="rating">
         <div className="rating__stars">
           {stars.map((star) => (
-            <>
-              <input onClick={() => {hanldeMouseOver(star.id);}} key={star.id} className="rating__input" id={`star-${star.id}`} type="radio" name="rating" value={star.id} />
+            <div onClick={() => {hanldeMouseOver(star.id);}} key={star.id}>
+              <input className="rating__input" id={`star-${star.id}`} type="radio" name="rating" value={star.id} />
               <label className="rating__label" htmlFor={`star-${star.id}`}>{`Rating ${star.id}`}</label>
-            </>
+            </div>
           ))}
         </div>
       </div>
