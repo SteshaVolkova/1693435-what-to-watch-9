@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from 'react';
+import { useRef, useState } from 'react';
 import { Link } from 'react-router-dom';
 import {Film} from '../../types/films';
 
@@ -9,30 +9,44 @@ type VideoPlayerProps = {
 
 function VideoPlayer({autoPlay, film}: VideoPlayerProps): JSX.Element {
   const {previewVideoLink, posterImage, id, name} = film;
-
-  const [isPlaying, setIsPlaying] = useState(autoPlay);
+  const [timer, setTimer] = useState<NodeJS.Timeout | null>(null);
+  const [isLoading, setIsLoading] = useState(true);
 
   const videoRef = useRef<HTMLVideoElement | null>(null);
 
-  useEffect(() => {
-    if (videoRef.current === null) {
-      return;
-    }
+  const onMouseEnterHandler = () => {
+    setTimer(setTimeout(() => {
+      if(!isLoading) {
+        videoRef.current && videoRef.current.play();
+      }
+    }, 1000));
+  };
 
-    if (isPlaying) {
-      videoRef.current.play();
-      return;
-    }
+  const onMouseLeaveHandler = () => {
+    if(timer) {
+      clearTimeout(timer);
+      setTimer(null);
+      videoRef.current && videoRef.current.load();
 
-    videoRef.current.pause();
-    videoRef.current.currentTime = 0;
-    videoRef.current.load();
-  }, [isPlaying, posterImage]);
+    }
+  };
 
   return (
-    <article className="small-film-card catalog__films-card" onMouseEnter={() => setIsPlaying(!isPlaying)} onMouseLeave={() => setIsPlaying(!isPlaying)}>
+    <article className="small-film-card catalog__films-card" onMouseEnter={onMouseEnterHandler} onMouseLeave={onMouseLeaveHandler}>
       <div className="small-film-card__image">
-        <video ref={videoRef} src={previewVideoLink} poster={posterImage} width="100%" height="100%"></video>
+        <video
+          ref={videoRef}
+          src={previewVideoLink}
+          poster={posterImage}
+          muted
+          autoPlay={autoPlay}
+          onLoadedData={() => {
+            setIsLoading(false);
+          }}
+          width="100%"
+          height="100%"
+        >
+        </video>
       </div>
       <h3 className="small-film-card__title">
         <Link className="small-film-card__link" to={`/films/${id}`}>{name}</Link>
