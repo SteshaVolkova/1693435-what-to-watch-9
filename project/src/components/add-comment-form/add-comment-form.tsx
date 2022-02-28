@@ -1,11 +1,11 @@
 import {useState} from 'react';
 import {Star} from '../../types/rating-stars';
 
-type AddCommentFormProps = {
-    stars: Star[],
-}
+function AddCommentForm(): JSX.Element {
+  const stars: Star[] = [
+    {'id': 10},{'id': 9},{'id': 8},{'id': 7},{'id': 6},{'id': 5},{'id': 4},{'id': 3},{'id': 2},{'id': 1},
+  ];
 
-function AddCommentForm({stars}: AddCommentFormProps): JSX.Element {
   const [statRating, setStatRating] = useState<null | number>(null);
   const hanldeMouseOver = (id: number) => {
     setStatRating(id);

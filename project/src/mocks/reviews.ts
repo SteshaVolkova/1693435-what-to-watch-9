@@ -3,7 +3,7 @@ import {FilmReview} from '../types/films';
 export const filmReviews: FilmReview[] = [
   {
     'comment': 'Discerning travellers and Wes Anderson fans will luxuriate in the glorious Mittel-European kitsch of one of the director\'s funniest and most exquisitely designed movies in years.',
-    'date': 'Tue Feb 22 2022 18:44:41 GMT+0300 (Москва, стандартное время)',
+    'date': 'Feb 22 2022',
     'id': 1,
     'rating': 8.9,
     'user': {
