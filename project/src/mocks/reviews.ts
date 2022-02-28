@@ -13,7 +13,7 @@ export const filmReviews: FilmReview[] = [
   },
   {
     'comment': 'Discerning travellers and Wes Anderson fans will luxuriate in the glorious Mittel-European kitsch of one of the director\'s funniest and most exquisitely designed movies in years.',
-    'date': 'Tue Feb 22 2022 18:44:41 GMT+0300 (Москва, стандартное время)',
+    'date': 'Feb 22 2022',
     'id': 2,
     'rating': 8.9,
     'user': {
@@ -23,7 +23,7 @@ export const filmReviews: FilmReview[] = [
   },
   {
     'comment': 'Discerning travellers and Wes Anderson fans will luxuriate in the glorious Mittel-European kitsch of one of the director\'s funniest and most exquisitely designed movies in years.',
-    'date': 'Tue Feb 22 2022 18:44:41 GMT+0300 (Москва, стандартное время)',
+    'date': 'Feb 22 2022',
     'id': 3,
     'rating': 8.9,
     'user': {
@@ -33,7 +33,7 @@ export const filmReviews: FilmReview[] = [
   },
   {
     'comment': 'Discerning travellers and Wes Anderson fans will luxuriate in the glorious Mittel-European kitsch of one of the director\'s funniest and most exquisitely designed movies in years.',
-    'date': 'Tue Feb 22 2022 18:44:41 GMT+0300 (Москва, стандартное время)',
+    'date': 'Feb 22 2022',
     'id': 4,
     'rating': 8.9,
     'user': {
@@ -43,7 +43,7 @@ export const filmReviews: FilmReview[] = [
   },
   {
     'comment': 'Discerning travellers and Wes Anderson fans will luxuriate in the glorious Mittel-European kitsch of one of the director\'s funniest and most exquisitely designed movies in years.',
-    'date': 'Tue Feb 22 2022 18:44:41 GMT+0300 (Москва, стандартное время)',
+    'date': 'Feb 22 2022',
     'id': 5,
     'rating': 8.9,
     'user': {
@@ -53,7 +53,7 @@ export const filmReviews: FilmReview[] = [
   },
   {
     'comment': 'Discerning travellers and Wes Anderson fans will luxuriate in the glorious Mittel-European kitsch of one of the director\'s funniest and most exquisitely designed movies in years.',
-    'date': 'Tue Feb 22 2022 18:44:41 GMT+0300 (Москва, стандартное время)',
+    'date': 'Feb 22 2022',
     'id': 6,
     'rating': 8.9,
     'user': {
@@ -63,7 +63,7 @@ export const filmReviews: FilmReview[] = [
   },
   {
     'comment': 'Discerning travellers and Wes Anderson fans will luxuriate in the glorious Mittel-European kitsch of one of the director\'s funniest and most exquisitely designed movies in years.',
-    'date': 'Tue Feb 22 2022 18:44:41 GMT+0300 (Москва, стандартное время)',
+    'date': 'Feb 22 2022',
     'id': 7,
     'rating': 8.9,
     'user': {
@@ -73,7 +73,7 @@ export const filmReviews: FilmReview[] = [
   },
   {
     'comment': 'Discerning travellers and Wes Anderson fans will luxuriate in the glorious Mittel-European kitsch of one of the director\'s funniest and most exquisitely designed movies in years.',
-    'date': 'Tue Feb 22 2022 18:44:41 GMT+0300 (Москва, стандартное время)',
+    'date': 'Feb 22 2022',
     'id': 8,
     'rating': 8.9,
     'user': {
