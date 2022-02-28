@@ -1,6 +1,6 @@
 import Footer from '../../components/footer/footer';
 import MoviePageTopBlock from '../../components/movie-page-top-block/movie-page-top-block';
-import FilmsList from '../../components/films-list/films-list';
+import SmallFilmCard from '../../components/small-film-card/small-film-card';
 import { Film } from '../../types/films';
 import { useParams } from 'react-router-dom';
 import MovieTabs from '../../components/movie-tabs/movie-tabs';
@@ -37,7 +37,9 @@ function MoviePage({films, reviews }: MoviePageProps): JSX.Element {
         <section className="catalog catalog--like-this">
           <h2 className="catalog__title">More like this</h2>
 
-          <FilmsList films={films} />
+          <div className="catalog__films-list">
+            {films.filter((item) => (item.genre === film.genre)).splice(0, 4).map((item) => <SmallFilmCard key={item.id} film={item}/>)}
+          </div>
         </section>
 
         <Footer />
