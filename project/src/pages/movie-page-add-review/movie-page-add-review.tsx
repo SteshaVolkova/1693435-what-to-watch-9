@@ -2,15 +2,13 @@ import {Link, useParams} from 'react-router-dom';
 import HeaderLogo from '../../components/header-logo/header-logo';
 import HeaderSignOut from '../../components/header-sign-out/header-sign-out';
 import AddCommentForm from '../../components/add-comment-form/add-comment-form';
-import {Star} from '../../types/rating-stars';
 import {Film} from '../../types/films';
 
 type MoviePageReviewsProps = {
   films: Film[],
-  stars: Star[],
 };
 
-function MoviePageReviews({films, stars}: MoviePageReviewsProps): JSX.Element {
+function MoviePageReviews({ films }: MoviePageReviewsProps): JSX.Element {
   const params = useParams();
   const filmId = Number(params.id);
   const film = films[filmId - 1];
@@ -50,7 +48,7 @@ function MoviePageReviews({films, stars}: MoviePageReviewsProps): JSX.Element {
       </div>
 
       <div className="add-review">
-        <AddCommentForm stars={stars} />
+        <AddCommentForm />
       </div>
 
     </section>

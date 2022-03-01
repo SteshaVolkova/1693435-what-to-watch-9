@@ -1,19 +1,21 @@
 import Footer from '../../components/footer/footer';
-import FilmNavigationItem from '../../components/film-navigation-item/film-navigation-item';
 import MoviePageTopBlock from '../../components/movie-page-top-block/movie-page-top-block';
-import FilmsList from '../../components/films-list/films-list';
-import {Film} from '../../types/films';
-import {useParams} from 'react-router-dom';
+import SmallFilmCard from '../../components/small-film-card/small-film-card';
+import { Film } from '../../types/films';
+import { useParams } from 'react-router-dom';
+import MovieTabs from '../../components/movie-tabs/movie-tabs';
+import { FilmReview } from '../../types/films';
 
 type MoviePageProps = {
   films: Film[],
+  reviews: FilmReview[],
 };
 
-function MoviePage({films}: MoviePageProps): JSX.Element {
+function MoviePage({films, reviews }: MoviePageProps): JSX.Element {
   const params = useParams();
   const filmId = Number(params.id);
   const film = films[filmId - 1];
-  const {posterImage, name, rating, scoresCount, description, director, starring} = film;
+  const { posterImage, name } = film;
 
   return (
     <>
@@ -26,31 +28,7 @@ function MoviePage({films}: MoviePageProps): JSX.Element {
               <img src={posterImage} alt={name} width="218" height="327" />
             </div>
 
-            <div className="film-card__desc">
-              <nav className="film-nav film-card__nav">
-                <ul className="film-nav__list">
-                  <FilmNavigationItem className={'film-nav__item film-nav__item--active'} filmNavLink={'overview'} filmNavTitle={'Overview'} />
-                  <FilmNavigationItem className={'film-nav__item'} filmNavLink={'details'} filmNavTitle={'Details'} />
-                  <FilmNavigationItem className={'film-nav__item'} filmNavLink={'reviews'} filmNavTitle={'Reviews'} />
-                </ul>
-              </nav>
-
-              <div className="film-rating">
-                <div className="film-rating__score">{rating}</div>
-                <p className="film-rating__meta">
-                  <span className="film-rating__level">Very good</span>
-                  <span className="film-rating__count">{`${scoresCount} ratings`}</span>
-                </p>
-              </div>
-
-              <div className="film-card__text">
-                <p>{description}</p>
-
-                <p className="film-card__director"><strong>{`Director: ${director}`}</strong></p>
-
-                <p className="film-card__starring"><strong>{`Starring: ${starring}`}</strong></p>
-              </div>
-            </div>
+            <MovieTabs film={film} reviews={reviews} />
           </div>
         </div>
       </section>
@@ -59,7 +37,9 @@ function MoviePage({films}: MoviePageProps): JSX.Element {
         <section className="catalog catalog--like-this">
           <h2 className="catalog__title">More like this</h2>
 
-          <FilmsList films={films} />
+          <div className="catalog__films-list">
+            {films.filter((item) => (item.genre === film.genre)).splice(0, 4).map((item) => <SmallFilmCard key={item.id} film={item}/>)}
+          </div>
         </section>
 
         <Footer />
