@@ -20,9 +20,7 @@ function MainPage({film, films}: MainPageProps): JSX.Element {
   const selectedGenre = useAppSelector((state) => state.selectedGenre);
 
   useEffect(() => {
-
     setGenres(['All genres', ...new Set(films.map(({genre}) => genre))]);
-
   }, [films]);
 
   return (
