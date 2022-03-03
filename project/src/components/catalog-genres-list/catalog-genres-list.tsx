@@ -1,18 +1,22 @@
-import CatalogGenresItem from '../catalog-genres-item/catalog-genres-item';
+import { useAppDispatch, useAppSelector } from '../../hooks/';
+import { updateSelectedGenre } from '../../store/action';
+import { Link } from 'react-router-dom';
 
-function CatalogGenresList(): JSX.Element {
+type CatalogGenresListProps = {
+  genres: string[],
+};
+
+function CatalogGenresList({genres}: CatalogGenresListProps): JSX.Element {
+  const dipatch = useAppDispatch();
+  const selectedGenre = useAppSelector((state) => state.selectedGenre);
+
   return (
     <>
-      <CatalogGenresItem className={'catalog__genres-item catalog__genres-item--active'} genreItemLink={'/all-gener'} genreItemTitle={'All genres'} />
-      <CatalogGenresItem className={'catalog__genres-item'} genreItemLink={'/comedies'} genreItemTitle={'Comedies'} />
-      <CatalogGenresItem className={'catalog__genres-item'} genreItemLink={'/crime'} genreItemTitle={'Crime'} />
-      <CatalogGenresItem className={'catalog__genres-item'} genreItemLink={'documentry'} genreItemTitle={'Documentary'} />
-      <CatalogGenresItem className={'catalog__genres-item'} genreItemLink={'/drams'} genreItemTitle={'Dramas'} />
-      <CatalogGenresItem className={'catalog__genres-item'} genreItemLink={'/horror'} genreItemTitle={'Horror'} />
-      <CatalogGenresItem className={'catalog__genres-item'} genreItemLink={'/kid-familly'} genreItemTitle={'Kids & Family'} />
-      <CatalogGenresItem className={'catalog__genres-item'} genreItemLink={'/romance'} genreItemTitle={'Romance'} />
-      <CatalogGenresItem className={'catalog__genres-item'} genreItemLink={'/sci-fi'} genreItemTitle={'Sci-Fi'} />
-      <CatalogGenresItem className={'catalog__genres-item'} genreItemLink={'/thrillers'} genreItemTitle={'Thrillers'} />
+      {genres.map((genre) =>(
+        <li key={genre} onClick={() => dipatch(updateSelectedGenre(genre))} className={`catalog__genres-item ${genre === selectedGenre ? ' catalog__genres-item--active' : ''}`}>
+          <Link to={''} className="catalog__genres-link">{genre}</Link>
+        </li>),
+      )}
     </>
   );
 }
