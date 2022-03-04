@@ -4,7 +4,10 @@ import CatalogGenresList from '../../components/catalog-genres-list/catalog-genr
 import FilmCardDescription from '../../components/film-card-description/film-card-description';
 import Footer from '../../components/footer/footer';
 import FilmsList from '../../components/films-list/films-list';
-import {Film} from '../../types/films';
+import { Film } from '../../types/films';
+import { useEffect, useState } from 'react';
+import { useAppSelector } from '../../hooks';
+
 
 type MainPageProps = {
   films: Film[],
@@ -13,6 +16,13 @@ type MainPageProps = {
 
 function MainPage({film, films}: MainPageProps): JSX.Element {
   const {backgroundImage, name, posterImage} = film;
+  const [genres, setGenres] = useState< string[] >([]);
+  const selectedGenre = useAppSelector((state) => state.selectedGenre);
+
+  useEffect(() => {
+    setGenres(['All genres', ...new Set(films.map(({genre}) => genre))]);
+  }, [films]);
+
   return (
     <>
       <section className="film-card">
@@ -43,14 +53,11 @@ function MainPage({film, films}: MainPageProps): JSX.Element {
           <h2 className="catalog__title visually-hidden">Catalog</h2>
 
           <ul className="catalog__genres-list">
-            <CatalogGenresList />
+            <CatalogGenresList genres={genres}/>
           </ul>
 
-          <FilmsList films={films} />
+          <FilmsList films={films.filter(({genre}) => selectedGenre === 'All genres' || selectedGenre === genre)} />
 
-          <div className="catalog__more">
-            <button className="catalog__button" type="button">Show more</button>
-          </div>
         </section>
 
         <Footer />
