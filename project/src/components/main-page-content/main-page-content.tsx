@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 import { useAppSelector } from '../../hooks';
 import { Film } from '../../types/films';
 import FilmsList from '../../components/films-list/films-list';
@@ -24,11 +24,11 @@ function MainPageContent({ films }: MainPageContentProps): JSX.Element {
   const [filmsToShow, setFilmsToShow] = useState<Film[]>([]);
   const [next, setNext] = useState(DEFAULT_FILM_COUNT);
 
-  const loopWithSlice = (start: number, end:number) => {
-    const slicedPosts = filmsList.slice(start, end);
+  const loopWithSlice = useCallback((start: number, end:number) => {
+    const slicedPosts = films.filter(({genre}) => selectedGenre === 'All genres' || selectedGenre === genre).slice(start, end);
     arrayForHoldingFilms = [...arrayForHoldingFilms, ...slicedPosts];
     setFilmsToShow(arrayForHoldingFilms);
-  };
+  }, [films, selectedGenre]);
 
   const chooseGenre = () => {
     arrayForHoldingFilms = [];
@@ -41,7 +41,7 @@ function MainPageContent({ films }: MainPageContentProps): JSX.Element {
 
   useEffect(() => {
     loopWithSlice(0, FILMS_PER_PAGE);
-  }, [selectedGenre]);
+  }, [loopWithSlice, selectedGenre]);
 
   const handleShowMoreFilms = () => {
     loopWithSlice(next, next + FILMS_PER_PAGE);
