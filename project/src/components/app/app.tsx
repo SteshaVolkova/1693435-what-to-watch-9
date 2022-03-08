@@ -10,6 +10,8 @@ import PrivateRoute from '../private-route/private-route';
 import NotFoundPage from '../../pages/not-found-page/not-found-page';
 import { Film } from '../../types/films';
 import { FilmReview } from '../../types/films';
+import LoadingScreen from '../loading-screen/loading-screen';
+import { useAppSelector } from '../../hooks';
 
 type AppScreenProps = {
   film: Film,
@@ -18,6 +20,13 @@ type AppScreenProps = {
 }
 
 function App({ film, films, reviews }: AppScreenProps): JSX.Element {
+  const {isDataLoaded} = useAppSelector((state) => state);
+
+  if ( !isDataLoaded) {
+    return (
+      <LoadingScreen />
+    );
+  }
 
   return (
     <BrowserRouter>
