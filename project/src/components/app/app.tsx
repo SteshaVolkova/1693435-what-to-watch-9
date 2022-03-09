@@ -1,5 +1,5 @@
-import {BrowserRouter, Route, Routes} from 'react-router-dom';
-import {AppRoute, AuthorizationStatus} from '../../const';
+import { Route, Routes } from 'react-router-dom';
+import { AppRoute } from '../../const';
 import MainPage from '../../pages/main-page/main-page';
 import MoviePage from '../../pages/movie-page/movie-page';
 import MoviePageReviews from '../../pages/movie-page-add-review/movie-page-add-review';
@@ -12,6 +12,9 @@ import { Film } from '../../types/films';
 import { FilmReview } from '../../types/films';
 import LoadingScreen from '../loading-screen/loading-screen';
 import { useAppSelector } from '../../hooks';
+import { isCheckedAuth } from '../../types/films';
+import HistoryRouter from '../history-route/history-route';
+import browserHistory from '../../browser-history';
 
 type AppScreenProps = {
   film: Film,
@@ -20,16 +23,16 @@ type AppScreenProps = {
 }
 
 function App({ film, films, reviews }: AppScreenProps): JSX.Element {
-  const {isDataLoaded} = useAppSelector((state) => state);
+  const {authorizationStatus, isDataLoaded} = useAppSelector((state) => state);
 
-  if ( !isDataLoaded) {
+  if (isCheckedAuth(authorizationStatus) || !isDataLoaded) {
     return (
       <LoadingScreen />
     );
   }
 
   return (
-    <BrowserRouter>
+    <HistoryRouter history={browserHistory}>
       <Routes>
         <Route
           index
@@ -58,7 +61,7 @@ function App({ film, films, reviews }: AppScreenProps): JSX.Element {
           path={AppRoute.MyList}
           element={
             <PrivateRoute
-              authorizationStatus={AuthorizationStatus.NoAuth}
+              authorizationStatus={authorizationStatus}
             >
               <MyListPage films={films} />
             </PrivateRoute>
@@ -66,7 +69,7 @@ function App({ film, films, reviews }: AppScreenProps): JSX.Element {
         />
 
         <Route
-          path={AppRoute.Player}
+          path={AppRoute.PlayerFilm}
           element={<MoviePlayer films={films}/>}
         />
 
@@ -75,7 +78,7 @@ function App({ film, films, reviews }: AppScreenProps): JSX.Element {
           element={<NotFoundPage />}
         />
       </Routes>
-    </BrowserRouter>
+    </HistoryRouter>
   );
 }
 

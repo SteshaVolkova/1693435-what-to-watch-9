@@ -1,9 +1,9 @@
 import HeaderLogo from '../../components/header-logo/header-logo';
-import HeaderSignOut from '../../components/header-sign-out/header-sign-out';
 import FilmCardDescription from '../../components/film-card-description/film-card-description';
 import MainPageContent from '../../components/main-page-content/main-page-content';
 import Footer from '../../components/footer/footer';
 import { Film } from '../../types/films';
+import HeaderLogin from '../../components/header-login/header-login';
 
 
 type MainPageProps = {
@@ -25,7 +25,7 @@ function MainPage({film, films}: MainPageProps): JSX.Element {
 
         <header className="page-header film-card__head">
           <HeaderLogo />
-          <HeaderSignOut />
+          <HeaderLogin />
         </header>
 
         <div className="film-card__wrap">

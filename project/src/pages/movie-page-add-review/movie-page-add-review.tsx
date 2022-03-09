@@ -1,6 +1,6 @@
 import {Link, useParams} from 'react-router-dom';
 import HeaderLogo from '../../components/header-logo/header-logo';
-import HeaderSignOut from '../../components/header-sign-out/header-sign-out';
+import HeaderLogin from '../../components/header-login/header-login';
 import AddCommentForm from '../../components/add-comment-form/add-comment-form';
 import {Film} from '../../types/films';
 
@@ -39,7 +39,7 @@ function MoviePageReviews({ films }: MoviePageReviewsProps): JSX.Element {
             </ul>
           </nav>
 
-          <HeaderSignOut />
+          <HeaderLogin />
         </header>
 
         <div className="film-card__poster film-card__poster--small">

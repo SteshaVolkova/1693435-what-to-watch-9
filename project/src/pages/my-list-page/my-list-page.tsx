@@ -1,5 +1,5 @@
 import HeaderLogo from '../../components/header-logo/header-logo';
-import HeaderSignOut from '../../components/header-sign-out/header-sign-out';
+import HeaderLogin from '../../components/header-login/header-login';
 import Footer from '../../components/footer/footer';
 import FilmsList from '../../components/films-list/films-list';
 import {Film} from '../../types/films';
@@ -16,7 +16,7 @@ function MyListPage({films}: MyListPageProps): JSX.Element {
 
         <h1 className="page-title user-page__title">My list</h1>
 
-        <HeaderSignOut />
+        <HeaderLogin />
       </header>
 
       <section className="catalog">
