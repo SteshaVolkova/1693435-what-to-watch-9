@@ -1,11 +1,10 @@
 import { useParams } from 'react-router-dom';
-import {Film} from '../../types/films';
+import { useAppSelector } from '../../hooks';
 
-type MoviePlayerProps = {
-  films: Film[],
-}
 
-function MoviePlayer({films}: MoviePlayerProps): JSX.Element {
+function MoviePlayer(): JSX.Element {
+  const {films} = useAppSelector((state) => state);
+
   const params = useParams();
   const filmId = Number(params.id);
   const film = films[filmId - 1];

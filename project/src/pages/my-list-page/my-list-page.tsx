@@ -2,13 +2,12 @@ import HeaderLogo from '../../components/header-logo/header-logo';
 import HeaderLogin from '../../components/header-login/header-login';
 import Footer from '../../components/footer/footer';
 import FilmsList from '../../components/films-list/films-list';
-import {Film} from '../../types/films';
+import { useAppSelector } from '../../hooks';
 
-type MyListPageProps = {
-  films: Film[]
-}
 
-function MyListPage({films}: MyListPageProps): JSX.Element {
+function MyListPage(): JSX.Element {
+  const {films} = useAppSelector((state) => state);
+
   return (
     <div className="user-page">
       <header className="page-header user-page__head">

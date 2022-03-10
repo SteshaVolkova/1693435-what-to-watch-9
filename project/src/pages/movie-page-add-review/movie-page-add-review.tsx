@@ -2,13 +2,11 @@ import {Link, useParams} from 'react-router-dom';
 import HeaderLogo from '../../components/header-logo/header-logo';
 import HeaderLogin from '../../components/header-login/header-login';
 import AddCommentForm from '../../components/add-comment-form/add-comment-form';
-import {Film} from '../../types/films';
+import { useAppSelector } from '../../hooks';
 
-type MoviePageReviewsProps = {
-  films: Film[],
-};
 
-function MoviePageReviews({ films }: MoviePageReviewsProps): JSX.Element {
+function MoviePageReviews(): JSX.Element {
+  const {films} = useAppSelector((state) => state);
   const params = useParams();
   const filmId = Number(params.id);
   const film = films[filmId - 1];
