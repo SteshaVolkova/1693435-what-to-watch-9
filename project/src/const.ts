@@ -16,7 +16,6 @@ export enum AuthorizationStatus {
 
 export enum APIRoute {
   Films = '/films',
-  Film = '/films/:id',
   SimilarFilm = '/films/:id/similar',
   PromoFilm = '/promo',
   FavoriteFilms = '/favorite',

@@ -3,7 +3,7 @@ import { APIRoute, AppRoute, TIMEOUT_SHOW_ERROR, AuthorizationStatus } from '../
 import { api } from '../store';
 import { store } from '../store';
 import { Film, FilmReview } from '../types/films';
-import { loadFilms, requireAuthorization, setError, redirectToRoute, loadComments, setPromoFilm } from './action';
+import { loadFilms, requireAuthorization, setError, redirectToRoute, loadComments, setPromoFilm, setsimilarFilms } from './action';
 import { errorHandle } from '../services/error-handle';
 import { AuthData } from '../types/auth-data';
 import { UserData } from '../types/user-data';
@@ -49,6 +49,19 @@ export const fetchPromoAction = createAsyncThunk(
     try {
       const {data} = await api.get<Film>(APIRoute.PromoFilm);
       store.dispatch(setPromoFilm(data));
+    } catch (error) {
+      errorHandle(error);
+    }
+  },
+);
+
+
+export const fetchSimilarFilmsAction = createAsyncThunk(
+  'data/setsimilarFilms',
+  async (id: number | null) => {
+    try {
+      const {data} = await api.get<Film[]>(`${APIRoute.Films}/${id}/similar`);
+      store.dispatch(setsimilarFilms(data));
     } catch (error) {
       errorHandle(error);
     }

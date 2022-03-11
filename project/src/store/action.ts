@@ -10,6 +10,8 @@ export const loadComments = createAction<FilmReview[]>('data/loadComments');
 
 export const setPromoFilm = createAction<Film>('data/setPromoFilm');
 
+export const setsimilarFilms = createAction<Film[]>('data/setsimilarFilms');
+
 export const setError = createAction<string>('film/setError');
 
 export const requireAuthorization = createAction<AuthorizationStatus>('user/requireAuthorization');

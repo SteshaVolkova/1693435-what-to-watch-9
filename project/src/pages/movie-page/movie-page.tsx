@@ -4,17 +4,22 @@ import SmallFilmCard from '../../components/small-film-card/small-film-card';
 import { useParams } from 'react-router-dom';
 import MovieTabs from '../../components/movie-tabs/movie-tabs';
 import { useAppSelector } from '../../hooks';
-import { fetchCommentsAction } from '../../store/api-actions';
+import { fetchCommentsAction, fetchSimilarFilmsAction } from '../../store/api-actions';
 import { store } from '../../store';
+import { useEffect } from 'react';
 
 
 function MoviePage(): JSX.Element {
-  const {films, comments} = useAppSelector((state) => state);
+  const {films, comments, similarFilms} = useAppSelector((state) => state);
   const params = useParams();
   const filmId = Number(params.id);
   const film = films[filmId - 1];
   const { posterImage, name, id } = film;
-  store.dispatch(fetchCommentsAction(id));
+
+  useEffect(() => {
+    store.dispatch(fetchCommentsAction(id));
+    store.dispatch(fetchSimilarFilmsAction(id));
+  }, [id]);
 
   return (
     <>
@@ -37,7 +42,7 @@ function MoviePage(): JSX.Element {
           <h2 className="catalog__title">More like this</h2>
 
           <div className="catalog__films-list">
-            {films.filter((item) => (item.genre === film.genre)).splice(0, 4).map((item) => <SmallFilmCard key={item.id} film={item}/>)}
+            {similarFilms.filter((item) => (item.genre === film.genre)).splice(0, 4).map((item) => <SmallFilmCard key={item.id} film={item}/>)}
           </div>
         </section>
 
