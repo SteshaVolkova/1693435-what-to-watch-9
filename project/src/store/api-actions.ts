@@ -2,12 +2,13 @@ import {createAsyncThunk} from '@reduxjs/toolkit';
 import { APIRoute, AppRoute, TIMEOUT_SHOW_ERROR, AuthorizationStatus } from '../const';
 import { api } from '../store';
 import { store } from '../store';
-import { Film, FilmReview } from '../types/films';
-import { loadFilms, requireAuthorization, setError, redirectToRoute, loadComments, setPromoFilm, setsimilarFilms } from './action';
+import { Film, FilmReview, CommentPost, userCommentData } from '../types/films';
+import { loadFilms, requireAuthorization, setError, redirectToRoute, loadComments, setPromoFilm, setsimilarFilms, postUserReview } from './action';
 import { errorHandle } from '../services/error-handle';
 import { AuthData } from '../types/auth-data';
 import { UserData } from '../types/user-data';
 import { dropToken, saveToken } from '../services/token';
+import { saveCommentToken } from '../services/comment-token';
 
 export const clearErrorAction = createAsyncThunk(
   'film/setError',
@@ -62,6 +63,19 @@ export const fetchSimilarFilmsAction = createAsyncThunk(
     try {
       const {data} = await api.get<Film[]>(`${APIRoute.Films}/${id}/similar`);
       store.dispatch(setsimilarFilms(data));
+    } catch (error) {
+      errorHandle(error);
+    }
+  },
+);
+
+export const postComment = createAsyncThunk(
+  'film/postComment',
+  async ({review, rating}: CommentPost) => {
+    try {
+      const {data: {commentToken}} = await api.post<userCommentData>(APIRoute.CommentPost, {review, rating});
+      saveCommentToken(commentToken);
+      store.dispatch(postUserReview({review, rating}));
     } catch (error) {
       errorHandle(error);
     }

@@ -1,7 +1,7 @@
 import { createReducer } from '@reduxjs/toolkit';
-import { updateSelectedGenre, loadFilms, loadComments, setError, requireAuthorization, setPromoFilm, setsimilarFilms } from './action';
+import { updateSelectedGenre, loadFilms, loadComments, setError, requireAuthorization, setPromoFilm, setsimilarFilms, postUserReview } from './action';
 import { AuthorizationStatus } from '../const';
-import { Film, FilmReview } from '../types/films';
+import { Film, FilmReview, CommentPost } from '../types/films';
 
 type InitialStateProps = {
   selectedGenre: string,
@@ -9,6 +9,7 @@ type InitialStateProps = {
   comments: FilmReview[],
   promoFilm: Film,
   similarFilms: Film[],
+  userComment: CommentPost,
   error: string,
   isDataLoaded: boolean,
   authorizationStatus: AuthorizationStatus,
@@ -37,6 +38,10 @@ const initialState: InitialStateProps = {
     released: 0,
     isFavorite: false,
   },
+  userComment: {
+    review: '',
+    rating: 0,
+  },
   similarFilms: [],
   error: '',
   isDataLoaded: false,
@@ -63,6 +68,9 @@ const reducer = createReducer(initialState, (builder) => {
     .addCase(setsimilarFilms, (state, action) => {
       state.similarFilms = action.payload;
       state.isDataLoaded = true;
+    })
+    .addCase(postUserReview, (state, action) => {
+      state.userComment = action.payload;
     })
     .addCase(setError, (state, action) => {
       state.error = action.payload;
