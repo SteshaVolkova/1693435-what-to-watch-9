@@ -20,7 +20,7 @@ export enum APIRoute {
   SimilarFilm = '/films/:id/similar',
   PromoFilm = '/promo',
   FavoriteFilms = '/favorite',
-  CommentsFilm = '/comments/:id',
+  CommentsFilm = '/comments',
   Login = '/login',
   Logout = '/logout',
 }

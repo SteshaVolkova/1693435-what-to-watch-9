@@ -2,8 +2,8 @@ import {createAsyncThunk} from '@reduxjs/toolkit';
 import { APIRoute, AppRoute, TIMEOUT_SHOW_ERROR, AuthorizationStatus } from '../const';
 import { api } from '../store';
 import { store } from '../store';
-import { Film } from '../types/films';
-import { loadFilms, requireAuthorization, setError, redirectToRoute } from './action';
+import { Film, FilmReview } from '../types/films';
+import { loadFilms, requireAuthorization, setError, redirectToRoute, loadComments, setPromoFilm } from './action';
 import { errorHandle } from '../services/error-handle';
 import { AuthData } from '../types/auth-data';
 import { UserData } from '../types/user-data';
@@ -25,6 +25,30 @@ export const fetchFilmsAction = createAsyncThunk(
     try {
       const {data} = await api.get<Film[]>(APIRoute.Films);
       store.dispatch(loadFilms(data));
+    } catch (error) {
+      errorHandle(error);
+    }
+  },
+);
+
+export const fetchCommentsAction = createAsyncThunk(
+  'data/loadComments',
+  async (id: number | null) => {
+    try {
+      const {data} = await api.get<FilmReview[]>(`${APIRoute.CommentsFilm}/${id}`);
+      store.dispatch(loadComments(data));
+    } catch (error) {
+      errorHandle(error);
+    }
+  },
+);
+
+export const fetchPromoAction = createAsyncThunk(
+  'data/setPromoFilm',
+  async () => {
+    try {
+      const {data} = await api.get<Film>(APIRoute.PromoFilm);
+      store.dispatch(setPromoFilm(data));
     } catch (error) {
       errorHandle(error);
     }

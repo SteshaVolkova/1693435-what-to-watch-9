@@ -9,16 +9,24 @@ function MovieTabReview({reviews}: MovieReviewListProps): JSX.Element {
 
   return (
     <div className="film-card__reviews film-card__row">
-      <div className="film-card__reviews-col">
-        {reviews.map((review) => (
-          <MovieReview key={review.id} review={review}/>
-        )).splice(0, reviews.length/2)}
-      </div>
-      <div className="film-card__reviews-col">
-        {reviews.map((review) => (
-          <MovieReview key={review.id} review={review}/>
-        )).splice(reviews.length/2)}
-      </div>
+      {reviews.length > 1 ?
+        <>
+          <div className="film-card__reviews-col">
+            {reviews.map((review) => (
+              <MovieReview key={review.id} review={review} />
+            )).splice(0, reviews.length / 2)}
+          </div>
+          <div className="film-card__reviews-col">
+            {reviews.map((review) => (
+              <MovieReview key={review.id} review={review} />
+            )).splice(reviews.length / 2)}
+          </div>
+        </> :
+        <div className="film-card__reviews-col">
+          {reviews.map((review) => (
+            <MovieReview key={review.id} review={review} />
+          ))}
+        </div>}
     </div>
   );
 }

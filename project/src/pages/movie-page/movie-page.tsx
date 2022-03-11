@@ -3,19 +3,18 @@ import MoviePageTopBlock from '../../components/movie-page-top-block/movie-page-
 import SmallFilmCard from '../../components/small-film-card/small-film-card';
 import { useParams } from 'react-router-dom';
 import MovieTabs from '../../components/movie-tabs/movie-tabs';
-import { FilmReview } from '../../types/films';
 import { useAppSelector } from '../../hooks';
+import { fetchCommentsAction } from '../../store/api-actions';
+import { store } from '../../store';
 
-type MoviePageProps = {
-  reviews: FilmReview[],
-};
 
-function MoviePage({ reviews }: MoviePageProps): JSX.Element {
-  const {films} = useAppSelector((state) => state);
+function MoviePage(): JSX.Element {
+  const {films, comments} = useAppSelector((state) => state);
   const params = useParams();
   const filmId = Number(params.id);
   const film = films[filmId - 1];
-  const { posterImage, name } = film;
+  const { posterImage, name, id } = film;
+  store.dispatch(fetchCommentsAction(id));
 
   return (
     <>
@@ -28,7 +27,7 @@ function MoviePage({ reviews }: MoviePageProps): JSX.Element {
               <img src={posterImage} alt={name} width="218" height="327" />
             </div>
 
-            <MovieTabs film={film} reviews={reviews} />
+            <MovieTabs film={film} reviews={comments} />
           </div>
         </div>
       </section>

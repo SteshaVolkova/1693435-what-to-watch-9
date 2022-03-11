@@ -7,8 +7,9 @@ import { useAppSelector } from '../../hooks';
 
 
 function MainPage(): JSX.Element {
-  const {films} = useAppSelector((state) => state);
-  const {backgroundImage, name, posterImage} = films[0];
+  const {films, promoFilm} = useAppSelector((state) => state);
+  const {backgroundImage, name, posterImage} = promoFilm;
+
 
   return (
     <>
@@ -30,7 +31,7 @@ function MainPage(): JSX.Element {
               <img src={posterImage} alt={name} width="218" height="327" />
             </div>
 
-            <FilmCardDescription film={films[0]} />
+            <FilmCardDescription film={promoFilm} />
           </div>
         </div>
       </section>
