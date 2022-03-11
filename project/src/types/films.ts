@@ -1,3 +1,5 @@
+import { AuthorizationStatus } from '../const';
+
 export type Film = {
     id: number
     name: string
@@ -28,3 +30,6 @@ export type FilmReview = {
         name: string
     }
 };
+
+export const isCheckedAuth = (authorizationStatus: AuthorizationStatus): boolean =>
+  authorizationStatus === AuthorizationStatus.Unknown;

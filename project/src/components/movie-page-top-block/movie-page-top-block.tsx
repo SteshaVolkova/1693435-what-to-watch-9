@@ -1,6 +1,6 @@
 import {Link} from 'react-router-dom';
 import HeaderLogo from '../header-logo/header-logo';
-import HeaderSignOut from '../header-sign-out/header-sign-out';
+import HeaderLogin from '../../components/header-login/header-login';
 import FilmCardDescription from '../film-card-description/film-card-description';
 import {Film} from '../../types/films';
 
@@ -21,7 +21,7 @@ function MoviePageTopBlock({film}: MoviePageTopBlockProps):JSX.Element {
 
       <header className="page-header film-card__head">
         <HeaderLogo />
-        <HeaderSignOut />
+        <HeaderLogin />
       </header>
 
       <div className="film-card__wrap">

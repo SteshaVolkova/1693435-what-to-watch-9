@@ -1,17 +1,17 @@
 import Footer from '../../components/footer/footer';
 import MoviePageTopBlock from '../../components/movie-page-top-block/movie-page-top-block';
 import SmallFilmCard from '../../components/small-film-card/small-film-card';
-import { Film } from '../../types/films';
 import { useParams } from 'react-router-dom';
 import MovieTabs from '../../components/movie-tabs/movie-tabs';
 import { FilmReview } from '../../types/films';
+import { useAppSelector } from '../../hooks';
 
 type MoviePageProps = {
-  films: Film[],
   reviews: FilmReview[],
 };
 
-function MoviePage({films, reviews }: MoviePageProps): JSX.Element {
+function MoviePage({ reviews }: MoviePageProps): JSX.Element {
+  const {films} = useAppSelector((state) => state);
   const params = useParams();
   const filmId = Number(params.id);
   const film = films[filmId - 1];

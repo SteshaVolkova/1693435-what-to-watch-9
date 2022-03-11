@@ -7,13 +7,13 @@ type CatalogGenresListProps = {
 };
 
 function CatalogGenresList({genres}: CatalogGenresListProps): JSX.Element {
-  const dipatch = useAppDispatch();
+  const dispatch = useAppDispatch();
   const selectedGenre = useAppSelector((state) => state.selectedGenre);
 
   return (
     <>
       {genres.map((genre) =>(
-        <li key={genre} onClick={() => dipatch(updateSelectedGenre(genre))} className={`catalog__genres-item ${genre === selectedGenre ? ' catalog__genres-item--active' : ''}`}>
+        <li key={genre} onClick={() => dispatch(updateSelectedGenre(genre))} className={`catalog__genres-item ${genre === selectedGenre ? ' catalog__genres-item--active' : ''}`}>
           <Link to={''} className="catalog__genres-link">{genre}</Link>
         </li>),
       )}

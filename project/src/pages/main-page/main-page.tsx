@@ -1,18 +1,14 @@
 import HeaderLogo from '../../components/header-logo/header-logo';
-import HeaderSignOut from '../../components/header-sign-out/header-sign-out';
 import FilmCardDescription from '../../components/film-card-description/film-card-description';
 import MainPageContent from '../../components/main-page-content/main-page-content';
 import Footer from '../../components/footer/footer';
-import { Film } from '../../types/films';
+import HeaderLogin from '../../components/header-login/header-login';
+import { useAppSelector } from '../../hooks';
 
 
-type MainPageProps = {
-  films: Film[],
-  film: Film,
-};
-
-function MainPage({film, films}: MainPageProps): JSX.Element {
-  const {backgroundImage, name, posterImage} = film;
+function MainPage(): JSX.Element {
+  const {films} = useAppSelector((state) => state);
+  const {backgroundImage, name, posterImage} = films[0];
 
   return (
     <>
@@ -25,7 +21,7 @@ function MainPage({film, films}: MainPageProps): JSX.Element {
 
         <header className="page-header film-card__head">
           <HeaderLogo />
-          <HeaderSignOut />
+          <HeaderLogin />
         </header>
 
         <div className="film-card__wrap">
@@ -34,7 +30,7 @@ function MainPage({film, films}: MainPageProps): JSX.Element {
               <img src={posterImage} alt={name} width="218" height="327" />
             </div>
 
-            <FilmCardDescription film={film} />
+            <FilmCardDescription film={films[0]} />
           </div>
         </div>
       </section>
