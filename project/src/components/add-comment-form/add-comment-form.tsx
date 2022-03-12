@@ -1,4 +1,4 @@
-import { FormEvent, useRef, useState } from 'react';
+import { FormEvent, useState } from 'react';
 import { postComment } from '../../store/api-actions';
 import { Star } from '../../types/rating-stars';
 import { CommentPost } from '../../types/films';
@@ -29,9 +29,6 @@ function AddCommentForm(): JSX.Element {
     setIsHideDetails((currentState) => !currentState);
   };
 
-  const ratingRef = useRef<HTMLInputElement | null>(null);
-  const commentRef = useRef<HTMLTextAreaElement | null>(null);
-
   const onSubmit = ({review, rating}: CommentPost) => {
     store.dispatch(postComment({review, rating}));
   };
@@ -53,7 +50,7 @@ function AddCommentForm(): JSX.Element {
         <div className="rating__stars">
           {stars.map((star) => (
             <div onClick={() => {hanldeMouseOver(star.id);}} key={star.id}>
-              <input ref={ratingRef} className="rating__input" id={`star-${star.id}`} type="radio" name="rating" value={star.id} />
+              <input className="rating__input" id={`star-${star.id}`} type="radio" name="rating" value={star.id} />
               <label className="rating__label" htmlFor={`star-${star.id}`}>{`Rating ${star.id}`}</label>
             </div>
           ))}
@@ -61,7 +58,7 @@ function AddCommentForm(): JSX.Element {
       </div>
 
       <div className="add-review__text">
-        <textarea ref={commentRef} onChange={fieldChangeHandler} value={commentData} name="comment" className="add-review__textarea" id="review-text" placeholder="Review text"></textarea>
+        <textarea onChange={fieldChangeHandler} value={commentData} name="comment" className="add-review__textarea" id="review-text" placeholder="Review text"></textarea>
         <div className="add-review__submit">
           {(statRating === null || commentData === '' || commentData.length < MIN_COMMENT_LENGTH || commentData.length > MAX_COMMENT_LENGTH) ?
             <button className="add-review__btn" type="submit" disabled>Post</button> :
