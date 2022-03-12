@@ -36,11 +36,11 @@ export const isCheckedAuth = (authorizationStatus: AuthorizationStatus): boolean
 
 export type CommentPost = {
   review: string,
-  rating: number,
+  rating: number | null,
 }
 
 export type userCommentData = {
   review: string,
   rating: number,
-  commentToken: string,
+  token: string,
 }

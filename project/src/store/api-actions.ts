@@ -8,7 +8,6 @@ import { errorHandle } from '../services/error-handle';
 import { AuthData } from '../types/auth-data';
 import { UserData } from '../types/user-data';
 import { dropToken, saveToken } from '../services/token';
-import { saveCommentToken } from '../services/comment-token';
 
 export const clearErrorAction = createAsyncThunk(
   'film/setError',
@@ -73,9 +72,10 @@ export const postComment = createAsyncThunk(
   'film/postComment',
   async ({review, rating}: CommentPost) => {
     try {
-      const {data: {commentToken}} = await api.post<userCommentData>(APIRoute.CommentPost, {review, rating});
-      saveCommentToken(commentToken);
+      const {data: {token}} = await api.post<userCommentData>(APIRoute.CommentPost, {review, rating});
+      saveToken(token);
       store.dispatch(postUserReview({review, rating}));
+      store.dispatch(redirectToRoute(AppRoute.Film));
     } catch (error) {
       errorHandle(error);
     }
