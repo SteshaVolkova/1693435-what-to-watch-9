@@ -39,7 +39,8 @@ const initialState: InitialStateProps = {
     isFavorite: false,
   },
   userComment: {
-    review: '',
+    id: 0,
+    comment: '',
     rating: 0,
   },
   similarFilms: [],

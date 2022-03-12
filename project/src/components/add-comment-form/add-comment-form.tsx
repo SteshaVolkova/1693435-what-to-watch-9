@@ -1,8 +1,9 @@
-import { FormEvent, useState } from 'react';
-import { postComment } from '../../store/api-actions';
+import { FormEvent, useEffect, useState } from 'react';
+import { fetchCommentsAction, postComment } from '../../store/api-actions';
 import { Star } from '../../types/rating-stars';
 import { CommentPost } from '../../types/films';
 import { store } from '../../store';
+import { useParams } from 'react-router-dom';
 
 const MAX_COMMENT_LENGTH = 400;
 const MIN_COMMENT_LENGTH = 50;
@@ -12,9 +13,15 @@ function AddCommentForm(): JSX.Element {
     {'id': 10},{'id': 9},{'id': 8},{'id': 7},{'id': 6},{'id': 5},{'id': 4},{'id': 3},{'id': 2},{'id': 1},
   ];
 
-  const [statRating, setStatRating] = useState<null | number>(null);
-  const hanldeMouseOver = (id: number) => {
-    setStatRating(id);
+  const params = useParams();
+  const id = Number(params.id);
+  useEffect(() => {
+    store.dispatch(fetchCommentsAction(id));
+  }, [id]);
+
+  const [statRating, setStatRating] = useState<number>(0);
+  const hanldeMouseOver = (starId: number) => {
+    setStatRating(starId);
   };
 
   const [commentData, setCommentData] = useState('');
@@ -23,23 +30,18 @@ function AddCommentForm(): JSX.Element {
     setCommentData(enteredName);
   };
 
-  const [isHideDetails, setIsHideDetails] = useState(true);
-  const showDetailsHandle = (evt: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
-    evt.preventDefault();
-    setIsHideDetails((currentState) => !currentState);
-  };
-
-  const onSubmit = ({review, rating}: CommentPost) => {
-    store.dispatch(postComment({review, rating}));
+  const onSubmit = ({comment, rating}: CommentPost) => {
+    store.dispatch(postComment({id, comment, rating}));
   };
 
   const handleSubmit = (evt: FormEvent<HTMLFormElement>) => {
     evt.preventDefault();
 
-    if (statRating === null || commentData === '' || commentData.length < MIN_COMMENT_LENGTH || commentData.length > MAX_COMMENT_LENGTH) {
+    if (statRating !== 0 || commentData !== '') {
       onSubmit({
+        id: id,
         rating: statRating,
-        review: commentData,
+        comment: commentData,
       });
     }
   };
@@ -63,10 +65,8 @@ function AddCommentForm(): JSX.Element {
           {(statRating === null || commentData === '' || commentData.length < MIN_COMMENT_LENGTH || commentData.length > MAX_COMMENT_LENGTH) ?
             <button className="add-review__btn" type="submit" disabled>Post</button> :
             <button className="add-review__btn" type="submit">Post</button>}
-          <button className="add-review__btn" type="button" onClick={showDetailsHandle}>{isHideDetails ? 'Показать' : 'Спрятать'}</button>
         </div>
       </div>
-      {isHideDetails ? null : <div>Ваша оценка:{statRating}. Ваш коментарий: {commentData}.</div>}
     </form>
   );
 }

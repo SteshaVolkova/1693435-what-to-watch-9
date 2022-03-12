@@ -70,12 +70,12 @@ export const fetchSimilarFilmsAction = createAsyncThunk(
 
 export const postComment = createAsyncThunk(
   'film/postComment',
-  async ({review, rating}: CommentPost) => {
+  async ({id, comment, rating}: CommentPost) => {
     try {
-      const {data: {token}} = await api.post<userCommentData>(APIRoute.CommentPost, {review, rating});
+      const {data: {token}} = await api.post<userCommentData>(`${APIRoute.CommentPost}/${id}`, {comment, rating});
       saveToken(token);
-      store.dispatch(postUserReview({review, rating}));
-      store.dispatch(redirectToRoute(AppRoute.Film));
+      store.dispatch(postUserReview({id, comment, rating}));
+      store.dispatch(redirectToRoute(AppRoute.Root));
     } catch (error) {
       errorHandle(error);
     }

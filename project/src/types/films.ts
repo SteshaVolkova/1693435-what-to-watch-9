@@ -35,12 +35,13 @@ export const isCheckedAuth = (authorizationStatus: AuthorizationStatus): boolean
   authorizationStatus === AuthorizationStatus.Unknown;
 
 export type CommentPost = {
-  review: string,
-  rating: number | null,
+  id: number,
+  comment: string,
+  rating: number,
 }
 
 export type userCommentData = {
-  review: string,
+  comment: string,
   rating: number,
   token: string,
 }
