@@ -75,7 +75,6 @@ export const postComment = createAsyncThunk(
       const {data: {token}} = await api.post<userCommentData>(`${APIRoute.CommentPost}/${id}`, {comment, rating});
       saveToken(token);
       store.dispatch(postUserReview({id, comment, rating}));
-      store.dispatch(redirectToRoute(AppRoute.Root));
     } catch (error) {
       errorHandle(error);
     }

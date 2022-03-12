@@ -3,7 +3,8 @@ import { fetchCommentsAction, postComment } from '../../store/api-actions';
 import { Star } from '../../types/rating-stars';
 import { CommentPost } from '../../types/films';
 import { store } from '../../store';
-import { useParams } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
+import { AppRoute } from '../../const';
 
 const MAX_COMMENT_LENGTH = 400;
 const MIN_COMMENT_LENGTH = 50;
@@ -13,6 +14,7 @@ function AddCommentForm(): JSX.Element {
     {'id': 10},{'id': 9},{'id': 8},{'id': 7},{'id': 6},{'id': 5},{'id': 4},{'id': 3},{'id': 2},{'id': 1},
   ];
 
+  const navigate = useNavigate();
   const params = useParams();
   const id = Number(params.id);
   useEffect(() => {
@@ -43,6 +45,7 @@ function AddCommentForm(): JSX.Element {
         rating: statRating,
         comment: commentData,
       });
+      navigate(`${AppRoute.FilmPage}/${id}`);
     }
   };
 
