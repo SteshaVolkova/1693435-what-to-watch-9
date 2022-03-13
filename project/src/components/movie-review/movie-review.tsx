@@ -29,7 +29,7 @@ function MovieReview({review}: MovieReviewProps): JSX.Element {
         </footer>
       </blockquote>
 
-      <div className="review__rating">{rating}</div>
+      <div className="review__rating">{rating.toString().replace('.', ',')}</div>
     </div>
   );
 }

@@ -3,6 +3,7 @@ import HeaderLogo from '../../components/header-logo/header-logo';
 import HeaderLogin from '../../components/header-login/header-login';
 import AddCommentForm from '../../components/add-comment-form/add-comment-form';
 import { useAppSelector } from '../../hooks';
+import LoadingScreen from '../../components/loading-screen/loading-screen';
 
 
 function MoviePageReviews(): JSX.Element {
@@ -10,13 +11,18 @@ function MoviePageReviews(): JSX.Element {
   const params = useParams();
   const filmId = Number(params.id);
   const film = films[filmId - 1];
-  const {name, backgroundImage, id, posterImage} = film;
+
+  if (!film) {
+    return (
+      <LoadingScreen />
+    );
+  }
 
   return (
     <section className="film-card film-card--full">
       <div className="film-card__header">
         <div className="film-card__bg">
-          <img src={backgroundImage} alt={name} />
+          <img src={film.backgroundImage} alt={film.name} />
         </div>
 
         <h1 className="visually-hidden">WTW</h1>
@@ -29,7 +35,7 @@ function MoviePageReviews(): JSX.Element {
           <nav className="breadcrumbs">
             <ul className="breadcrumbs__list">
               <li className="breadcrumbs__item">
-                <Link to={`/films/${id}`} className="breadcrumbs__link">{name}</Link>
+                <Link to={`/films/${film.id}`} className="breadcrumbs__link">{film.name}</Link>
               </li>
               <li className="breadcrumbs__item">
                 <Link to='/review' className="breadcrumbs__link">Add review</Link>
@@ -41,7 +47,7 @@ function MoviePageReviews(): JSX.Element {
         </header>
 
         <div className="film-card__poster film-card__poster--small">
-          <img src={posterImage} alt={name} width="218" height="327" />
+          <img src={film.posterImage} alt={film.name} width="218" height="327" />
         </div>
       </div>
 
