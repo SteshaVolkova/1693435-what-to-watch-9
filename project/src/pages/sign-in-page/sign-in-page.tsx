@@ -6,7 +6,8 @@ import { loginAction } from '../../store/api-actions';
 import { AuthData } from '../../types/auth-data';
 
 function SignInPage(): JSX.Element {
-  const [isError, setIsError] = useState(false);
+  const [isError, setIsError] = useState<boolean>(false);
+  const [isPasswordError, setIsPasswordError] = useState<boolean>(false);
   const loginRef = useRef<HTMLInputElement | null>(null);
   const passwordRef = useRef<HTMLInputElement | null>(null);
 
@@ -20,6 +21,11 @@ function SignInPage(): JSX.Element {
     setIsError(false);
   };
 
+  const focusPasswordInput = () => {
+    setIsError(false);
+    setIsPasswordError(false);
+  };
+
   const handleSubmit = (evt: FormEvent<HTMLFormElement>) => {
     evt.preventDefault();
 
@@ -29,9 +35,16 @@ function SignInPage(): JSX.Element {
           login: loginRef.current.value,
           password: passwordRef.current.value,
         });
-      }else {
+      } else {
         setIsError(true);
       }
+    }
+  };
+
+  const hendlerPasswordValidate = () => {
+    const validate = /^(?=.*\d)(?=.*[a-zA-Z]).*/;
+    if(!validate.test(String(passwordRef.current?.value).toLocaleLowerCase())) {
+      setIsPasswordError(true);
     }
   };
 
@@ -64,7 +77,8 @@ function SignInPage(): JSX.Element {
             </div>
             <div className="sign-in__field">
               <input
-                onFocus={focusInput}
+                onFocus={focusPasswordInput}
+                onChange={hendlerPasswordValidate}
                 ref={passwordRef}
                 className="sign-in__input"
                 type="password"
@@ -74,6 +88,7 @@ function SignInPage(): JSX.Element {
               />
               <label className="sign-in__label visually-hidden" htmlFor="user-password">Password</label>
             </div>
+            {isPasswordError && <><span>The password must not contain spaces and must contain at least one letter and number</span><br></br><br></br></>}
             {isError && <span>Fill in all fields, please!</span>}
           </div>
           <div className="sign-in__submit">
