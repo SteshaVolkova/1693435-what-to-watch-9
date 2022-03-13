@@ -3,10 +3,10 @@ import { APIRoute, AppRoute, TIMEOUT_SHOW_ERROR, AuthorizationStatus } from '../
 import { api } from '../store';
 import { store } from '../store';
 import { Film, FilmReview, CommentPost, userCommentData } from '../types/films';
-import { loadFilms, requireAuthorization, setError, redirectToRoute, loadComments, setPromoFilm, setsimilarFilms, postUserReview, reviewSendError } from './action';
+import { loadFilms, requireAuthorization, setError, redirectToRoute, loadComments, setPromoFilm, setsimilarFilms, postUserReview, reviewSendError, userData } from './action';
 import { errorHandle } from '../services/error-handle';
 import { AuthData } from '../types/auth-data';
-import { UserData } from '../types/user-data';
+import { UserData, UserLoginData } from '../types/user-data';
 import { dropToken, saveToken } from '../services/token';
 
 export const clearErrorAction = createAsyncThunk(
@@ -55,7 +55,6 @@ export const fetchPromoAction = createAsyncThunk(
   },
 );
 
-
 export const fetchSimilarFilmsAction = createAsyncThunk(
   'data/setsimilarFilms',
   async (id: number | null) => {
@@ -72,10 +71,22 @@ export const postComment = createAsyncThunk(
   'film/postComment',
   async ({id, comment, rating}: CommentPost) => {
     try {
-      await api.post<userCommentData>(`${APIRoute.CommentPost}/${id}`, {comment, rating});
+      await api.post<userCommentData>(`${APIRoute.CommentPost}/${id}/dsssssss`, {comment, rating});
       store.dispatch(postUserReview({id, comment, rating}));
     } catch (error) {
       store.dispatch(reviewSendError(true));
+      errorHandle(error);
+    }
+  },
+);
+
+export const fetchUserAction = createAsyncThunk(
+  'user/userData',
+  async () => {
+    try {
+      const {data} = await api.get<UserLoginData>(APIRoute.Login);
+      store.dispatch(userData(data));
+    } catch (error) {
       errorHandle(error);
     }
   },

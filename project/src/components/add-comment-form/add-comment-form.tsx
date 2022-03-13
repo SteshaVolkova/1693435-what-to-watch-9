@@ -7,9 +7,10 @@ import {  useNavigate, useParams } from 'react-router-dom';
 import { AppRoute } from '../../const';
 import React from 'react';
 import { useAppSelector } from '../../hooks';
+import LoadingScreen from '../loading-screen/loading-screen';
 
 const MAX_COMMENT_LENGTH = 400;
-const MIN_COMMENT_LENGTH = 5;
+const MIN_COMMENT_LENGTH = 50;
 
 const stars: Star[] = [
   {'id': 10},{'id': 9},{'id': 8},{'id': 7},{'id': 6},{'id': 5},{'id': 4},{'id': 3},{'id': 2},{'id': 1},
@@ -21,10 +22,12 @@ function AddCommentForm(): JSX.Element {
   const [canSubmit, setCanSubmit] = useState<boolean>(false);
 
   const reviewSendError = useAppSelector((state) => state.reviewSendError);
+  const {isDataLoaded} = useAppSelector((state) => state);
 
   const navigate = useNavigate();
   const params = useParams();
   const id = Number(params.id);
+
   useEffect(() => {
     store.dispatch(fetchCommentsAction(id));
   }, [id]);
@@ -68,30 +71,36 @@ function AddCommentForm(): JSX.Element {
     }
   };
 
-  return (
-    <form action="#" className="add-review__form" onSubmit={handleSubmit}>
-      <div className="rating">
-        <div className="rating__stars">
-          {stars.map((star) => (
-            <React.Fragment key={star.id}>
-              <input onClick={() => {hanldeMouseOver(star.id);}} className="rating__input" id={`star-${star.id}`} type="radio" name="rating" value={star.id} />
-              <label className="rating__label" htmlFor={`star-${star.id}`}>{`Rating ${star.id}`}</label>
-            </React.Fragment>
-          ))}
+  if (isDataLoaded) {
+    return (
+      <form action="#" className="add-review__form" onSubmit={handleSubmit}>
+        <div className="rating">
+          <div className="rating__stars">
+            {stars.map((star) => (
+              <React.Fragment key={star.id}>
+                <input onClick={() => {hanldeMouseOver(star.id);}} className="rating__input" id={`star-${star.id}`} type="radio" name="rating" value={star.id} />
+                <label className="rating__label" htmlFor={`star-${star.id}`}>{`Rating ${star.id}`}</label>
+              </React.Fragment>
+            ))}
+          </div>
         </div>
-      </div>
 
-      <div className="add-review__text">
-        <textarea onChange={fieldChangeHandler} value={commentData} name="comment" className="add-review__textarea" id="review-text" placeholder="Review text"></textarea>
-        <div className="add-review__submit">
-          {(statRating === 0 || commentData === '' || commentData.length < MIN_COMMENT_LENGTH || commentData.length > MAX_COMMENT_LENGTH) ?
-            <button className="add-review__btn" type="submit" disabled>Post</button> :
-            <button className="add-review__btn" type="submit">Post</button>}
+        <div className="add-review__text">
+          <textarea onChange={fieldChangeHandler} value={commentData} name="comment" className="add-review__textarea" id="review-text" placeholder="Review text"></textarea>
+          <div className="add-review__submit">
+            {(statRating === 0 || commentData === '' || commentData.length < MIN_COMMENT_LENGTH || commentData.length > MAX_COMMENT_LENGTH) ?
+              <button className="add-review__btn" type="submit" disabled>Post</button> :
+              <button className="add-review__btn" type="submit">Post</button>}
+          </div>
         </div>
-      </div>
-      {reviewSendError && <span>Oops, something went wrong while submitting your review! Try later!</span>}
-    </form>
-  );
+        {reviewSendError && <span>Oops, something went wrong while submitting your review! Try later!</span>}
+      </form>
+    );
+  } else {
+    return (
+      <LoadingScreen />
+    );
+  }
 }
 
 export default AddCommentForm;
