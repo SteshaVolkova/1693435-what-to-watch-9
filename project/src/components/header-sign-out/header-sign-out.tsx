@@ -1,9 +1,11 @@
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
+import { AppRoute } from '../../const';
 import { useAppDispatch } from '../../hooks';
 import { logoutAction } from '../../store/api-actions';
 
 function HeaderSignOut(): JSX.Element {
   const dispatch = useAppDispatch();
+  const navigate = useNavigate();
 
   return (
     <div className="user-block">
@@ -18,6 +20,7 @@ function HeaderSignOut(): JSX.Element {
           onClick={(evt) => {
             evt.preventDefault();
             dispatch(logoutAction());
+            navigate(AppRoute.Root);
           }}
           to='/'
         >

@@ -19,3 +19,5 @@ export const setError = createAction<string>('film/setError');
 export const requireAuthorization = createAction<AuthorizationStatus>('user/requireAuthorization');
 
 export const redirectToRoute = createAction<AppRoute>('main/redirectToRoute');
+
+export const reviewSendError = createAction<boolean>('film/reviewSendError');

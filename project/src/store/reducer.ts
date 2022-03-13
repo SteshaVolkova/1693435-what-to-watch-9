@@ -1,5 +1,5 @@
 import { createReducer } from '@reduxjs/toolkit';
-import { updateSelectedGenre, loadFilms, loadComments, setError, requireAuthorization, setPromoFilm, setsimilarFilms, postUserReview } from './action';
+import { updateSelectedGenre, loadFilms, loadComments, setError, requireAuthorization, setPromoFilm, setsimilarFilms, postUserReview, reviewSendError } from './action';
 import { AuthorizationStatus } from '../const';
 import { Film, FilmReview, CommentPost } from '../types/films';
 
@@ -13,6 +13,7 @@ type InitialStateProps = {
   error: string,
   isDataLoaded: boolean,
   authorizationStatus: AuthorizationStatus,
+  reviewSendError: boolean,
 };
 
 const initialState: InitialStateProps = {
@@ -47,6 +48,7 @@ const initialState: InitialStateProps = {
   error: '',
   isDataLoaded: false,
   authorizationStatus: AuthorizationStatus.Unknown,
+  reviewSendError: false,
 };
 
 const reducer = createReducer(initialState, (builder) => {
@@ -78,6 +80,9 @@ const reducer = createReducer(initialState, (builder) => {
     })
     .addCase(requireAuthorization, (state, action) => {
       state.authorizationStatus = action.payload;
+    })
+    .addCase(reviewSendError, (state, action) => {
+      state.reviewSendError = action.payload;
     });
 });
 
