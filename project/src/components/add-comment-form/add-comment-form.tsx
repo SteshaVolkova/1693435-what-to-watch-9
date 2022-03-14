@@ -62,10 +62,10 @@ function AddCommentForm(): JSX.Element {
         rating: statRating,
         comment: commentData,
       });
-    }
 
-    if (!reviewSendError) {
-      setCanSubmit(true);
+      if(!reviewSendError) {
+        setCanSubmit(true);
+      }
     }
   };
 

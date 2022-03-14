@@ -71,11 +71,11 @@ export const postComment = createAsyncThunk(
   'film/postComment',
   async ({id, comment, rating}: CommentPost) => {
     try {
-      await api.post<userCommentData>(`${APIRoute.CommentPost}/${id}/dsssssss`, {comment, rating});
+      await api.post<userCommentData>(`${APIRoute.CommentPost}/${id}`, {comment, rating});
       store.dispatch(postUserReview({id, comment, rating}));
     } catch (error) {
-      store.dispatch(reviewSendError(true));
       errorHandle(error);
+      store.dispatch(reviewSendError(true));
     }
   },
 );
