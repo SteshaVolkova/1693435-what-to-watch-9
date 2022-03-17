@@ -24,7 +24,7 @@ function HeaderSignOut(): JSX.Element {
             dispatch(logoutAction());
             navigate(AppRoute.Root);
           }}
-          to='/'
+          to={AppRoute.Root}
         >
           Sign out
         </Link>

@@ -1,5 +1,6 @@
 import { useRef, useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
+import { AppRoute } from '../../const';
 import {Film} from '../../types/films';
 
 type VideoPlayerProps = {
@@ -13,6 +14,8 @@ function VideoPlayer({autoPlay, film}: VideoPlayerProps): JSX.Element {
   const [isLoading, setIsLoading] = useState(true);
 
   const videoRef = useRef<HTMLVideoElement | null>(null);
+
+  const navigate = useNavigate();
 
   const onMouseEnterHandler = () => {
     setTimer(setTimeout(() => {
@@ -32,7 +35,7 @@ function VideoPlayer({autoPlay, film}: VideoPlayerProps): JSX.Element {
   };
 
   return (
-    <article className="small-film-card catalog__films-card" onMouseEnter={onMouseEnterHandler} onMouseLeave={onMouseLeaveHandler}>
+    <article onClick={() => {navigate(`${AppRoute.FilmPage}/${id}`);}} className="small-film-card catalog__films-card" onMouseEnter={onMouseEnterHandler} onMouseLeave={onMouseLeaveHandler}>
       <div className="small-film-card__image">
         <video
           ref={videoRef}
@@ -49,7 +52,7 @@ function VideoPlayer({autoPlay, film}: VideoPlayerProps): JSX.Element {
         </video>
       </div>
       <h3 className="small-film-card__title">
-        <Link className="small-film-card__link" to={`/films/${id}`}>{name}</Link>
+        <Link className="small-film-card__link" to={`${AppRoute.FilmPage}/${id}`}>{name}</Link>
       </h3>
     </article>
   );

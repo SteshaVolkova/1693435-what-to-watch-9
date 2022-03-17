@@ -4,6 +4,7 @@ import HeaderLogin from '../../components/header-login/header-login';
 import AddCommentForm from '../../components/add-comment-form/add-comment-form';
 import { useAppSelector } from '../../hooks';
 import LoadingScreen from '../../components/loading-screen/loading-screen';
+import { AppRoute } from '../../const';
 
 
 function MoviePageReviews(): JSX.Element {
@@ -35,10 +36,10 @@ function MoviePageReviews(): JSX.Element {
           <nav className="breadcrumbs">
             <ul className="breadcrumbs__list">
               <li className="breadcrumbs__item">
-                <Link to={`/films/${film.id}`} className="breadcrumbs__link">{film.name}</Link>
+                <Link to={`${AppRoute.FilmPage}/${film.id}`} className="breadcrumbs__link">{film.name}</Link>
               </li>
               <li className="breadcrumbs__item">
-                <Link to='/review' className="breadcrumbs__link">Add review</Link>
+                <Link to={AppRoute.FilmReview} className="breadcrumbs__link">Add review</Link>
               </li>
             </ul>
           </nav>
