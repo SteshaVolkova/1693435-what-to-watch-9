@@ -1,8 +1,19 @@
 import { createReducer } from '@reduxjs/toolkit';
-import { updateSelectedGenre, loadFilms, loadComments, setError, requireAuthorization, setPromoFilm, setsimilarFilms, postUserReview, reviewSendError, userData } from './action';
+import {
+  updateSelectedGenre,
+  loadFilms,
+  loadComments,
+  setError,
+  requireAuthorization,
+  setPromoFilm,
+  setsimilarFilms,
+  postUserReview,
+  userData,
+  reviewSendStatus
+} from './action';
 import { AuthorizationStatus } from '../const';
 import { Film, FilmReview, CommentPost } from '../types/films';
-import { UserLoginData } from '../types/user-data';
+import { ReviewSendStatus, UserLoginData } from '../types/user-data';
 
 type InitialStateProps = {
   selectedGenre: string,
@@ -15,7 +26,7 @@ type InitialStateProps = {
   error: string,
   isDataLoaded: boolean,
   authorizationStatus: AuthorizationStatus,
-  reviewSendError: boolean,
+  reviewSendStatus: ReviewSendStatus,
 };
 
 const initialState: InitialStateProps = {
@@ -57,7 +68,7 @@ const initialState: InitialStateProps = {
   error: '',
   isDataLoaded: false,
   authorizationStatus: AuthorizationStatus.Unknown,
-  reviewSendError: false,
+  reviewSendStatus: 'initial',
 };
 
 const reducer = createReducer(initialState, (builder) => {
@@ -90,8 +101,8 @@ const reducer = createReducer(initialState, (builder) => {
     .addCase(requireAuthorization, (state, action) => {
       state.authorizationStatus = action.payload;
     })
-    .addCase(reviewSendError, (state, action) => {
-      state.reviewSendError = action.payload;
+    .addCase(reviewSendStatus, (state, action) => {
+      state.reviewSendStatus = action.payload;
     })
     .addCase(userData, (state, action) => {
       state.userLoginData = action.payload;

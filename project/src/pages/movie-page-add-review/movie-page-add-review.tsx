@@ -39,7 +39,7 @@ function MoviePageReviews(): JSX.Element {
                 <Link to={`${AppRoute.FilmPage}/${film.id}`} className="breadcrumbs__link">{film.name}</Link>
               </li>
               <li className="breadcrumbs__item">
-                <Link to={AppRoute.FilmReview} className="breadcrumbs__link">Add review</Link>
+                <Link to={`${AppRoute.FilmPage}/${film.id}/${AppRoute.FilmReview}`} className="breadcrumbs__link">Add review</Link>
               </li>
             </ul>
           </nav>

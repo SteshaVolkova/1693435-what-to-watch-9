@@ -11,3 +11,5 @@ export type UserLoginData = {
   name: string,
   token: string,
 };
+
+export type ReviewSendStatus = 'initial' | 'sending' | 'error';

@@ -1,7 +1,7 @@
 import { createAction } from '@reduxjs/toolkit';
 import { Film, FilmReview, CommentPost } from '../types/films';
 import { AppRoute, AuthorizationStatus } from '../const';
-import { UserLoginData } from '../types/user-data';
+import { ReviewSendStatus, UserLoginData } from '../types/user-data';
 
 export const updateSelectedGenre = createAction<string>('main/updateSelectedGenre');
 
@@ -23,4 +23,4 @@ export const userData = createAction<UserLoginData>('user/userData');
 
 export const redirectToRoute = createAction<AppRoute>('main/redirectToRoute');
 
-export const reviewSendError = createAction<boolean>('film/reviewSendError');
+export const reviewSendStatus = createAction<ReviewSendStatus>('film/reviewSendStatus');

@@ -1,12 +1,12 @@
 import { FormEvent, useEffect, useState } from 'react';
-import { fetchCommentsAction, postComment } from '../../store/api-actions';
+import { postComment } from '../../store/api-actions';
 import { Star } from '../../types/rating-stars';
-import { CommentPost } from '../../types/films';
 import { store } from '../../store';
 import {  useNavigate, useParams } from 'react-router-dom';
 import { AppRoute } from '../../const';
 import React from 'react';
 import { useAppSelector } from '../../hooks';
+import { reviewSendStatus } from '../../store/action';
 
 const MAX_COMMENT_LENGTH = 400;
 const MIN_COMMENT_LENGTH = 50;
@@ -16,66 +16,69 @@ const stars: Star[] = [
 ];
 
 function AddCommentForm(): JSX.Element {
-  const [commentData, setCommentData] = useState('');
-  const [statRating, setStatRating] = useState<number>(0);
-  const [canSubmit, setCanSubmit] = useState<boolean>(false);
+  const [commentData, setCommentData] = useState<string>('');
+  const [starRating, setStatRating] = useState<number>(0);
+  const [isSending, setIsSending] = useState<boolean>(false);
+  const [isDisabled, setIsDisabled] = useState<boolean>(true);
 
-  const reviewSendError = useAppSelector((state) => state.reviewSendError);
+  const sendStatus = useAppSelector((state) => state.reviewSendStatus);
 
   const navigate = useNavigate();
   const params = useParams();
   const id = Number(params.id);
 
-  useEffect(() => {
-    store.dispatch(fetchCommentsAction(id));
-  }, [id]);
+  useEffect (() => {
+    return () => {
+      store.dispatch(reviewSendStatus('initial'));
+    };
 
-  useEffect(() => {
-    if(reviewSendError) {
-      setCanSubmit(false);
-    }
-    if(canSubmit) {
+    return;
+  }, []);
+
+  useEffect (() => {
+    setIsDisabled(
+      starRating === 0 ||
+      commentData.length < MIN_COMMENT_LENGTH ||
+      commentData.length > MAX_COMMENT_LENGTH,
+    );
+  }, [starRating, commentData]);
+
+  useEffect (() => {
+    if (isSending && sendStatus === 'initial') {
       navigate(`${AppRoute.FilmPage}/${id}`);
     }
-  }, [canSubmit, id, navigate, reviewSendError]);
-
-
-  const hanldeMouseOver = (starId: number) => {
-    setStatRating(starId);
-  };
-
-  const fieldChangeHandler = (event: React.ChangeEvent<HTMLTextAreaElement>) => {
-    const enteredName = event.target.value;
-    setCommentData(enteredName);
-  };
-
-  const onSubmit = ({comment, rating}: CommentPost) => {
-    store.dispatch(postComment({id, comment, rating}));
-  };
+    setIsSending(sendStatus === 'sending');
+  }, [id, isSending, navigate, sendStatus]);
 
   const handleSubmit = (evt: FormEvent<HTMLFormElement>) => {
     evt.preventDefault();
 
-    if (statRating !== 0 || commentData !== '' || !reviewSendError) {
-      onSubmit({
-        id: id,
-        rating: statRating,
-        comment: commentData,
-      });
-
-      if(!reviewSendError) {
-        setCanSubmit(true);
-      }
+    if (!isDisabled) {
+      store.dispatch(postComment({id, comment: commentData, rating: starRating}));
     }
   };
 
   return (
-    <form action="#" className="add-review__form" onSubmit={handleSubmit}>
+    <form
+      action="#"
+      className="add-review__form"
+      onSubmit={handleSubmit}
+      style={{opacity: isSending ? 0.5 : 1}}
+    >
       <div className="rating">
         <div className="rating__stars">
           {stars.map((star) => (
             <React.Fragment key={star.id}>
-              <input onClick={() => {hanldeMouseOver(star.id);}} className="rating__input" id={`star-${star.id}`} type="radio" name="rating" value={star.id} />
+              <input
+                onChange={() => setStatRating(star.id)}
+                checked={star.id === starRating}
+                className="rating__input"
+                id={`star-${star.id}`}
+                type="radio"
+                name="rating"
+                value={star.id}
+                disabled={isSending}
+              />
               <label className="rating__label" htmlFor={`star-${star.id}`}>{`Rating ${star.id}`}</label>
             </React.Fragment>
           ))}
@@ -83,14 +86,26 @@ function AddCommentForm(): JSX.Element {
       </div>
 
       <div className="add-review__text">
-        <textarea onChange={fieldChangeHandler} value={commentData} name="comment" className="add-review__textarea" id="review-text" placeholder="Review text"></textarea>
+        <textarea
+          onChange={({target}) => setCommentData(target.value)}
+          value={commentData}
+          name="comment"
+          className="add-review__textarea"
+          id="review-text"
+          placeholder="Review text"
+          disabled={isSending}
+        />
         <div className="add-review__submit">
-          {(statRating === 0 || commentData === '' || commentData.length < MIN_COMMENT_LENGTH || commentData.length > MAX_COMMENT_LENGTH) ?
-            <button className="add-review__btn" type="submit" disabled>Post</button> :
-            <button className="add-review__btn" type="submit">Post</button>}
+          <button
+            className="add-review__btn"
+            type="submit"
+            disabled={isDisabled || isSending}
+          >
+            Post
+          </button>
         </div>
       </div>
-      {reviewSendError && <span>Oops, something went wrong while submitting your review! Try later!</span>}
+      {sendStatus === 'error' && <span>Oops, something went wrong while submitting your review! Try later!</span>}
     </form>
   );
 }
