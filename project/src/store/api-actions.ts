@@ -83,7 +83,7 @@ export const postComment = createAsyncThunk(
   async ({id, comment, rating}: CommentPost) => {
     try {
       store.dispatch(reviewSendStatus('sending'));
-      await api.post<userCommentData>(`${APIRoute.CommentPost}/${id}/kd`, {comment, rating});
+      await api.post<userCommentData>(`${APIRoute.CommentPost}/${id}`, {comment, rating});
       store.dispatch(postUserReview({id, comment, rating}));
       store.dispatch(reviewSendStatus('initial'));
     } catch (error) {
