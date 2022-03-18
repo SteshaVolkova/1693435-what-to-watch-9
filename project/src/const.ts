@@ -35,3 +35,16 @@ export enum HTTP_CODE {
   UNAUTHORIZED = 401,
   NOT_FOUND = 404,
 }
+
+export enum NameSpace {
+  filmsData = 'FILMS_DATA',
+  commentsData = 'COMMENTS_DATA',
+  promoFilmData = 'PROMO_FILM_DATA',
+  similarFilmsData = 'SIMILAR_FILMS_DATA',
+  postUserReview = 'POST_USER_REVIEW',
+  setError = 'FILM_SET_ERROR',
+  reviewSendStatus = 'REVIEW_SEND_STATUS',
+  selectedGenre = 'SELECTED_GENRE',
+  user = 'USER',
+  userData = 'USSER_DATA',
+}

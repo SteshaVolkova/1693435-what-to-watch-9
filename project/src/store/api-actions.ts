@@ -3,22 +3,20 @@ import { APIRoute, AppRoute, TIMEOUT_SHOW_ERROR, AuthorizationStatus } from '../
 import { api } from '../store';
 import { store } from '../store';
 import { Film, FilmReview, CommentPost, userCommentData } from '../types/films';
-import {
-  loadFilms,
-  requireAuthorization,
-  setError,
-  redirectToRoute,
-  loadComments,
-  setPromoFilm,
-  setsimilarFilms,
-  postUserReview,
-  userData,
-  reviewSendStatus
-} from './action';
+import { redirectToRoute } from './action';
 import { errorHandle } from '../services/error-handle';
 import { AuthData } from '../types/auth-data';
 import { UserData, UserLoginData } from '../types/user-data';
 import { dropToken, saveToken } from '../services/token';
+import { requireAuthorization } from './user-process/user-process';
+import { loadFilms } from './films-data/films-data';
+import { loadComments } from './commentc-data/commentc-data';
+import { setPromoFilm } from './promo-film-data/promo-film-data';
+import { setSimilarFilms } from './similar-films-data/similar-films-data';
+import { postUserReview } from './post-comment-data/post-comment-data';
+import { setError } from './set-data-error/set-data-error';
+import { userData } from './user-data/user-data';
+import { reviewSendStatus } from './review-send-status/review-send-status';
 
 export const clearErrorAction = createAsyncThunk(
   'film/setError',
@@ -71,7 +69,7 @@ export const fetchSimilarFilmsAction = createAsyncThunk(
   async (id: number | null) => {
     try {
       const {data} = await api.get<Film[]>(`${APIRoute.Films}/${id}/similar`);
-      store.dispatch(setsimilarFilms(data));
+      store.dispatch(setSimilarFilms(data));
     } catch (error) {
       errorHandle(error);
     }

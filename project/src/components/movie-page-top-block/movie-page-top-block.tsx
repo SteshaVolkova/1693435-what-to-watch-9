@@ -1,7 +1,7 @@
 import { Link, useNavigate } from 'react-router-dom';
 import HeaderLogo from '../header-logo/header-logo';
 import HeaderLogin from '../../components/header-login/header-login';
-import {Film} from '../../types/films';
+import { Film } from '../../types/films';
 import { useAppSelector } from '../../hooks';
 import { useEffect, useState } from 'react';
 import AddToMyListButton from '../add-to-my-list-button/add-to-my-list-button';
@@ -14,7 +14,7 @@ type MoviePageTopBlockProps = {
 function MoviePageTopBlock({film}: MoviePageTopBlockProps):JSX.Element {
   const {promoFilm} = useAppSelector((state) => state);
   const [isAuth, setIsAuth] = useState<boolean>(false);
-  const {authorizationStatus} = useAppSelector((state) => state);
+  const {authorizationStatus} = useAppSelector(({USER}) => USER);
   const {backgroundImage, name} = film;
   const navigate = useNavigate();
 
@@ -44,7 +44,6 @@ function MoviePageTopBlock({film}: MoviePageTopBlockProps):JSX.Element {
           </p>
 
           <div className="film-card__buttons">
-            {film.id}
             <button onClick={() => {
               navigate(`${AppRoute.Player}/${film.id}`);
             }}
