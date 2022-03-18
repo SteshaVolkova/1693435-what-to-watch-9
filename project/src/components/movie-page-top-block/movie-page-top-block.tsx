@@ -12,7 +12,7 @@ type MoviePageTopBlockProps = {
   };
 
 function MoviePageTopBlock({film}: MoviePageTopBlockProps):JSX.Element {
-  const {promoFilm} = useAppSelector((state) => state);
+  const {promoFilm} = useAppSelector(({PROMO_FILM_DATA}) => PROMO_FILM_DATA);
   const [isAuth, setIsAuth] = useState<boolean>(false);
   const {authorizationStatus} = useAppSelector(({USER}) => USER);
   const {backgroundImage, name} = film;

@@ -12,7 +12,9 @@ import LoadingScreen from '../../components/loading-screen/loading-screen';
 
 
 function MoviePage(): JSX.Element {
-  const {films, comments, similarFilms} = useAppSelector((state) => state);
+  const {films} = useAppSelector (({FILMS_DATA}) => FILMS_DATA);
+  const {comments} = useAppSelector (({COMMENTS_DATA}) => COMMENTS_DATA);
+  const {similarFilms} = useAppSelector(({SIMILAR_FILMS_DATA}) => SIMILAR_FILMS_DATA);
   const params = useParams();
   const filmId = Number(params.id);
   const film = films[filmId - 1];

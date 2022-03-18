@@ -4,7 +4,7 @@ import { useAppSelector } from '../../hooks';
 import { useEffect, useState } from 'react';
 
 function HeaderLogin(): JSX.Element {
-  const {authorizationStatus} = useAppSelector((state) => state);
+  const {authorizationStatus} = useAppSelector(({USER}) => USER);
   const [isAuth, setIsAuth] = useState<boolean>(false);
 
   useEffect (() => {

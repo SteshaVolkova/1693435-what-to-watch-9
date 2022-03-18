@@ -1,5 +1,5 @@
 import { useAppDispatch, useAppSelector } from '../../hooks/';
-import { updateSelectedGenre } from '../../store/action';
+import { updateSelectedGenre } from '../../store/update-selected-genre/update-selected-genre';
 import { Link } from 'react-router-dom';
 
 type CatalogGenresListProps = {
@@ -8,12 +8,12 @@ type CatalogGenresListProps = {
 
 function CatalogGenresList({genres}: CatalogGenresListProps): JSX.Element {
   const dispatch = useAppDispatch();
-  const selectedGenre = useAppSelector((state) => state.selectedGenre);
+  const activeGenre = useAppSelector(({SELECTED_GENRE}) => SELECTED_GENRE);
 
   return (
     <>
       {genres.map((genre) =>(
-        <li key={genre} onClick={() => dispatch(updateSelectedGenre(genre))} className={`catalog__genres-item ${genre === selectedGenre ? ' catalog__genres-item--active' : ''}`}>
+        <li key={genre} onClick={() => dispatch(updateSelectedGenre(genre))} className={`catalog__genres-item ${genre === activeGenre.selectedGenre ? ' catalog__genres-item--active' : ''}`}>
           <Link to={''} className="catalog__genres-link">{genre}</Link>
         </li>),
       )}

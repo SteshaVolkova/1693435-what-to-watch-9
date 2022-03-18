@@ -9,7 +9,7 @@ import { useNavigate } from 'react-router-dom';
 
 
 function MainPage(): JSX.Element {
-  const {promoFilm} = useAppSelector((state) => state);
+  const {promoFilm} = useAppSelector(({PROMO_FILM_DATA}) => PROMO_FILM_DATA);
   const navigate = useNavigate();
 
   return (

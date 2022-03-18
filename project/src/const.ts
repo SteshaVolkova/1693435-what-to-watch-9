@@ -42,7 +42,7 @@ export enum NameSpace {
   promoFilmData = 'PROMO_FILM_DATA',
   similarFilmsData = 'SIMILAR_FILMS_DATA',
   postUserReview = 'POST_USER_REVIEW',
-  setError = 'FILM_SET_ERROR',
+  setError = 'SET_ERROR',
   reviewSendStatus = 'REVIEW_SEND_STATUS',
   selectedGenre = 'SELECTED_GENRE',
   user = 'USER',

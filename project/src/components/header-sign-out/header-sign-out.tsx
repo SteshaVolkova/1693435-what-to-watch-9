@@ -7,7 +7,7 @@ function HeaderSignOut(): JSX.Element {
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
 
-  const {userLoginData} = useAppSelector((state) => state);
+  const {userLoginData} = useAppSelector(({USSER_DATA}) => USSER_DATA);
 
   return (
     <div className="user-block">

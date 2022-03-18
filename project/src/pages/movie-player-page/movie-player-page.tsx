@@ -3,7 +3,7 @@ import { useAppSelector } from '../../hooks';
 
 
 function MoviePlayer(): JSX.Element {
-  const {films} = useAppSelector((state) => state);
+  const {films} = useAppSelector(({FILMS_DATA}) => FILMS_DATA);
 
   const params = useParams();
   const filmId = Number(params.id);

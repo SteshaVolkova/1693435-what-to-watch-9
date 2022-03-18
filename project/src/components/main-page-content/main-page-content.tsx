@@ -9,10 +9,11 @@ const FILMS_PER_PAGE = 8;
 let arrayForHoldingFilms: Film[] = [];
 
 function MainPageContent(): JSX.Element {
-  const {films} = useAppSelector((state) => state);
+  const {films} = useAppSelector(({FILMS_DATA}) => FILMS_DATA);
   const [genres, setGenres] = useState< string[] >([]);
-  const selectedGenre = useAppSelector((state) => state.selectedGenre);
-  const filmsList = films.filter(({genre}) => selectedGenre === 'All genres' || selectedGenre === genre);
+  const [isShowMoreButton, setIsShowMoreButton] = useState<boolean>(false);
+  const activeGenre = useAppSelector(({SELECTED_GENRE}) => SELECTED_GENRE);
+  const filmsList = films.filter(({genre}) => activeGenre.selectedGenre === 'All genres' || activeGenre.selectedGenre === genre);
 
   useEffect(() => {
     setGenres(['All genres', ...new Set(films.map(({genre}) => genre))]);
@@ -22,10 +23,10 @@ function MainPageContent(): JSX.Element {
   const [next, setNext] = useState(DEFAULT_FILM_COUNT);
 
   const loopWithSlice = useCallback((start: number, end:number) => {
-    const slicedPosts = films.filter(({genre}) => selectedGenre === 'All genres' || selectedGenre === genre).slice(start, end);
+    const slicedPosts = films.filter(({genre}) => activeGenre.selectedGenre === 'All genres' || activeGenre.selectedGenre === genre).slice(start, end);
     arrayForHoldingFilms = [...arrayForHoldingFilms, ...slicedPosts];
     setFilmsToShow(arrayForHoldingFilms);
-  }, [films, selectedGenre]);
+  }, [films, activeGenre]);
 
   const chooseGenre = () => {
     arrayForHoldingFilms = [];
@@ -34,16 +35,20 @@ function MainPageContent(): JSX.Element {
 
   useEffect(() => {
     chooseGenre();
-  }, [selectedGenre]);
+  }, [activeGenre]);
 
   useEffect(() => {
     loopWithSlice(0, FILMS_PER_PAGE);
-  }, [loopWithSlice, selectedGenre]);
+  }, [loopWithSlice, activeGenre]);
 
   const handleShowMoreFilms = () => {
     loopWithSlice(next, next + FILMS_PER_PAGE);
     setNext(next + FILMS_PER_PAGE);
   };
+
+  useEffect(() => {
+    setIsShowMoreButton(filmsList.length > DEFAULT_FILM_COUNT && filmsToShow.length !== filmsList.length);
+  }, [filmsList.length, filmsToShow.length]);
 
   return (
     <section className="catalog">
@@ -55,7 +60,7 @@ function MainPageContent(): JSX.Element {
 
       <FilmsList films={filmsToShow} />
 
-      {(filmsList.length > DEFAULT_FILM_COUNT && filmsToShow.length !== filmsList.length) &&
+      {isShowMoreButton &&
       <div className="catalog__more">
         <button onClick={handleShowMoreFilms} className="catalog__button" type="button">Show more</button>
       </div>}

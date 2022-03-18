@@ -6,7 +6,7 @@ import {  useNavigate, useParams } from 'react-router-dom';
 import { AppRoute } from '../../const';
 import React from 'react';
 import { useAppSelector } from '../../hooks';
-import { reviewSendStatus } from '../../store/action';
+import { reviewSendStatus } from '../../store/review-send-status/review-send-status';
 
 const MAX_COMMENT_LENGTH = 400;
 const MIN_COMMENT_LENGTH = 50;
@@ -21,7 +21,7 @@ function AddCommentForm(): JSX.Element {
   const [isSending, setIsSending] = useState<boolean>(false);
   const [isDisabled, setIsDisabled] = useState<boolean>(true);
 
-  const sendStatus = useAppSelector((state) => state.reviewSendStatus);
+  const sendStatus = useAppSelector(({REVIEW_SEND_STATUS}) => REVIEW_SEND_STATUS);
 
   const navigate = useNavigate();
   const params = useParams();
@@ -44,10 +44,10 @@ function AddCommentForm(): JSX.Element {
   }, [starRating, commentData]);
 
   useEffect (() => {
-    if (isSending && sendStatus === 'initial') {
+    if (isSending && sendStatus.reviewSendStatus === 'initial') {
       navigate(`${AppRoute.FilmPage}/${id}`);
     }
-    setIsSending(sendStatus === 'sending');
+    setIsSending(sendStatus.reviewSendStatus === 'sending');
   }, [id, isSending, navigate, sendStatus]);
 
   const handleSubmit = (evt: FormEvent<HTMLFormElement>) => {
@@ -105,7 +105,7 @@ function AddCommentForm(): JSX.Element {
           </button>
         </div>
       </div>
-      {sendStatus === 'error' && <span>Oops, something went wrong while submitting your review! Try later!</span>}
+      {sendStatus.reviewSendStatus === 'error' && <span>Oops, something went wrong while submitting your review! Try later!</span>}
     </form>
   );
 }
