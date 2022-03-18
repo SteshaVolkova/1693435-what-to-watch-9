@@ -43,7 +43,7 @@ function SignInPage(): JSX.Element {
 
   const hendlerPasswordValidate = () => {
     const validate = /^(?=.*\d)(?=.*[a-zA-Z]).*/;
-    if(!validate.test(String(passwordRef.current?.value).toLocaleLowerCase())) {
+    if (!validate.test(String(passwordRef.current?.value).toLocaleLowerCase())) {
       setIsPasswordError(true);
     }
   };

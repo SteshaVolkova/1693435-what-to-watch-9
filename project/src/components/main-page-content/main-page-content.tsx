@@ -8,11 +8,8 @@ const DEFAULT_FILM_COUNT = 8;
 const FILMS_PER_PAGE = 8;
 let arrayForHoldingFilms: Film[] = [];
 
-type MainPageContentProps = {
-    films: Film[],
-}
-
-function MainPageContent({ films }: MainPageContentProps): JSX.Element {
+function MainPageContent(): JSX.Element {
+  const {films} = useAppSelector((state) => state);
   const [genres, setGenres] = useState< string[] >([]);
   const selectedGenre = useAppSelector((state) => state.selectedGenre);
   const filmsList = films.filter(({genre}) => selectedGenre === 'All genres' || selectedGenre === genre);
