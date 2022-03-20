@@ -1,22 +1,35 @@
 import Footer from '../../components/footer/footer';
 import MoviePageTopBlock from '../../components/movie-page-top-block/movie-page-top-block';
 import SmallFilmCard from '../../components/small-film-card/small-film-card';
-import { useParams } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import MovieTabs from '../../components/movie-tabs/movie-tabs';
-import { FilmReview } from '../../types/films';
 import { useAppSelector } from '../../hooks';
+import { fetchCommentsAction, fetchSimilarFilmsAction } from '../../store/api-actions';
+import { store } from '../../store';
+import { useEffect } from 'react';
+import { AppRoute } from '../../const';
+import LoadingScreen from '../../components/loading-screen/loading-screen';
 
-type MoviePageProps = {
-  reviews: FilmReview[],
-};
 
-function MoviePage({ reviews }: MoviePageProps): JSX.Element {
-  const {films} = useAppSelector((state) => state);
+function MoviePage(): JSX.Element {
+  const {films, comments, similarFilms} = useAppSelector((state) => state);
   const params = useParams();
   const filmId = Number(params.id);
   const film = films[filmId - 1];
-  const { posterImage, name } = film;
+  const navigate = useNavigate();
 
+  useEffect(() => {
+    if (!film) {
+      navigate(AppRoute.NotFound);
+      return;
+    }
+    store.dispatch(fetchCommentsAction(film.id));
+    store.dispatch(fetchSimilarFilmsAction(film.id));
+  }, [film, navigate]);
+
+  if (!film) {
+    return <LoadingScreen />;
+  }
   return (
     <>
       <section className="film-card film-card--full">
@@ -25,10 +38,10 @@ function MoviePage({ reviews }: MoviePageProps): JSX.Element {
         <div className="film-card__wrap film-card__translate-top">
           <div className="film-card__info">
             <div className="film-card__poster film-card__poster--big">
-              <img src={posterImage} alt={name} width="218" height="327" />
+              <img src={film.posterImage} alt={film.name} width="218" height="327" />
             </div>
 
-            <MovieTabs film={film} reviews={reviews} />
+            <MovieTabs film={film} reviews={comments} />
           </div>
         </div>
       </section>
@@ -38,7 +51,7 @@ function MoviePage({ reviews }: MoviePageProps): JSX.Element {
           <h2 className="catalog__title">More like this</h2>
 
           <div className="catalog__films-list">
-            {films.filter((item) => (item.genre === film.genre)).splice(0, 4).map((item) => <SmallFilmCard key={item.id} film={item}/>)}
+            {similarFilms.filter((item) => (item.genre === film.genre)).splice(0, 4).map((item) => <SmallFilmCard key={item.id} film={item}/>)}
           </div>
         </section>
 

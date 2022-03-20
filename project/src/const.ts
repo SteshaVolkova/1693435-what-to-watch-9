@@ -3,10 +3,13 @@ export enum AppRoute {
     Login = '/login',
     MyList = '/mylist',
     Film = 'films/:id',
+    FilmPage = '/films',
     FilmReview = 'review',
     PlayerFilm = '/player/:id',
-    Player ='/player'
+    Player = '/player',
+    NotFound = '/404',
   }
+
 
 export enum AuthorizationStatus {
   Auth = 'AUTH',
@@ -16,11 +19,11 @@ export enum AuthorizationStatus {
 
 export enum APIRoute {
   Films = '/films',
-  Film = '/films/:id',
   SimilarFilm = '/films/:id/similar',
   PromoFilm = '/promo',
   FavoriteFilms = '/favorite',
-  CommentsFilm = '/comments/:id',
+  CommentsFilm = '/comments',
+  CommentPost = '/comments',
   Login = '/login',
   Logout = '/logout',
 }

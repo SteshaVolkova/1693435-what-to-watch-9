@@ -1,6 +1,7 @@
-import {Link} from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import HeaderLogo from '../../components/header-logo/header-logo';
 import Footer from '../../components/footer/footer';
+import { AppRoute } from '../../const';
 
 function NotFoundPage(): JSX.Element {
   return (
@@ -12,7 +13,7 @@ function NotFoundPage(): JSX.Element {
       <div className="sign-in user-page__content">
         <h1>404. Page not found</h1>
         <br></br>
-        <Link to="/">Go to main page</Link>
+        <Link to={AppRoute.Root}>Go to main page</Link>
       </div>
 
       <Footer />

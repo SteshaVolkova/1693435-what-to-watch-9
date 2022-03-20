@@ -4,14 +4,20 @@ import HeaderLogin from '../../components/header-login/header-login';
 import FilmCardDescription from '../film-card-description/film-card-description';
 import {Film} from '../../types/films';
 import { useAppSelector } from '../../hooks';
+import { useEffect, useState } from 'react';
 
 type MoviePageTopBlockProps = {
     film: Film
   };
 
 function MoviePageTopBlock({film}: MoviePageTopBlockProps):JSX.Element {
+  const [isAuth, setIsAuth] = useState<boolean>(false);
   const {authorizationStatus} = useAppSelector((state) => state);
   const {backgroundImage, name} = film;
+
+  useEffect (() => {
+    setIsAuth(authorizationStatus === 'AUTH');
+  }, [authorizationStatus]);
 
   return (
     <div className="film-card__hero">
@@ -28,7 +34,7 @@ function MoviePageTopBlock({film}: MoviePageTopBlockProps):JSX.Element {
 
       <div className="film-card__wrap">
         <FilmCardDescription film={film}>
-          {authorizationStatus === 'AUTH' ? <Link to='review' className="btn film-card__button">Add review</Link>: ''}
+          {isAuth ? <Link to='review' className="btn film-card__button">Add review</Link>: ''}
         </FilmCardDescription>
       </div>
     </div>
