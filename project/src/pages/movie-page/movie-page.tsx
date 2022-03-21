@@ -35,7 +35,7 @@ function MoviePage(): JSX.Element {
   return (
     <>
       <section className="film-card film-card--full">
-        <MoviePageTopBlock film={film} />
+        <MoviePageTopBlock />
 
         <div className="film-card__wrap film-card__translate-top">
           <div className="film-card__info">
@@ -53,7 +53,7 @@ function MoviePage(): JSX.Element {
           <h2 className="catalog__title">More like this</h2>
 
           <div className="catalog__films-list">
-            {similarFilms.filter((item) => (item.genre === film.genre)).splice(0, 4).map((item) => <SmallFilmCard key={item.id} film={item}/>)}
+            {similarFilms.filter((item) => (item.name !== film.name)).filter((item) => (item.genre === film.genre)).splice(0, 4).map((item) => <SmallFilmCard key={item.id} film={item}/>)}
           </div>
         </section>
 

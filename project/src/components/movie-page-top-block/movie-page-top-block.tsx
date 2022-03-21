@@ -1,21 +1,18 @@
-import { Link, useNavigate } from 'react-router-dom';
+import { Link, useNavigate, useParams } from 'react-router-dom';
 import HeaderLogo from '../header-logo/header-logo';
 import HeaderLogin from '../../components/header-login/header-login';
-import { Film } from '../../types/films';
 import { useAppSelector } from '../../hooks';
 import { useEffect, useState } from 'react';
 import AddToMyListButton from '../add-to-my-list-button/add-to-my-list-button';
 import { AppRoute } from '../../const';
 
-type MoviePageTopBlockProps = {
-    film: Film
-  };
-
-function MoviePageTopBlock({film}: MoviePageTopBlockProps):JSX.Element {
-  const {promoFilm} = useAppSelector(({PROMO_FILM_DATA}) => PROMO_FILM_DATA);
+function MoviePageTopBlock():JSX.Element {
+  const {films} = useAppSelector(({FILMS_DATA}) => FILMS_DATA);
   const [isAuth, setIsAuth] = useState<boolean>(false);
   const {authorizationStatus} = useAppSelector(({USER}) => USER);
-  const {backgroundImage, name} = film;
+  const params = useParams();
+  const filmId = Number(params.id);
+  const film = films[filmId - 1];
   const navigate = useNavigate();
 
   useEffect (() => {
@@ -25,7 +22,7 @@ function MoviePageTopBlock({film}: MoviePageTopBlockProps):JSX.Element {
   return (
     <div className="film-card__hero">
       <div className="film-card__bg">
-        <img src={backgroundImage} alt={name} />
+        <img src={film.backgroundImage} alt={film.name} />
       </div>
 
       <h1 className="visually-hidden">WTW</h1>
@@ -37,10 +34,10 @@ function MoviePageTopBlock({film}: MoviePageTopBlockProps):JSX.Element {
 
       <div className="film-card__wrap">
         <div className="film-card__desc">
-          <h2 className="film-card__title">{promoFilm.name}</h2>
+          <h2 className="film-card__title">{film.name}</h2>
           <p className="film-card__meta">
-            <span className="film-card__genre">{promoFilm.genre}</span>
-            <span className="film-card__year">{promoFilm.released}</span>
+            <span className="film-card__genre">{film.genre}</span>
+            <span className="film-card__year">{film.released}</span>
           </p>
 
           <div className="film-card__buttons">
