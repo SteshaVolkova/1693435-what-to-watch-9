@@ -46,5 +46,5 @@ export enum NameSpace {
   reviewSendStatus = 'REVIEW_SEND_STATUS',
   selectedGenre = 'SELECTED_GENRE',
   user = 'USER',
-  userData = 'USSER_DATA',
+  userData = 'USER_DATA',
 }

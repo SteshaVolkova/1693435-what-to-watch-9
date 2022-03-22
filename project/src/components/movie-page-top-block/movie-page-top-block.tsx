@@ -5,11 +5,13 @@ import { useAppSelector } from '../../hooks';
 import { useEffect, useState } from 'react';
 import AddToMyListButton from '../add-to-my-list-button/add-to-my-list-button';
 import { AppRoute } from '../../const';
+import { getAuthorizationStatus } from '../../store/user-process/selectors';
+import { getFilmsList } from '../../store/films-data/selectors';
 
 function MoviePageTopBlock():JSX.Element {
-  const {films} = useAppSelector(({FILMS_DATA}) => FILMS_DATA);
+  const films = useAppSelector(getFilmsList);
   const [isAuth, setIsAuth] = useState<boolean>(false);
-  const {authorizationStatus} = useAppSelector(({USER}) => USER);
+  const authorizationStatus = useAppSelector(getAuthorizationStatus);
   const params = useParams();
   const filmId = Number(params.id);
   const film = films[filmId - 1];

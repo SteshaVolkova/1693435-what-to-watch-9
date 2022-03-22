@@ -6,10 +6,11 @@ import { useAppSelector } from '../../hooks';
 import AddToMyListButton from '../../components/add-to-my-list-button/add-to-my-list-button';
 import { AppRoute } from '../../const';
 import { useNavigate } from 'react-router-dom';
+import { getPromoFilmList } from '../../store/promo-film-data/selectors';
 
 
 function MainPage(): JSX.Element {
-  const {promoFilm} = useAppSelector(({PROMO_FILM_DATA}) => PROMO_FILM_DATA);
+  const promoFilm = useAppSelector(getPromoFilmList);
   const navigate = useNavigate();
 
   return (

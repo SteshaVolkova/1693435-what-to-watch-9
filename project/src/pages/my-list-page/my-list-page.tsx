@@ -3,10 +3,11 @@ import HeaderLogin from '../../components/header-login/header-login';
 import Footer from '../../components/footer/footer';
 import FilmsList from '../../components/films-list/films-list';
 import { useAppSelector } from '../../hooks';
+import { getFilmsList } from '../../store/films-data/selectors';
 
 
 function MyListPage(): JSX.Element {
-  const {films} = useAppSelector(({FILMS_DATA}) => FILMS_DATA);
+  const films = useAppSelector(getFilmsList);
 
   return (
     <div className="user-page">

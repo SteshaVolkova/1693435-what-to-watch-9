@@ -2,12 +2,13 @@ import { Link, useNavigate } from 'react-router-dom';
 import { AppRoute } from '../../const';
 import { useAppDispatch, useAppSelector } from '../../hooks';
 import { logoutAction } from '../../store/api-actions';
+import { getUserLoginData } from '../../store/user-data/selectors';
 
 function HeaderSignOut(): JSX.Element {
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
 
-  const {userLoginData} = useAppSelector(({USSER_DATA}) => USSER_DATA);
+  const userLoginData = useAppSelector(getUserLoginData);
 
   return (
     <div className="user-block">

@@ -9,12 +9,18 @@ import { store } from '../../store';
 import { useEffect } from 'react';
 import { AppRoute } from '../../const';
 import LoadingScreen from '../../components/loading-screen/loading-screen';
+import { getCommentsList, getCommentsLoadedDataStatus } from '../../store/commentc-data/selectors';
+import { getFilmsList, getFilmsLoadedDataStatus } from '../../store/films-data/selectors';
+import { getSimilarLoadedDataStatus, getSumilarFilmsList } from '../../store/similar-films-data/selectors';
 
 
 function MoviePage(): JSX.Element {
-  const {films} = useAppSelector (({FILMS_DATA}) => FILMS_DATA);
-  const {comments} = useAppSelector (({COMMENTS_DATA}) => COMMENTS_DATA);
-  const {similarFilms} = useAppSelector(({SIMILAR_FILMS_DATA}) => SIMILAR_FILMS_DATA);
+  const films = useAppSelector (getFilmsList);
+  const comments = useAppSelector (getCommentsList);
+  const similarFilms = useAppSelector(getSumilarFilmsList);
+  const isDataLoadedSimilarList = useAppSelector(getSimilarLoadedDataStatus);
+  const isDataLoadedFilmsList = useAppSelector(getFilmsLoadedDataStatus);
+  const isDataLoadedCommentsList = useAppSelector(getCommentsLoadedDataStatus);
   const params = useParams();
   const filmId = Number(params.id);
   const film = films[filmId - 1];
@@ -29,8 +35,10 @@ function MoviePage(): JSX.Element {
     store.dispatch(fetchSimilarFilmsAction(film.id));
   }, [film, navigate]);
 
-  if (!film) {
-    return <LoadingScreen />;
+  if (!film || !isDataLoadedSimilarList || !isDataLoadedFilmsList || !isDataLoadedCommentsList) {
+    return (
+      <LoadingScreen />
+    );
   }
   return (
     <>
