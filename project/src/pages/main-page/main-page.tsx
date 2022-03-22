@@ -6,12 +6,20 @@ import { useAppSelector } from '../../hooks';
 import AddToMyListButton from '../../components/add-to-my-list-button/add-to-my-list-button';
 import { AppRoute } from '../../const';
 import { useNavigate } from 'react-router-dom';
-import { getPromoFilmList } from '../../store/promo-film-data/selectors';
+import { getPromoFiilmLoadedDataStatus, getPromoFilmList } from '../../store/promo-film-data/selectors';
+import LoadingScreen from '../../components/loading-screen/loading-screen';
 
 
 function MainPage(): JSX.Element {
   const promoFilm = useAppSelector(getPromoFilmList);
+  const isPromoFilmLoaded = useAppSelector(getPromoFiilmLoadedDataStatus);
   const navigate = useNavigate();
+
+  if (!isPromoFilmLoaded) {
+    return (
+      <LoadingScreen />
+    );
+  }
 
   return (
     <>
