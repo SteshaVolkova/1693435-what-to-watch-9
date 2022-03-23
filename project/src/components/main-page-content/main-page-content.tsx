@@ -3,18 +3,18 @@ import { useAppSelector } from '../../hooks';
 import { Film } from '../../types/films';
 import FilmsList from '../../components/films-list/films-list';
 import CatalogGenresList from '../../components/catalog-genres-list/catalog-genres-list';
+import { getFilmsList } from '../../store/films-data/selectors';
+import { getSelectedGenre } from '../../store/update-selected-genre/selectors';
 
 const DEFAULT_FILM_COUNT = 8;
 const FILMS_PER_PAGE = 8;
 let arrayForHoldingFilms: Film[] = [];
 
-type MainPageContentProps = {
-    films: Film[],
-}
-
-function MainPageContent({ films }: MainPageContentProps): JSX.Element {
+function MainPageContent(): JSX.Element {
+  const films = useAppSelector(getFilmsList);
   const [genres, setGenres] = useState< string[] >([]);
-  const selectedGenre = useAppSelector((state) => state.selectedGenre);
+  const [isShowMoreButton, setIsShowMoreButton] = useState<boolean>(false);
+  const selectedGenre = useAppSelector(getSelectedGenre);
   const filmsList = films.filter(({genre}) => selectedGenre === 'All genres' || selectedGenre === genre);
 
   useEffect(() => {
@@ -48,6 +48,10 @@ function MainPageContent({ films }: MainPageContentProps): JSX.Element {
     setNext(next + FILMS_PER_PAGE);
   };
 
+  useEffect(() => {
+    setIsShowMoreButton(filmsList.length > DEFAULT_FILM_COUNT && filmsToShow.length !== filmsList.length);
+  }, [filmsList.length, filmsToShow.length]);
+
   return (
     <section className="catalog">
       <h2 className="catalog__title visually-hidden">Catalog</h2>
@@ -58,7 +62,7 @@ function MainPageContent({ films }: MainPageContentProps): JSX.Element {
 
       <FilmsList films={filmsToShow} />
 
-      {(filmsList.length > DEFAULT_FILM_COUNT && filmsToShow.length !== filmsList.length) &&
+      {isShowMoreButton &&
       <div className="catalog__more">
         <button onClick={handleShowMoreFilms} className="catalog__button" type="button">Show more</button>
       </div>}

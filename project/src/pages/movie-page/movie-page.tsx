@@ -9,10 +9,18 @@ import { store } from '../../store';
 import { useEffect } from 'react';
 import { AppRoute } from '../../const';
 import LoadingScreen from '../../components/loading-screen/loading-screen';
+import { getCommentsList, getCommentsLoadedDataStatus } from '../../store/commentc-data/selectors';
+import { getFilmsList, getFilmsLoadedDataStatus } from '../../store/films-data/selectors';
+import { getSimilarLoadedDataStatus, getSumilarFilmsList } from '../../store/similar-films-data/selectors';
 
 
 function MoviePage(): JSX.Element {
-  const {films, comments, similarFilms} = useAppSelector((state) => state);
+  const films = useAppSelector (getFilmsList);
+  const comments = useAppSelector (getCommentsList);
+  const similarFilms = useAppSelector(getSumilarFilmsList);
+  const isDataLoadedSimilarList = useAppSelector(getSimilarLoadedDataStatus);
+  const isDataLoadedFilmsList = useAppSelector(getFilmsLoadedDataStatus);
+  const isDataLoadedCommentsList = useAppSelector(getCommentsLoadedDataStatus);
   const params = useParams();
   const filmId = Number(params.id);
   const film = films[filmId - 1];
@@ -27,13 +35,15 @@ function MoviePage(): JSX.Element {
     store.dispatch(fetchSimilarFilmsAction(film.id));
   }, [film, navigate]);
 
-  if (!film) {
-    return <LoadingScreen />;
+  if (!film || !isDataLoadedSimilarList || !isDataLoadedFilmsList || !isDataLoadedCommentsList) {
+    return (
+      <LoadingScreen />
+    );
   }
   return (
     <>
       <section className="film-card film-card--full">
-        <MoviePageTopBlock film={film} />
+        <MoviePageTopBlock />
 
         <div className="film-card__wrap film-card__translate-top">
           <div className="film-card__info">
@@ -51,7 +61,7 @@ function MoviePage(): JSX.Element {
           <h2 className="catalog__title">More like this</h2>
 
           <div className="catalog__films-list">
-            {similarFilms.filter((item) => (item.genre === film.genre)).splice(0, 4).map((item) => <SmallFilmCard key={item.id} film={item}/>)}
+            {similarFilms.filter((item) => (item.name !== film.name)).filter((item) => (item.genre === film.genre)).splice(0, 4).map((item) => <SmallFilmCard key={item.id} film={item}/>)}
           </div>
         </section>
 

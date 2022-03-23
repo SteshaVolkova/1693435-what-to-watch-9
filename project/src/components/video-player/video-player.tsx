@@ -19,14 +19,14 @@ function VideoPlayer({autoPlay, film}: VideoPlayerProps): JSX.Element {
 
   const onMouseEnterHandler = () => {
     setTimer(setTimeout(() => {
-      if(!isLoading) {
+      if (!isLoading) {
         videoRef.current && videoRef.current.play();
       }
     }, 1000));
   };
 
   const onMouseLeaveHandler = () => {
-    if(timer) {
+    if (timer) {
       clearTimeout(timer);
       setTimer(null);
       videoRef.current && videoRef.current.load();

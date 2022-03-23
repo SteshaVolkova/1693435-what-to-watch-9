@@ -1,6 +1,7 @@
 import { useAppDispatch, useAppSelector } from '../../hooks/';
-import { updateSelectedGenre } from '../../store/action';
+import { updateSelectedGenre } from '../../store/update-selected-genre/update-selected-genre';
 import { Link } from 'react-router-dom';
+import { getSelectedGenre } from '../../store/update-selected-genre/selectors';
 
 type CatalogGenresListProps = {
   genres: string[],
@@ -8,7 +9,7 @@ type CatalogGenresListProps = {
 
 function CatalogGenresList({genres}: CatalogGenresListProps): JSX.Element {
   const dispatch = useAppDispatch();
-  const selectedGenre = useAppSelector((state) => state.selectedGenre);
+  const selectedGenre = useAppSelector(getSelectedGenre);
 
   return (
     <>

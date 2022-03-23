@@ -6,7 +6,8 @@ import {  useNavigate, useParams } from 'react-router-dom';
 import { AppRoute } from '../../const';
 import React from 'react';
 import { useAppSelector } from '../../hooks';
-import { reviewSendStatus } from '../../store/action';
+import { reviewSendStatus } from '../../store/review-send-status/review-send-status';
+import { getReviewSendStatus } from '../../store/review-send-status/selectors';
 
 const MAX_COMMENT_LENGTH = 400;
 const MIN_COMMENT_LENGTH = 50;
@@ -21,7 +22,7 @@ function AddCommentForm(): JSX.Element {
   const [isSending, setIsSending] = useState<boolean>(false);
   const [isDisabled, setIsDisabled] = useState<boolean>(true);
 
-  const sendStatus = useAppSelector((state) => state.reviewSendStatus);
+  const sendStatus = useAppSelector(getReviewSendStatus);
 
   const navigate = useNavigate();
   const params = useParams();

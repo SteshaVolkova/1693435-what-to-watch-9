@@ -5,10 +5,11 @@ import AddCommentForm from '../../components/add-comment-form/add-comment-form';
 import { useAppSelector } from '../../hooks';
 import LoadingScreen from '../../components/loading-screen/loading-screen';
 import { AppRoute } from '../../const';
+import { getFilmsList } from '../../store/films-data/selectors';
 
 
 function MoviePageReviews(): JSX.Element {
-  const {films} = useAppSelector((state) => state);
+  const films = useAppSelector(getFilmsList);
   const params = useParams();
   const filmId = Number(params.id);
   const film = films[filmId - 1];
