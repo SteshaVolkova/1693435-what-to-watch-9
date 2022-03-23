@@ -60,7 +60,7 @@ function MainPage(): JSX.Element {
                   </svg>
                   <span>Play</span>
                 </button>
-                <AddToMyListButton />
+                <AddToMyListButton filmId={promoFilm.id} />
               </div>
             </div>
           </div>

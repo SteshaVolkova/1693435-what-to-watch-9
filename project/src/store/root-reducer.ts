@@ -10,6 +10,7 @@ import { postCommentData } from './post-comment-data/post-comment-data';
 import { setErrorData } from './set-data-error/set-data-error';
 import { getUserData } from './user-data/user-data';
 import { reviewSendStatusData } from './review-send-status/review-send-status';
+import { favoriteFilmsData } from './favorite-films-data/favorite-films-data';
 
 export const rootReducer = combineReducers({
   [NameSpace.user]: userProcess.reducer,
@@ -22,4 +23,5 @@ export const rootReducer = combineReducers({
   [NameSpace.setError]: setErrorData.reducer,
   [NameSpace.userData]: getUserData.reducer,
   [NameSpace.reviewSendStatus]: reviewSendStatusData.reducer,
+  [NameSpace.favoriteFilms]: favoriteFilmsData.reducer,
 });

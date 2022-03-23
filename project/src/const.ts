@@ -41,6 +41,7 @@ export enum NameSpace {
   commentsData = 'COMMENTS_DATA',
   promoFilmData = 'PROMO_FILM_DATA',
   similarFilmsData = 'SIMILAR_FILMS_DATA',
+  favoriteFilms  = 'FAVORITE_FILMS',
   postUserReview = 'POST_USER_REVIEW',
   setError = 'SET_ERROR',
   reviewSendStatus = 'REVIEW_SEND_STATUS',

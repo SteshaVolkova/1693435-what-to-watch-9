@@ -1,19 +1,45 @@
-import { useNavigate } from 'react-router-dom';
-import { AppRoute } from '../../const';
+import { useEffect, useState } from 'react';
+import { useAppSelector } from '../../hooks';
+import { store } from '../../store';
+import { pushFavoriteFilm } from '../../store/api-actions';
+import { getFavoriteFilmsList } from '../../store/favorite-films-data/selectors';
+import { getAuthorizationStatus } from '../../store/user-process/selectors';
+import { Film, isCheckedAuth } from '../../types/films';
 
-function AddToMyListButton(): JSX.Element {
-  const navigate = useNavigate();
+type AddToMyListButtonProps = {
+  filmId: number,
+}
+
+function AddToMyListButton({filmId}: AddToMyListButtonProps): JSX.Element {
+  const favoriteFilms = useAppSelector(getFavoriteFilmsList);
+  const authorizationStatus = useAppSelector(getAuthorizationStatus);
+  const [filmStatus, setFilmStatus] = useState(0);
+
+  const toggleToFavorite = (id: number, status: number) => {
+    store.dispatch(pushFavoriteFilm({id, status}));
+  };
+
+  useEffect(() => {
+    if (!favoriteFilms) {
+      return;
+    }
+    if (favoriteFilms.find((item: Film) => item.id === filmId)) {
+      setFilmStatus(1);
+    } else {
+      setFilmStatus(0);
+    }
+  }, [filmId, favoriteFilms]);
 
   return(
     <button
       onClick={() => {
-        navigate(AppRoute.MyList);
+        toggleToFavorite(filmId, 1 - filmStatus);
       }}
       className="btn btn--list film-card__button"
       type="button"
     >
       <svg viewBox="0 0 19 20" width="19" height="20">
-        <use xlinkHref="#add"></use>
+        {!isCheckedAuth(authorizationStatus) && filmStatus ? <use xlinkHref="#in-list"></use> : <use xlinkHref="#add"></use>}
       </svg>
       <span>My list</span>
     </button>
