@@ -21,8 +21,8 @@ function HeaderSignOut(): JSX.Element {
         <Link
           className="user-block__link"
           onClick={(evt) => {
-            dispatch(logoutAction());
             evt.preventDefault();
+            dispatch(logoutAction());
             navigate(AppRoute.Root);
           }}
           to={AppRoute.Root}
