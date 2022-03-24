@@ -5,11 +5,12 @@ import { Provider } from 'react-redux';
 import { store } from './store';
 import { createAPI } from './services/api';
 import ErrorMessage from './components/error-message/error-message';
-import { fetchFilmsAction, checkAuthAction, fetchPromoAction } from './store/api-actions';
+import { fetchFilmsAction, checkAuthAction, fetchPromoAction, fetchUserAction } from './store/api-actions';
 
 store.dispatch(fetchFilmsAction());
 store.dispatch(checkAuthAction());
 store.dispatch(fetchPromoAction());
+store.dispatch(fetchUserAction());
 
 export const api = createAPI();
 
