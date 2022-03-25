@@ -1,4 +1,4 @@
-import { useNavigate } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import { AppRoute } from '../../const';
 import { useAppSelector } from '../../hooks';
 import { getPromoFilmList } from '../../store/promo-film-data/selectors';
@@ -6,7 +6,6 @@ import AddToMyListButton from '../add-to-my-list-button/add-to-my-list-button';
 
 export default function PromoFilm(): JSX.Element {
   const promoFilm = useAppSelector(getPromoFilmList);
-  const navigate = useNavigate();
 
   return (
     <>
@@ -28,17 +27,12 @@ export default function PromoFilm(): JSX.Element {
             </p>
 
             <div className="film-card__buttons">
-              <button onClick={() => {
-                navigate(`${AppRoute.Player}/${promoFilm.id}`);
-              }}
-              className="btn btn--play film-card__button"
-              type="button"
-              >
+              <Link to={`${AppRoute.Player}/${promoFilm.id}`} className="btn btn--play film-card__button">
                 <svg viewBox="0 0 19 19" width="19" height="19">
-                  <use xlinkHref="#play-s"></use>
+                  <use xlinkHref="#play-s"/>
                 </svg>
                 <span>Play</span>
-              </button>
+              </Link>
               <AddToMyListButton filmId={promoFilm.id} />
             </div>
           </div>
