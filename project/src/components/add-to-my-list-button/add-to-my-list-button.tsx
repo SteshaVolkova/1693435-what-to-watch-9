@@ -10,7 +10,7 @@ type AddToMyListButtonProps = {
   filmId: number,
 }
 
-function AddToMyListButton({filmId}: AddToMyListButtonProps): JSX.Element {
+export default function AddToMyListButton({filmId}: AddToMyListButtonProps): JSX.Element {
   const favoriteFilms = useAppSelector(getFavoriteFilmsList);
   const authorizationStatus = useAppSelector(getAuthorizationStatus);
   const [filmStatus, setFilmStatus] = useState(0);
@@ -45,6 +45,3 @@ function AddToMyListButton({filmId}: AddToMyListButtonProps): JSX.Element {
     </button>
   );
 }
-
-export default AddToMyListButton;
-

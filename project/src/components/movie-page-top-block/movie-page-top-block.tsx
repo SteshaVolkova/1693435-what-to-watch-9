@@ -8,7 +8,7 @@ import { AppRoute } from '../../const';
 import { getAuthorizationStatus } from '../../store/user-process/selectors';
 import { getFilmsList } from '../../store/films-data/selectors';
 
-function MoviePageTopBlock():JSX.Element {
+export default function MoviePageTopBlock():JSX.Element {
   const films = useAppSelector(getFilmsList);
   const [isAuth, setIsAuth] = useState<boolean>(false);
   const authorizationStatus = useAppSelector(getAuthorizationStatus);
@@ -62,5 +62,3 @@ function MoviePageTopBlock():JSX.Element {
     </div>
   );
 }
-
-export default MoviePageTopBlock;

@@ -1,7 +1,7 @@
 import { Link } from 'react-router-dom';
 import { AppRoute } from '../../const';
 
-function HeaderLogo(): JSX.Element {
+export default function HeaderLogo(): JSX.Element {
   return (
     <div className="logo">
       <Link to={AppRoute.Root} className="logo__link">
@@ -12,5 +12,3 @@ function HeaderLogo(): JSX.Element {
     </div>
   );
 }
-
-export default HeaderLogo;

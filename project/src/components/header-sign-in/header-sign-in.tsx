@@ -1,7 +1,7 @@
 import { Link } from 'react-router-dom';
 import { AppRoute } from '../../const';
 
-function HeaderSignIn(): JSX.Element {
+export default function HeaderSignIn(): JSX.Element {
 
   return (
     <Link
@@ -13,5 +13,3 @@ function HeaderSignIn(): JSX.Element {
 
   );
 }
-
-export default HeaderSignIn;

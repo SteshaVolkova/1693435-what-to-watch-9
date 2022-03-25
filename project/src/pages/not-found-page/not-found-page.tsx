@@ -3,7 +3,7 @@ import HeaderLogo from '../../components/header-logo/header-logo';
 import Footer from '../../components/footer/footer';
 import { AppRoute } from '../../const';
 
-function NotFoundPage(): JSX.Element {
+export default function NotFoundPage(): JSX.Element {
   return (
     <div className="user-page">
       <header className="page-header user-page__head">
@@ -20,5 +20,3 @@ function NotFoundPage(): JSX.Element {
     </div>
   );
 }
-
-export default NotFoundPage;

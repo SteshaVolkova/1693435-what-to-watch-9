@@ -5,7 +5,7 @@ import { useAppDispatch } from '../../hooks';
 import { loginAction } from '../../store/api-actions';
 import { AuthData } from '../../types/auth-data';
 
-function SignInPage(): JSX.Element {
+export default function SignInPage(): JSX.Element {
   const [isError, setIsError] = useState<boolean>(false);
   const [isPasswordError, setIsPasswordError] = useState<boolean>(false);
   const loginRef = useRef<HTMLInputElement | null>(null);
@@ -101,5 +101,3 @@ function SignInPage(): JSX.Element {
     </div>
   );
 }
-
-export default SignInPage;

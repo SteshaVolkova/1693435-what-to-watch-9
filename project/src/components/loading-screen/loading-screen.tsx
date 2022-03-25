@@ -1,4 +1,4 @@
-function LoadingScreen(): JSX.Element {
+export default function LoadingScreen(): JSX.Element {
   return (
     <div style={{
       position: 'fixed',
@@ -36,5 +36,3 @@ function LoadingScreen(): JSX.Element {
     </div>
   );
 }
-
-export default LoadingScreen;

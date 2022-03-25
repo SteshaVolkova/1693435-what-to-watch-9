@@ -16,7 +16,7 @@ const stars: Star[] = [
   {'id': 10},{'id': 9},{'id': 8},{'id': 7},{'id': 6},{'id': 5},{'id': 4},{'id': 3},{'id': 2},{'id': 1},
 ];
 
-function AddCommentForm(): JSX.Element {
+export default function AddCommentForm(): JSX.Element {
   const [commentData, setCommentData] = useState<string>('');
   const [starRating, setStatRating] = useState<number>(0);
   const [isSending, setIsSending] = useState<boolean>(false);
@@ -110,5 +110,3 @@ function AddCommentForm(): JSX.Element {
     </form>
   );
 }
-
-export default AddCommentForm;

@@ -6,7 +6,7 @@ import { useAppSelector } from '../../hooks';
 import { getFavoriteFilmsList } from '../../store/favorite-films-data/selectors';
 
 
-function MyListPage(): JSX.Element {
+export default function MyListPage(): JSX.Element {
   const favoriteFilms = useAppSelector(getFavoriteFilmsList);
 
   return (
@@ -29,5 +29,3 @@ function MyListPage(): JSX.Element {
     </div>
   );
 }
-
-export default MyListPage;

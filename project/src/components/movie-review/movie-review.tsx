@@ -13,7 +13,7 @@ type MovieReviewProps = {
     review: FilmReview,
 }
 
-function MovieReview({review}: MovieReviewProps): JSX.Element {
+export default function MovieReview({review}: MovieReviewProps): JSX.Element {
   const {comment, date, user, rating} = review;
   const {name} = user;
 
@@ -33,5 +33,3 @@ function MovieReview({review}: MovieReviewProps): JSX.Element {
     </div>
   );
 }
-
-export default MovieReview;

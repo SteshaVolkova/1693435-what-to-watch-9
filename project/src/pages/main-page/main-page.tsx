@@ -8,7 +8,7 @@ import LoadingScreen from '../../components/loading-screen/loading-screen';
 import PromoFilm from '../../components/promo-film/promo-film';
 
 
-function MainPage(): JSX.Element {
+export default function MainPage(): JSX.Element {
   const isPromoFilmLoaded = useAppSelector(getPromoFiilmLoadedDataStatus);
 
   if (!isPromoFilmLoaded) {
@@ -37,5 +37,3 @@ function MainPage(): JSX.Element {
     </>
   );
 }
-
-export default MainPage;

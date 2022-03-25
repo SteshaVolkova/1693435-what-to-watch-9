@@ -10,7 +10,7 @@ const DEFAULT_FILM_COUNT = 8;
 const FILMS_PER_PAGE = 8;
 let arrayForHoldingFilms: Film[] = [];
 
-function MainPageContent(): JSX.Element {
+export default function MainPageContent(): JSX.Element {
   const films = useAppSelector(getFilmsList);
   const [genres, setGenres] = useState< string[] >([]);
   const [isShowMoreButton, setIsShowMoreButton] = useState<boolean>(false);
@@ -69,5 +69,3 @@ function MainPageContent(): JSX.Element {
     </section>
   );
 }
-
-export default MainPageContent;

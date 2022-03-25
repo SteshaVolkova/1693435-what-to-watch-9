@@ -6,11 +6,9 @@ type SmallFilmCardProps = {
     film: Film,
 };
 
-function SmallFilmCard({film}: SmallFilmCardProps): JSX.Element {
+export default function SmallFilmCard({film}: SmallFilmCardProps): JSX.Element {
 
   return (
     <VideoPlayer autoPlay={false} film={film} />
   );
 }
-
-export default SmallFilmCard;
