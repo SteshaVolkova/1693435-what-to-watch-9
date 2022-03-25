@@ -11,6 +11,7 @@ store.dispatch(fetchFilmsAction());
 store.dispatch(checkAuthAction());
 store.dispatch(fetchPromoAction());
 
+
 export const api = createAPI();
 
 ReactDOM.render(
