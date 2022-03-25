@@ -2,11 +2,11 @@ import {createAsyncThunk} from '@reduxjs/toolkit';
 import { APIRoute, AppRoute, TIMEOUT_SHOW_ERROR, AuthorizationStatus } from '../const';
 import { api } from '../store';
 import { store } from '../store';
-import { Film, FilmReview, CommentPost, userCommentData } from '../types/films';
+import { Film, FilmReview, CommentPost, userCommentData, PushFilmToFavorite } from '../types/films';
 import { redirectToRoute } from './action';
 import { errorHandle } from '../services/error-handle';
 import { AuthData } from '../types/auth-data';
-import { UserData, UserLoginData } from '../types/user-data';
+import { UserData } from '../types/user-data';
 import { dropToken, saveToken } from '../services/token';
 import { requireAuthorization } from './user-process/user-process';
 import { loadFilms } from './films-data/films-data';
@@ -17,6 +17,7 @@ import { postUserReview } from './post-comment-data/post-comment-data';
 import { setError } from './set-data-error/set-data-error';
 import { userData } from './user-data/user-data';
 import { reviewSendStatus } from './review-send-status/review-send-status';
+import { loadFavoriteFilms } from './favorite-films-data/favorite-films-data';
 
 export const clearErrorAction = createAsyncThunk(
   'film/setError',
@@ -34,18 +35,6 @@ export const fetchFilmsAction = createAsyncThunk(
     try {
       const {data} = await api.get<Film[]>(APIRoute.Films);
       store.dispatch(loadFilms(data));
-    } catch (error) {
-      errorHandle(error);
-    }
-  },
-);
-
-export const fetchCommentsAction = createAsyncThunk(
-  'data/loadComments',
-  async (id: number | null) => {
-    try {
-      const {data} = await api.get<FilmReview[]>(`${APIRoute.CommentsFilm}/${id}`);
-      store.dispatch(loadComments(data));
     } catch (error) {
       errorHandle(error);
     }
@@ -76,6 +65,42 @@ export const fetchSimilarFilmsAction = createAsyncThunk(
   },
 );
 
+export const fetchFavoriteFilm = createAsyncThunk(
+  'data/loadFavoriteFilms',
+  async () => {
+    try {
+      const {data} = await api.get<Film[]>(APIRoute.FavoriteFilms);
+      store.dispatch(loadFavoriteFilms(data));
+    } catch (error) {
+      errorHandle(error);
+    }
+  },
+);
+
+export const pushFavoriteFilm = createAsyncThunk(
+  'film/pushFavoriteFilms',
+  async ({id, status}: PushFilmToFavorite) => {
+    try {
+      await api.post<userCommentData>(`${APIRoute.FavoriteFilms}/${id}/${status}`, {id, status});
+      store.dispatch(fetchFavoriteFilm());
+    } catch (error) {
+      errorHandle(error);
+    }
+  },
+);
+
+export const fetchCommentsAction = createAsyncThunk(
+  'data/loadComments',
+  async (id: number | null) => {
+    try {
+      const {data} = await api.get<FilmReview[]>(`${APIRoute.CommentsFilm}/${id}`);
+      store.dispatch(loadComments(data));
+    } catch (error) {
+      errorHandle(error);
+    }
+  },
+);
+
 export const postComment = createAsyncThunk(
   'film/postComment',
   async ({id, comment, rating}: CommentPost) => {
@@ -90,23 +115,12 @@ export const postComment = createAsyncThunk(
   },
 );
 
-export const fetchUserAction = createAsyncThunk(
-  'user/userData',
-  async () => {
-    try {
-      const {data} = await api.get<UserLoginData>(APIRoute.Login);
-      store.dispatch(userData(data));
-    } catch (error) {
-      errorHandle(error);
-    }
-  },
-);
-
 export const checkAuthAction = createAsyncThunk(
   'user/checkAuth',
   async () => {
     try {
-      await api.get(APIRoute.Login);
+      const {data} = await api.get(APIRoute.Login);
+      store.dispatch(userData(data));
       store.dispatch(requireAuthorization(AuthorizationStatus.Auth));
     } catch(error) {
       errorHandle(error);
@@ -119,8 +133,10 @@ export const loginAction = createAsyncThunk(
   'user/login',
   async ({login: email, password}: AuthData) => {
     try {
-      const {data: {token}} = await api.post<UserData>(APIRoute.Login, {email, password});
-      saveToken(token);
+      const {data} = await api.post<UserData>(APIRoute.Login, {email, password});
+      saveToken(data.token);
+      new Response(APIRoute.Login);
+      store.dispatch(userData(data));
       store.dispatch(requireAuthorization(AuthorizationStatus.Auth));
       store.dispatch(redirectToRoute(AppRoute.Root));
     } catch (error) {

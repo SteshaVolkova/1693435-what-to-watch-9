@@ -3,11 +3,11 @@ import HeaderLogin from '../../components/header-login/header-login';
 import Footer from '../../components/footer/footer';
 import FilmsList from '../../components/films-list/films-list';
 import { useAppSelector } from '../../hooks';
-import { getFilmsList } from '../../store/films-data/selectors';
+import { getFavoriteFilmsList } from '../../store/favorite-films-data/selectors';
 
 
 function MyListPage(): JSX.Element {
-  const films = useAppSelector(getFilmsList);
+  const favoriteFilms = useAppSelector(getFavoriteFilmsList);
 
   return (
     <div className="user-page">
@@ -22,7 +22,7 @@ function MyListPage(): JSX.Element {
       <section className="catalog">
         <h2 className="catalog__title visually-hidden">Catalog</h2>
 
-        <FilmsList films={films} />
+        <FilmsList films={favoriteFilms} />
       </section>
 
       <Footer />

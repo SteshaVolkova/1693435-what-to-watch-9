@@ -54,7 +54,7 @@ function MoviePageTopBlock():JSX.Element {
               </svg>
               <span>Play</span>
             </button>
-            <AddToMyListButton />
+            <AddToMyListButton filmId={film.id} />
             {isAuth ? <Link to={AppRoute.FilmReview} className="btn film-card__button">Add review</Link>: ''}
           </div>
         </div>

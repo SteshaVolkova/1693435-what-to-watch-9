@@ -31,12 +31,12 @@ function MovieTabReview({reviews}: MovieReviewListProps): JSX.Element {
           <div className="film-card__reviews-col">
             {reviews.map((review) => (
               <MovieReview key={review.id} review={review} />
-            )).splice(0, reviews.length / 2)}
+            )).splice(0, Math.ceil(reviews.length / 2))}
           </div>
           <div className="film-card__reviews-col">
             {reviews.map((review) => (
               <MovieReview key={review.id} review={review} />
-            )).splice(reviews.length / 2)}
+            )).splice(Math.ceil(reviews.length / 2))}
           </div>
         </> :
         <div className="film-card__reviews-col">

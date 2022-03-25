@@ -45,3 +45,8 @@ export type userCommentData = {
   rating: number,
   token: string,
 }
+
+export type PushFilmToFavorite = {
+  id: number,
+  status: number,
+}

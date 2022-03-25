@@ -31,6 +31,10 @@ export type SimilarFilmsData = {
   isDataLoaded: boolean,
 }
 
+export type FavoriteFilmsData = {
+  favoriteFilms: Film[],
+};
+
 export type PostUserReview = {
   userComment: CommentPost,
 }
