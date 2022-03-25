@@ -6,7 +6,7 @@ import { Film, FilmReview, CommentPost, userCommentData, PushFilmToFavorite } fr
 import { redirectToRoute } from './action';
 import { errorHandle } from '../services/error-handle';
 import { AuthData } from '../types/auth-data';
-import { UserData, UserLoginData } from '../types/user-data';
+import { UserData } from '../types/user-data';
 import { dropToken, saveToken } from '../services/token';
 import { requireAuthorization } from './user-process/user-process';
 import { loadFilms } from './films-data/films-data';
@@ -115,23 +115,12 @@ export const postComment = createAsyncThunk(
   },
 );
 
-export const fetchUserAction = createAsyncThunk(
-  'user/userData',
-  async () => {
-    try {
-      const {data} = await api.get<UserLoginData>(APIRoute.Login);
-      store.dispatch(userData(data));
-    } catch (error) {
-      errorHandle(error);
-    }
-  },
-);
-
 export const checkAuthAction = createAsyncThunk(
   'user/checkAuth',
   async () => {
     try {
-      await api.get(APIRoute.Login);
+      const {data} = await api.get(APIRoute.Login);
+      store.dispatch(userData(data));
       store.dispatch(requireAuthorization(AuthorizationStatus.Auth));
     } catch(error) {
       errorHandle(error);
@@ -144,8 +133,10 @@ export const loginAction = createAsyncThunk(
   'user/login',
   async ({login: email, password}: AuthData) => {
     try {
-      const {data: {token}} = await api.post<UserData>(APIRoute.Login, {email, password});
-      saveToken(token);
+      const {data} = await api.post<UserData>(APIRoute.Login, {email, password});
+      saveToken(data.token);
+      new Response(APIRoute.Login);
+      store.dispatch(userData(data));
       store.dispatch(requireAuthorization(AuthorizationStatus.Auth));
       store.dispatch(redirectToRoute(AppRoute.Root));
     } catch (error) {
