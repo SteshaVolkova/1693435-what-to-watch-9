@@ -129,7 +129,6 @@ export const checkAuthAction = createAsyncThunk(
   },
 );
 
-
 export const loginAction = createAsyncThunk(
   'user/login',
   async ({login: email, password}: AuthData) => {
