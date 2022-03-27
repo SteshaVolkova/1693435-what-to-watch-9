@@ -4,7 +4,7 @@ import { useAppSelector } from '../../hooks';
 import { getFilmsList } from '../../store/films-data/selectors';
 
 
-function MoviePlayer(): JSX.Element {
+export default function MoviePlayer(): JSX.Element {
   const films = useAppSelector(getFilmsList);
 
   const [isActive, setIsActive] = useState(true);
@@ -104,5 +104,3 @@ function MoviePlayer(): JSX.Element {
     </div>
   );
 }
-
-export default MoviePlayer;

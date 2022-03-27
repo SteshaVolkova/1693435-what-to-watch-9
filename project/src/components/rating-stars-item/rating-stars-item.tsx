@@ -4,7 +4,7 @@ type RatingStarsItemProps = {
     starTitle:string;
 }
 
-function RatingStarsItem({starId, starValue, starTitle}: RatingStarsItemProps): JSX.Element {
+export default function RatingStarsItem({starId, starValue, starTitle}: RatingStarsItemProps): JSX.Element {
   return (
     <>
       <input className="rating__input" id={starId} type="radio" name="rating" value={starValue} />
@@ -12,5 +12,3 @@ function RatingStarsItem({starId, starValue, starTitle}: RatingStarsItemProps): 
     </>
   );
 }
-
-export default RatingStarsItem;

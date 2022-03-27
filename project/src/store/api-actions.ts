@@ -121,6 +121,7 @@ export const checkAuthAction = createAsyncThunk(
     try {
       const {data} = await api.get(APIRoute.Login);
       store.dispatch(userData(data));
+      store.dispatch(fetchFavoriteFilm());
       store.dispatch(requireAuthorization(AuthorizationStatus.Auth));
     } catch(error) {
       errorHandle(error);
@@ -137,6 +138,7 @@ export const loginAction = createAsyncThunk(
       saveToken(data.token);
       new Response(APIRoute.Login);
       store.dispatch(userData(data));
+      store.dispatch(fetchFavoriteFilm());
       store.dispatch(requireAuthorization(AuthorizationStatus.Auth));
       store.dispatch(redirectToRoute(AppRoute.Root));
     } catch (error) {

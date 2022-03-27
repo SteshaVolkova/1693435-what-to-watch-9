@@ -16,7 +16,7 @@ type MovieTab = {
   title: string
 }
 
-function MovieTabs({ film, reviews }:MovieTabsProps): JSX.Element {
+export default function MovieTabs({ film, reviews }:MovieTabsProps): JSX.Element {
   const movieTabs: MovieTab[] = [
     {
       'id': 1,
@@ -55,5 +55,3 @@ function MovieTabs({ film, reviews }:MovieTabsProps): JSX.Element {
     </div>
   );
 }
-
-export default MovieTabs;

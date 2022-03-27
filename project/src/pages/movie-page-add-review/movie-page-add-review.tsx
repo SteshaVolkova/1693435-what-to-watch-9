@@ -8,7 +8,7 @@ import { AppRoute } from '../../const';
 import { getFilmsList } from '../../store/films-data/selectors';
 
 
-function MoviePageReviews(): JSX.Element {
+export default function MoviePageReviews(): JSX.Element {
   const films = useAppSelector(getFilmsList);
   const params = useParams();
   const filmId = Number(params.id);
@@ -60,5 +60,3 @@ function MoviePageReviews(): JSX.Element {
     </section>
   );
 }
-
-export default MoviePageReviews;

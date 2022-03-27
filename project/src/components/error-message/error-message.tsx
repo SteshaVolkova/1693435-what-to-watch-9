@@ -1,7 +1,7 @@
 import { useAppSelector } from '../../hooks';
 import { getError } from '../../store/set-data-error/selectors';
 
-function ErrorMessage(): JSX.Element | null {
+export default function ErrorMessage(): JSX.Element | null {
   const error = useAppSelector(getError);
 
   if (error) {
@@ -25,5 +25,3 @@ function ErrorMessage(): JSX.Element | null {
 
   return null;
 }
-
-export default ErrorMessage;

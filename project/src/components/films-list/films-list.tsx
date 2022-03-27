@@ -5,7 +5,7 @@ type FilmsListProps = {
   films: Film[];
 };
 
-function FilmsList({films}: FilmsListProps): JSX.Element {
+export default function FilmsList({films}: FilmsListProps): JSX.Element {
 
   return (
     <div className="catalog__films-list">
@@ -15,5 +15,3 @@ function FilmsList({films}: FilmsListProps): JSX.Element {
     </div>
   );
 }
-
-export default FilmsList;

@@ -1,4 +1,4 @@
-import { FormEvent, useEffect, useState } from 'react';
+import {FormEvent, useEffect, useRef, useState} from 'react';
 import { postComment } from '../../store/api-actions';
 import { Star } from '../../types/rating-stars';
 import { store } from '../../store';
@@ -16,33 +16,30 @@ const stars: Star[] = [
   {'id': 10},{'id': 9},{'id': 8},{'id': 7},{'id': 6},{'id': 5},{'id': 4},{'id': 3},{'id': 2},{'id': 1},
 ];
 
-function AddCommentForm(): JSX.Element {
+export default function AddCommentForm(): JSX.Element {
   const [commentData, setCommentData] = useState<string>('');
   const [starRating, setStatRating] = useState<number>(0);
   const [isSending, setIsSending] = useState<boolean>(false);
   const [isDisabled, setIsDisabled] = useState<boolean>(true);
-
+  const textarea = useRef<HTMLTextAreaElement>(null);
   const sendStatus = useAppSelector(getReviewSendStatus);
-
   const navigate = useNavigate();
   const params = useParams();
   const id = Number(params.id);
 
-  useEffect (() => {
-    return () => {
-      store.dispatch(reviewSendStatus('initial'));
-    };
-
-    return;
+  useEffect (() => () => {
+    store.dispatch(reviewSendStatus('initial'));
   }, []);
 
-  useEffect (() => {
-    setIsDisabled(
-      starRating === 0 ||
-      commentData.length < MIN_COMMENT_LENGTH ||
-      commentData.length > MAX_COMMENT_LENGTH,
-    );
-  }, [starRating, commentData]);
+  const handlerRatingChange = (rating: number) => {
+    setStatRating(rating);
+    checkIsDisabled();
+  };
+
+  const checkIsDisabled = () => {
+    setIsDisabled(starRating === 0 || (!!textarea.current && ( textarea.current.value.length < MIN_COMMENT_LENGTH ||
+      textarea.current.value.length > MAX_COMMENT_LENGTH)));
+  };
 
   useEffect (() => {
     if (isSending && sendStatus === 'initial') {
@@ -55,7 +52,9 @@ function AddCommentForm(): JSX.Element {
     evt.preventDefault();
 
     if (!isDisabled) {
-      store.dispatch(postComment({id, comment: commentData, rating: starRating}));
+      const comment  = textarea.current?.value || '';
+      setCommentData(comment);
+      store.dispatch(postComment({id, comment, rating: starRating}));
     }
   };
 
@@ -71,7 +70,7 @@ function AddCommentForm(): JSX.Element {
           {stars.map((star) => (
             <React.Fragment key={star.id}>
               <input
-                onChange={() => setStatRating(star.id)}
+                onChange={() => handlerRatingChange(star.id)}
                 checked={star.id === starRating}
                 className="rating__input"
                 id={`star-${star.id}`}
@@ -88,8 +87,9 @@ function AddCommentForm(): JSX.Element {
 
       <div className="add-review__text">
         <textarea
-          onChange={({target}) => setCommentData(target.value)}
-          value={commentData}
+          ref={textarea}
+          onChange={() => checkIsDisabled()}
+          defaultValue={commentData}
           name="comment"
           className="add-review__textarea"
           id="review-text"
@@ -110,5 +110,3 @@ function AddCommentForm(): JSX.Element {
     </form>
   );
 }
-
-export default AddCommentForm;

@@ -7,7 +7,7 @@ type CatalogGenresListProps = {
   genres: string[],
 };
 
-function CatalogGenresList({genres}: CatalogGenresListProps): JSX.Element {
+export default function CatalogGenresList({genres}: CatalogGenresListProps): JSX.Element {
   const dispatch = useAppDispatch();
   const selectedGenre = useAppSelector(getSelectedGenre);
 
@@ -21,5 +21,3 @@ function CatalogGenresList({genres}: CatalogGenresListProps): JSX.Element {
     </>
   );
 }
-
-export default CatalogGenresList;

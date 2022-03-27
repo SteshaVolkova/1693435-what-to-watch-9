@@ -9,7 +9,7 @@ type MovieReviewListProps = {
   reviews: FilmReview[],
 };
 
-function MovieTabReview({reviews}: MovieReviewListProps): JSX.Element {
+export default function MovieTabReview({reviews}: MovieReviewListProps): JSX.Element {
   const isDataLoaded = useAppSelector(getCommentsLoadedDataStatus);
 
   const [isOnly, setIsOnly] = useState<boolean>(false);
@@ -47,5 +47,3 @@ function MovieTabReview({reviews}: MovieReviewListProps): JSX.Element {
     </div>
   );
 }
-
-export default MovieTabReview;

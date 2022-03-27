@@ -4,7 +4,7 @@ type MovieTabOverviewProps = {
     film: Film,
 }
 
-function MovieTabOverview({film}: MovieTabOverviewProps): JSX.Element {
+export default function MovieTabOverview({film}: MovieTabOverviewProps): JSX.Element {
   const {rating, scoresCount, description, director, starring} = film;
 
   return (
@@ -32,5 +32,3 @@ function MovieTabOverview({film}: MovieTabOverviewProps): JSX.Element {
 
   );
 }
-
-export default MovieTabOverview;

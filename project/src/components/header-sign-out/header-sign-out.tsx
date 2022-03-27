@@ -4,7 +4,7 @@ import { useAppDispatch, useAppSelector } from '../../hooks';
 import { logoutAction } from '../../store/api-actions';
 import { getUserLoginData } from '../../store/user-data/selectors';
 
-function HeaderSignOut(): JSX.Element {
+export default function HeaderSignOut(): JSX.Element {
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
 
@@ -33,5 +33,3 @@ function HeaderSignOut(): JSX.Element {
     </div>
   );
 }
-
-export default HeaderSignOut;

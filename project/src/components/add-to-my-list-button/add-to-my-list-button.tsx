@@ -4,13 +4,13 @@ import { store } from '../../store';
 import { pushFavoriteFilm } from '../../store/api-actions';
 import { getFavoriteFilmsList } from '../../store/favorite-films-data/selectors';
 import { getAuthorizationStatus } from '../../store/user-process/selectors';
-import { Film, isCheckedAuth } from '../../types/films';
+import { Film } from '../../types/films';
 
 type AddToMyListButtonProps = {
   filmId: number,
 }
 
-function AddToMyListButton({filmId}: AddToMyListButtonProps): JSX.Element {
+export default function AddToMyListButton({filmId}: AddToMyListButtonProps): JSX.Element {
   const favoriteFilms = useAppSelector(getFavoriteFilmsList);
   const authorizationStatus = useAppSelector(getAuthorizationStatus);
   const [filmStatus, setFilmStatus] = useState(0);
@@ -39,12 +39,9 @@ function AddToMyListButton({filmId}: AddToMyListButtonProps): JSX.Element {
       type="button"
     >
       <svg viewBox="0 0 19 20" width="19" height="20">
-        {!isCheckedAuth(authorizationStatus) && filmStatus ? <use xlinkHref="#in-list"></use> : <use xlinkHref="#add"></use>}
+        {authorizationStatus === 'AUTH' && filmStatus ? <use xlinkHref="#in-list"></use> : <use xlinkHref="#add"></use>}
       </svg>
       <span>My list</span>
     </button>
   );
 }
-
-export default AddToMyListButton;
-

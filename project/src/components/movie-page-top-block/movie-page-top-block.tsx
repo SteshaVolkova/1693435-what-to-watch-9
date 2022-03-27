@@ -1,4 +1,4 @@
-import { Link, useNavigate, useParams } from 'react-router-dom';
+import { Link, useParams } from 'react-router-dom';
 import HeaderLogo from '../header-logo/header-logo';
 import HeaderLogin from '../../components/header-login/header-login';
 import { useAppSelector } from '../../hooks';
@@ -8,14 +8,13 @@ import { AppRoute } from '../../const';
 import { getAuthorizationStatus } from '../../store/user-process/selectors';
 import { getFilmsList } from '../../store/films-data/selectors';
 
-function MoviePageTopBlock():JSX.Element {
+export default function MoviePageTopBlock():JSX.Element {
   const films = useAppSelector(getFilmsList);
   const [isAuth, setIsAuth] = useState<boolean>(false);
   const authorizationStatus = useAppSelector(getAuthorizationStatus);
   const params = useParams();
   const filmId = Number(params.id);
   const film = films[filmId - 1];
-  const navigate = useNavigate();
 
   useEffect (() => {
     setIsAuth(authorizationStatus === 'AUTH');
@@ -43,17 +42,12 @@ function MoviePageTopBlock():JSX.Element {
           </p>
 
           <div className="film-card__buttons">
-            <button onClick={() => {
-              navigate(`${AppRoute.Player}/${film.id}`);
-            }}
-            className="btn btn--play film-card__button"
-            type="button"
-            >
+            <Link to={`${AppRoute.Player}/${film.id}`} className='btn btn--play film-card__button'>
               <svg viewBox="0 0 19 19" width="19" height="19">
-                <use xlinkHref="#play-s"></use>
+                <use xlinkHref="#play-s" />
               </svg>
               <span>Play</span>
-            </button>
+            </Link>
             <AddToMyListButton filmId={film.id} />
             {isAuth ? <Link to={AppRoute.FilmReview} className="btn film-card__button">Add review</Link>: ''}
           </div>
@@ -62,5 +56,3 @@ function MoviePageTopBlock():JSX.Element {
     </div>
   );
 }
-
-export default MoviePageTopBlock;

@@ -4,7 +4,7 @@ type MovieTabDetailsProps = {
     film: Film,
 }
 
-function MovieTabDetails({film}: MovieTabDetailsProps): JSX.Element {
+export default function MovieTabDetails({film}: MovieTabDetailsProps): JSX.Element {
   const {director, starring, runTime, genre, released} = film;
   return (
     <div className="film-card__text film-card__row">
@@ -38,5 +38,3 @@ function MovieTabDetails({film}: MovieTabDetailsProps): JSX.Element {
     </div>
   );
 }
-
-export default MovieTabDetails;

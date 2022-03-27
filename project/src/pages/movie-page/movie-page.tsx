@@ -14,7 +14,7 @@ import { getFilmsList, getFilmsLoadedDataStatus } from '../../store/films-data/s
 import { getSimilarLoadedDataStatus, getSumilarFilmsList } from '../../store/similar-films-data/selectors';
 
 
-function MoviePage(): JSX.Element {
+export default function MoviePage(): JSX.Element {
   const films = useAppSelector (getFilmsList);
   const comments = useAppSelector (getCommentsList);
   const similarFilms = useAppSelector(getSumilarFilmsList);
@@ -70,5 +70,3 @@ function MoviePage(): JSX.Element {
     </>
   );
 }
-
-export default MoviePage;

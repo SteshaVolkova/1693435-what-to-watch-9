@@ -14,14 +14,11 @@ import { isCheckedAuth } from '../../types/films';
 import HistoryRouter from '../history-route/history-route';
 import browserHistory from '../../browser-history';
 import { getAuthorizationStatus } from '../../store/user-process/selectors';
-import { getFilmsLoadedDataStatus } from '../../store/films-data/selectors';
 
-
-function App(): JSX.Element {
+export default function App(): JSX.Element {
   const authorizationStatus = useAppSelector(getAuthorizationStatus);
-  const isDataLoaded = useAppSelector(getFilmsLoadedDataStatus);
 
-  if (isCheckedAuth(authorizationStatus) || !isDataLoaded) {
+  if (isCheckedAuth(authorizationStatus)) {
     return (
       <LoadingScreen />
     );
@@ -77,5 +74,3 @@ function App(): JSX.Element {
     </HistoryRouter>
   );
 }
-
-export default App;
