@@ -1,6 +1,6 @@
 import request from 'axios';
 import { store } from '../store';
-import { setError } from '../store/set-error-data/set-error-data';
+import { errorData } from '../store/store-error-data/store-error-data';
 import { clearErrorAction } from '../store/api-actions';
 import { ErrorType } from '../types/error';
 import { HTTP_CODE } from '../const';
@@ -11,7 +11,7 @@ export const errorHandle = (error: ErrorType): void => {
   }
 
   const handleError = (message: string) => {
-    store.dispatch(setError(message));
+    store.dispatch(errorData(message));
     store.dispatch(clearErrorAction());
   };
 
