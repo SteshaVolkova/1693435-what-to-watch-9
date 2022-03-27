@@ -5,6 +5,8 @@ import LoadingScreen from '../loading-screen/loading-screen';
 import { useAppSelector } from '../../hooks';
 import { getCommentsLoadedDataStatus } from '../../store/commentc-data/selectors';
 
+const COMMENT_COLUMN_LENGTH = 2;
+
 type MovieReviewListProps = {
   reviews: FilmReview[],
 };
@@ -15,7 +17,7 @@ export default function MovieTabReview({reviews}: MovieReviewListProps): JSX.Ele
   const [isOnly, setIsOnly] = useState<boolean>(false);
 
   useEffect(() => {
-    setIsOnly(reviews.length < 2);
+    setIsOnly(reviews.length < COMMENT_COLUMN_LENGTH);
   }, [reviews.length]);
 
   if (!isDataLoaded) {
@@ -31,12 +33,12 @@ export default function MovieTabReview({reviews}: MovieReviewListProps): JSX.Ele
           <div className="film-card__reviews-col">
             {reviews.map((review) => (
               <MovieReview key={review.id} review={review} />
-            )).splice(0, Math.ceil(reviews.length / 2))}
+            )).splice(0, Math.ceil(reviews.length / COMMENT_COLUMN_LENGTH))}
           </div>
           <div className="film-card__reviews-col">
             {reviews.map((review) => (
               <MovieReview key={review.id} review={review} />
-            )).splice(Math.ceil(reviews.length / 2))}
+            )).splice(Math.ceil(reviews.length / COMMENT_COLUMN_LENGTH))}
           </div>
         </> :
         <div className="film-card__reviews-col">

@@ -1,17 +1,22 @@
 import HeaderLogo from '../../components/header-logo/header-logo';
 import Footer from '../../components/footer/footer';
-import { FormEvent, useRef, useState } from 'react';
-import { useAppDispatch } from '../../hooks';
+import { FormEvent, useEffect, useRef, useState } from 'react';
+import { useAppDispatch, useAppSelector } from '../../hooks';
 import { loginAction } from '../../store/api-actions';
 import { AuthData } from '../../types/auth-data';
+import { getAuthorizationStatus } from '../../store/user-process/selectors';
+import { useNavigate } from 'react-router-dom';
+import { AppRoute } from '../../const';
 
 export default function SignInPage(): JSX.Element {
+  const authorizationStatus = useAppSelector(getAuthorizationStatus);
   const [isError, setIsError] = useState<boolean>(false);
   const [isPasswordError, setIsPasswordError] = useState<boolean>(false);
   const loginRef = useRef<HTMLInputElement | null>(null);
   const passwordRef = useRef<HTMLInputElement | null>(null);
 
   const dispatch = useAppDispatch();
+  const navigate = useNavigate();
 
   const onSubmit = (authData: AuthData) => {
     dispatch(loginAction(authData));
@@ -47,6 +52,12 @@ export default function SignInPage(): JSX.Element {
       setIsPasswordError(true);
     }
   };
+
+  useEffect(() => {
+    if (authorizationStatus === 'AUTH') {
+      navigate(AppRoute.Root);
+    }
+  });
 
   return (
     <div className="user-page">
