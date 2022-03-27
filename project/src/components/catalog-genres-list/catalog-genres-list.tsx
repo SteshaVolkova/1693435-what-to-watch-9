@@ -1,7 +1,7 @@
 import { useAppDispatch, useAppSelector } from '../../hooks/';
-import { updateSelectedGenre } from '../../store/update-selected-genre/update-selected-genre';
+import { updateSelectedGenre } from '../../store/selected-genre/selected-genre';
 import { Link } from 'react-router-dom';
-import { getSelectedGenre } from '../../store/update-selected-genre/selectors';
+import { getSelectedGenre } from '../../store/selected-genre/selectors';
 
 const MAX_GENRE_LENGTH = 10;
 

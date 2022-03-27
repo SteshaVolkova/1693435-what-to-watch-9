@@ -4,7 +4,7 @@ import { Film } from '../../types/films';
 import FilmsList from '../../components/films-list/films-list';
 import CatalogGenresList from '../../components/catalog-genres-list/catalog-genres-list';
 import { getFilmsList } from '../../store/films-data/selectors';
-import { getSelectedGenre } from '../../store/update-selected-genre/selectors';
+import { getSelectedGenre } from '../../store/selected-genre/selectors';
 
 const DEFAULT_FILM_COUNT = 8;
 const FILMS_PER_PAGE = 8;

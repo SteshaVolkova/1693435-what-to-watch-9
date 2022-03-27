@@ -14,7 +14,7 @@ import { loadComments } from './commentc-data/commentc-data';
 import { setPromoFilm } from './promo-film-data/promo-film-data';
 import { setSimilarFilms } from './similar-films-data/similar-films-data';
 import { postUserReview } from './post-comment-data/post-comment-data';
-import { setError } from './set-data-error/set-data-error';
+import { setError } from './set-error-data/set-error-data';
 import { userData } from './user-data/user-data';
 import { reviewSendStatus } from './review-send-status/review-send-status';
 import { loadFavoriteFilms } from './favorite-films-data/favorite-films-data';
