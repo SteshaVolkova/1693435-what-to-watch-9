@@ -17,7 +17,7 @@ export default function VideoPlayer({autoPlay, film}: VideoPlayerProps): JSX.Ele
 
   const navigate = useNavigate();
 
-  const onMouseEnterHandler = () => {
+  const handleOnMouseEnter = () => {
     setTimer(setTimeout(() => {
       if (!isLoading) {
         videoRef.current && videoRef.current.play();
@@ -25,7 +25,7 @@ export default function VideoPlayer({autoPlay, film}: VideoPlayerProps): JSX.Ele
     }, 1000));
   };
 
-  const onMouseLeaveHandler = () => {
+  const handleOnMouseLeave = () => {
     if (timer) {
       clearTimeout(timer);
       setTimer(null);
@@ -35,7 +35,7 @@ export default function VideoPlayer({autoPlay, film}: VideoPlayerProps): JSX.Ele
   };
 
   return (
-    <article onClick={() => {navigate(`${AppRoute.FilmPage}/${id}`);}} className="small-film-card catalog__films-card" onMouseEnter={onMouseEnterHandler} onMouseLeave={onMouseLeaveHandler}>
+    <article onClick={() => {navigate(`${AppRoute.FilmPage}/${id}`);}} className="small-film-card catalog__films-card" onMouseEnter={handleOnMouseEnter} onMouseLeave={handleOnMouseLeave}>
       <div className="small-film-card__image">
         <video
           ref={videoRef}

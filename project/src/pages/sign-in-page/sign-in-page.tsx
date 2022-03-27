@@ -46,7 +46,7 @@ export default function SignInPage(): JSX.Element {
     }
   };
 
-  const hendlerPasswordValidate = () => {
+  const handlePasswordValidate = () => {
     const validate = /^(?=.*\d)(?=.*[a-zA-Z]).*/;
     if (!validate.test(String(passwordRef.current?.value).toLocaleLowerCase())) {
       setIsPasswordError(true);
@@ -89,7 +89,7 @@ export default function SignInPage(): JSX.Element {
             <div className="sign-in__field">
               <input
                 onFocus={focusPasswordInput}
-                onChange={hendlerPasswordValidate}
+                onChange={handlePasswordValidate}
                 ref={passwordRef}
                 className="sign-in__input"
                 type="password"

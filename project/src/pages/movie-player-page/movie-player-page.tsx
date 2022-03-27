@@ -34,11 +34,11 @@ export default function MoviePlayer(): JSX.Element {
     }
   }, [isActive]);
 
-  const hendlerPlayFilm = () => {
+  const handlePlayFilm = () => {
     setIsActive(!isActive);
   };
 
-  const hendlerFullScreen = () => {
+  const handleFullScreen = () => {
     videoRef.current?.requestFullscreen();
   };
 
@@ -87,7 +87,7 @@ export default function MoviePlayer(): JSX.Element {
           <button
             type="button"
             className="player__play"
-            onClick={() => {hendlerPlayFilm();}}
+            onClick={() => {handlePlayFilm();}}
           >
             <svg viewBox="0 0 19 19" width="19" height="19">
               {isActive ? <use xlinkHref="#pause"></use> : <use xlinkHref="#play-s"></use>}
@@ -99,7 +99,7 @@ export default function MoviePlayer(): JSX.Element {
           <button
             type="button"
             className="player__full-screen"
-            onClick={() => {hendlerFullScreen();}}
+            onClick={() => {handleFullScreen();}}
           >
             <svg viewBox="0 0 27 27" width="27" height="27">
               <use xlinkHref="#full-screen"></use>
