@@ -9,8 +9,8 @@ import { useAppSelector } from '../../hooks';
 import { reviewSendStatus } from '../../store/review-send-status/review-send-status';
 import { getReviewSendStatus } from '../../store/review-send-status/selectors';
 
-const MAX_COMMENT_LENGTH = 401;
-const MIN_COMMENT_LENGTH = 49;
+const MAX_COMMENT_LENGTH = 400;
+const MIN_COMMENT_LENGTH = 50;
 
 const stars: Star[] = [
   {'id': 10},{'id': 9},{'id': 8},{'id': 7},{'id': 6},{'id': 5},{'id': 4},{'id': 3},{'id': 2},{'id': 1},
@@ -106,7 +106,6 @@ export default function AddCommentForm(): JSX.Element {
           </button>
         </div>
       </div>
-      {textarea.current?.value.length}
       {sendStatus === 'error' && <span>Oops, something went wrong while submitting your review! Try later!</span>}
     </form>
   );
