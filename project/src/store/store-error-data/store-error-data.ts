@@ -6,14 +6,14 @@ const initialState: ErrorData = {
   error: '',
 };
 
-export const setErrorData = createSlice({
+export const storeErrorData = createSlice({
   name: NameSpace.setError,
   initialState,
   reducers: {
-    setError: (state, action) => {
+    errorData: (state, action) => {
       state.error = action.payload;
     },
   },
 });
 
-export const {setError} = setErrorData.actions;
+export const {errorData} = storeErrorData.actions;

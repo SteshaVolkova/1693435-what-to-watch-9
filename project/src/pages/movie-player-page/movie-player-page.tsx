@@ -1,11 +1,13 @@
 import { useEffect, useRef, useState } from 'react';
 import { useParams } from 'react-router-dom';
+import LoadingScreen from '../../components/loading-screen/loading-screen';
 import { useAppSelector } from '../../hooks';
-import { getFilmsList } from '../../store/films-data/selectors';
+import { getFilmsList, getFilmsLoadedDataStatus } from '../../store/films-data/selectors';
 
 
 export default function MoviePlayer(): JSX.Element {
   const films = useAppSelector(getFilmsList);
+  const isDataLoadedFilm = useAppSelector(getFilmsLoadedDataStatus);
 
   const [isActive, setIsActive] = useState(true);
   const [currentTime, setCurrentTime] = useState<number>(0);
@@ -13,7 +15,7 @@ export default function MoviePlayer(): JSX.Element {
   const params = useParams();
   const filmId = Number(params.id);
   const film = films[filmId - 1];
-  const {videoLink, posterImage} = film;
+  const {videoLink} = film;
   const videoRef = useRef<HTMLVideoElement | null>(null);
 
   const getRemainingTime = (runTimeItem: number, currentTimeItem: number) => new Date(((runTimeItem * 60) - currentTimeItem) * 1000).toISOString().substr(11, 8).toString();
@@ -32,13 +34,19 @@ export default function MoviePlayer(): JSX.Element {
     }
   }, [isActive]);
 
-  const hendlerPlayFilm = () => {
+  const handlePlayFilm = () => {
     setIsActive(!isActive);
   };
 
-  const hendlerFullScreen = () => {
+  const handleFullScreen = () => {
     videoRef.current?.requestFullscreen();
   };
+
+  if (!isDataLoadedFilm) {
+    return (
+      <LoadingScreen />
+    );
+  }
 
   return (
     <div className="player">
@@ -46,7 +54,6 @@ export default function MoviePlayer(): JSX.Element {
         ref={videoRef}
         src={videoLink}
         className="player__video"
-        poster={posterImage}
         onTimeUpdate={(evt) => setCurrentTime(Math.round(evt.currentTarget.currentTime))}
       >
       </video>
@@ -80,7 +87,7 @@ export default function MoviePlayer(): JSX.Element {
           <button
             type="button"
             className="player__play"
-            onClick={() => {hendlerPlayFilm();}}
+            onClick={() => {handlePlayFilm();}}
           >
             <svg viewBox="0 0 19 19" width="19" height="19">
               {isActive ? <use xlinkHref="#pause"></use> : <use xlinkHref="#play-s"></use>}
@@ -92,7 +99,7 @@ export default function MoviePlayer(): JSX.Element {
           <button
             type="button"
             className="player__full-screen"
-            onClick={() => {hendlerFullScreen();}}
+            onClick={() => {handleFullScreen();}}
           >
             <svg viewBox="0 0 27 27" width="27" height="27">
               <use xlinkHref="#full-screen"></use>

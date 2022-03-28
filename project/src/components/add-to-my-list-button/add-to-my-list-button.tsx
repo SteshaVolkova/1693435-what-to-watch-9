@@ -15,7 +15,7 @@ export default function AddToMyListButton({filmId}: AddToMyListButtonProps): JSX
   const authorizationStatus = useAppSelector(getAuthorizationStatus);
   const [filmStatus, setFilmStatus] = useState(0);
 
-  const toggleToFavorite = (id: number, status: number) => {
+  const handleToFavorite = (id: number, status: number) => {
     store.dispatch(pushFavoriteFilm({id, status}));
   };
 
@@ -33,7 +33,7 @@ export default function AddToMyListButton({filmId}: AddToMyListButtonProps): JSX
   return(
     <button
       onClick={() => {
-        toggleToFavorite(filmId, 1 - filmStatus);
+        handleToFavorite(filmId, 1 - filmStatus);
       }}
       className="btn btn--list film-card__button"
       type="button"

@@ -1,17 +1,22 @@
 import HeaderLogo from '../../components/header-logo/header-logo';
 import Footer from '../../components/footer/footer';
-import { FormEvent, useRef, useState } from 'react';
-import { useAppDispatch } from '../../hooks';
+import { FormEvent, useEffect, useRef, useState } from 'react';
+import { useAppDispatch, useAppSelector } from '../../hooks';
 import { loginAction } from '../../store/api-actions';
 import { AuthData } from '../../types/auth-data';
+import { getAuthorizationStatus } from '../../store/user-process/selectors';
+import { useNavigate } from 'react-router-dom';
+import { AppRoute } from '../../const';
 
 export default function SignInPage(): JSX.Element {
+  const authorizationStatus = useAppSelector(getAuthorizationStatus);
   const [isError, setIsError] = useState<boolean>(false);
   const [isPasswordError, setIsPasswordError] = useState<boolean>(false);
   const loginRef = useRef<HTMLInputElement | null>(null);
   const passwordRef = useRef<HTMLInputElement | null>(null);
 
   const dispatch = useAppDispatch();
+  const navigate = useNavigate();
 
   const onSubmit = (authData: AuthData) => {
     dispatch(loginAction(authData));
@@ -41,12 +46,18 @@ export default function SignInPage(): JSX.Element {
     }
   };
 
-  const hendlerPasswordValidate = () => {
+  const handlePasswordValidate = () => {
     const validate = /^(?=.*\d)(?=.*[a-zA-Z]).*/;
     if (!validate.test(String(passwordRef.current?.value).toLocaleLowerCase())) {
       setIsPasswordError(true);
     }
   };
+
+  useEffect(() => {
+    if (authorizationStatus === 'AUTH') {
+      navigate(AppRoute.Root);
+    }
+  });
 
   return (
     <div className="user-page">
@@ -78,7 +89,7 @@ export default function SignInPage(): JSX.Element {
             <div className="sign-in__field">
               <input
                 onFocus={focusPasswordInput}
-                onChange={hendlerPasswordValidate}
+                onChange={handlePasswordValidate}
                 ref={passwordRef}
                 className="sign-in__input"
                 type="password"

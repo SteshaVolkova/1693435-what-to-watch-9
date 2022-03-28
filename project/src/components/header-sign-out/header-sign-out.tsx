@@ -23,7 +23,6 @@ export default function HeaderSignOut(): JSX.Element {
           onClick={(evt) => {
             evt.preventDefault();
             dispatch(logoutAction());
-            navigate(AppRoute.Root);
           }}
           to={AppRoute.Root}
         >

@@ -31,12 +31,12 @@ export default function AddCommentForm(): JSX.Element {
     store.dispatch(reviewSendStatus('initial'));
   }, []);
 
-  const handlerRatingChange = (rating: number) => {
+  const handleRatingChange = (rating: number) => {
     setStatRating(rating);
-    checkIsDisabled();
+    handleCheckIsDisabled();
   };
 
-  const checkIsDisabled = () => {
+  const handleCheckIsDisabled = () => {
     setIsDisabled(starRating === 0 || (!!textarea.current && ( textarea.current.value.length < MIN_COMMENT_LENGTH ||
       textarea.current.value.length > MAX_COMMENT_LENGTH)));
   };
@@ -70,7 +70,7 @@ export default function AddCommentForm(): JSX.Element {
           {stars.map((star) => (
             <React.Fragment key={star.id}>
               <input
-                onChange={() => handlerRatingChange(star.id)}
+                onChange={() => handleRatingChange(star.id)}
                 checked={star.id === starRating}
                 className="rating__input"
                 id={`star-${star.id}`}
@@ -88,7 +88,7 @@ export default function AddCommentForm(): JSX.Element {
       <div className="add-review__text">
         <textarea
           ref={textarea}
-          onChange={() => checkIsDisabled()}
+          onChange={() => handleCheckIsDisabled()}
           defaultValue={commentData}
           name="comment"
           className="add-review__textarea"
