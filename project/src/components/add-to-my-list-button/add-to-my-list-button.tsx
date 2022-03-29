@@ -23,8 +23,7 @@ export default function AddToMyListButton({filmId}: AddToMyListButtonProps): JSX
     if (!favoriteFilms) {
       return;
     }
-    (favoriteFilms.find((item: Film) => item.id === filmId)) ?
-      setFilmStatus(1): setFilmStatus(0);
+    setFilmStatus(favoriteFilms.find((item: Film) => item.id === filmId) ? 1 : 0);
   }, [filmId, favoriteFilms]);
 
   return(
