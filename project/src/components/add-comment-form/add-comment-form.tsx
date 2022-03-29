@@ -1,24 +1,16 @@
-import {FormEvent, useEffect, useRef, useState} from 'react';
+import { FormEvent, useCallback, useEffect, useRef, useState } from 'react';
 import { postComment } from '../../store/api-actions';
-import { Star } from '../../types/rating-stars';
 import { store } from '../../store';
 import {  useNavigate, useParams } from 'react-router-dom';
-import { AppRoute } from '../../const';
+import { AppRoute, MAX_COMMENT_LENGTH, MIN_COMMENT_LENGTH, stars } from '../../const';
 import React from 'react';
 import { useAppSelector } from '../../hooks';
 import { reviewSendStatus } from '../../store/review-send-status/review-send-status';
 import { getReviewSendStatus } from '../../store/review-send-status/selectors';
 
-const MAX_COMMENT_LENGTH = 400;
-const MIN_COMMENT_LENGTH = 50;
-
-const stars: Star[] = [
-  {'id': 10},{'id': 9},{'id': 8},{'id': 7},{'id': 6},{'id': 5},{'id': 4},{'id': 3},{'id': 2},{'id': 1},
-];
-
 export default function AddCommentForm(): JSX.Element {
   const [commentData, setCommentData] = useState<string>('');
-  const [starRating, setStatRating] = useState<number>(0);
+  const [starRating, setStarRating] = useState<number>(0);
   const [isSending, setIsSending] = useState<boolean>(false);
   const [isDisabled, setIsDisabled] = useState<boolean>(true);
   const textarea = useRef<HTMLTextAreaElement>(null);
@@ -32,14 +24,17 @@ export default function AddCommentForm(): JSX.Element {
   }, []);
 
   const handleRatingChange = (rating: number) => {
-    setStatRating(rating);
-    handleCheckIsDisabled();
+    setStarRating(rating);
   };
 
-  const handleCheckIsDisabled = () => {
+  const handleCheckIsDisabled = useCallback((() => {
     setIsDisabled(starRating === 0 || (!!textarea.current && ( textarea.current.value.length < MIN_COMMENT_LENGTH ||
       textarea.current.value.length > MAX_COMMENT_LENGTH)));
-  };
+  }), [starRating]);
+
+  useEffect(() => {
+    handleCheckIsDisabled();
+  }, [handleCheckIsDisabled]);
 
   useEffect (() => {
     if (isSending && sendStatus === 'initial') {

@@ -110,6 +110,7 @@ export const postComment = createAsyncThunk(
       store.dispatch(postUserReview({id, comment, rating}));
       store.dispatch(reviewSendStatus('initial'));
     } catch (error) {
+      errorHandle(error);
       store.dispatch(reviewSendStatus('error'));
     }
   },
