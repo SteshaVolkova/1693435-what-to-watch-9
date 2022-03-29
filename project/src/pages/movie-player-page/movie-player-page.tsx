@@ -1,5 +1,6 @@
 import { useEffect, useRef, useState } from 'react';
 import { useParams } from 'react-router-dom';
+import { getRemainingPercent, getRemainingTime } from '../../common';
 import LoadingScreen from '../../components/loading-screen/loading-screen';
 import { useAppSelector } from '../../hooks';
 import { getFilmsList, getFilmsLoadedDataStatus } from '../../store/films-data/selectors';
@@ -17,10 +18,6 @@ export default function MoviePlayer(): JSX.Element {
   const film = films[filmId - 1];
   const {videoLink} = film;
   const videoRef = useRef<HTMLVideoElement | null>(null);
-
-  const getRemainingTime = (runTimeItem: number, currentTimeItem: number) => new Date(((runTimeItem * 60) - currentTimeItem) * 1000).toISOString().substr(11, 8).toString();
-
-  const getRemainingPercent = (runTimeItem: number, currentTimeItem: number) => ((currentTimeItem * 100) / (runTimeItem * 60)).toFixed(3);
 
   useEffect(() => {
     if (isActive) {

@@ -39,7 +39,7 @@ export default function AddToMyListButton({filmId}: AddToMyListButtonProps): JSX
       type="button"
     >
       <svg viewBox="0 0 19 20" width="19" height="20">
-        {authorizationStatus === 'AUTH' && filmStatus ? <use xlinkHref="#in-list"></use> : <use xlinkHref="#add"></use>}
+        <use xlinkHref={authorizationStatus === 'AUTH' && filmStatus ? '#in-list' : '#add'}></use>
       </svg>
       <span>My list</span>
     </button>

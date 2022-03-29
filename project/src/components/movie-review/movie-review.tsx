@@ -1,3 +1,4 @@
+import { convertDate } from '../../common';
 import {FilmReview} from '../../types/films';
 
 type MovieReviewProps = {
@@ -7,14 +8,6 @@ type MovieReviewProps = {
 export default function MovieReview({review}: MovieReviewProps): JSX.Element {
   const {comment, date, user, rating} = review;
   const {name} = user;
-
-  const convertDate = (commentDate: Date): string => {
-    const months = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
-    const year = commentDate.getFullYear();
-    const month = months[commentDate.getMonth()];
-    const day = commentDate.getDate();
-    return `${month} ${day}, ${year}`;
-  };
 
   return (
     <div className="review">

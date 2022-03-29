@@ -1,3 +1,4 @@
+import  './add-comment-form.css';
 import { FormEvent, useCallback, useEffect, useRef, useState } from 'react';
 import { postComment } from '../../store/api-actions';
 import { store } from '../../store';
@@ -56,9 +57,8 @@ export default function AddCommentForm(): JSX.Element {
   return (
     <form
       action="#"
-      className="add-review__form"
+      className={`add-review__form ${isSending ? ' add-review__form-disabled' : ''}`}
       onSubmit={handleSubmit}
-      style={{opacity: isSending ? 0.5 : 1}}
     >
       <div className="rating">
         <div className="rating__stars">
