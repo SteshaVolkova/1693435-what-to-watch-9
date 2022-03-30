@@ -31,6 +31,11 @@ export type FilmReview = {
     }
 };
 
+export type MovieTab = {
+  'id': number,
+  title: string
+}
+
 export const isCheckedAuth = (authorizationStatus: AuthorizationStatus): boolean =>
   authorizationStatus === AuthorizationStatus.Unknown;
 
