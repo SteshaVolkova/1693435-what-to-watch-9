@@ -1,3 +1,4 @@
+import { getTimeFromMins } from '../../common';
 import {Film} from '../../types/films';
 
 type MovieTabDetailsProps = {
@@ -6,12 +7,6 @@ type MovieTabDetailsProps = {
 
 export default function MovieTabDetails({film}: MovieTabDetailsProps): JSX.Element {
   const {director, runTime, genre, released} = film;
-
-  const getTimeFromMins = (mins: number) => {
-    const hours = Math.trunc(mins/60);
-    const minutes = mins % 60;
-    return `${hours  }h ${  minutes  }m`;
-  };
 
   return (
     <div className="film-card__text film-card__row">

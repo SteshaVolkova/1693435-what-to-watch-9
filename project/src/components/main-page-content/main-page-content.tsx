@@ -5,15 +5,14 @@ import FilmsList from '../../components/films-list/films-list';
 import CatalogGenresList from '../../components/catalog-genres-list/catalog-genres-list';
 import { getFilmsList } from '../../store/films-data/selectors';
 import { getSelectedGenre } from '../../store/selected-genre/selectors';
-
-const DEFAULT_FILM_COUNT = 8;
-const FILMS_PER_PAGE = 8;
-let arrayForHoldingFilms: Film[] = [];
+import { DEFAULT_FILM_COUNT, FILMS_PER_PAGE, ZERO_VALUE } from '../../const';
 
 export default function MainPageContent(): JSX.Element {
   const films = useAppSelector(getFilmsList);
   const [genres, setGenres] = useState< string[] >([]);
   const [isShowMoreButton, setIsShowMoreButton] = useState<boolean>(false);
+  const [filmsToShow, setFilmsToShow] = useState<Film[]>([]);
+  const [next, setNext] = useState(DEFAULT_FILM_COUNT);
   const selectedGenre = useAppSelector(getSelectedGenre);
   const filmsList = films.filter(({genre}) => selectedGenre === 'All genres' || selectedGenre === genre);
 
@@ -21,17 +20,7 @@ export default function MainPageContent(): JSX.Element {
     setGenres(['All genres', ...new Set(films.map(({genre}) => genre))]);
   }, [films]);
 
-  const [filmsToShow, setFilmsToShow] = useState<Film[]>([]);
-  const [next, setNext] = useState(DEFAULT_FILM_COUNT);
-
-  const loopWithSlice = useCallback((start: number, end:number) => {
-    const slicedPosts = films.filter(({genre}) => selectedGenre === 'All genres' || selectedGenre === genre).slice(start, end);
-    arrayForHoldingFilms = [...arrayForHoldingFilms, ...slicedPosts];
-    setFilmsToShow(arrayForHoldingFilms);
-  }, [films, selectedGenre]);
-
   const chooseGenre = () => {
-    arrayForHoldingFilms = [];
     setNext(DEFAULT_FILM_COUNT);
   };
 
@@ -39,12 +28,16 @@ export default function MainPageContent(): JSX.Element {
     chooseGenre();
   }, [selectedGenre]);
 
+  const loopWithSlice = useCallback((start: number, end:number) => {
+    setFilmsToShow(films.filter(({genre}) => selectedGenre === 'All genres' || selectedGenre === genre).slice(start, end));
+  }, [films, selectedGenre]);
+
   useEffect(() => {
-    loopWithSlice(0, FILMS_PER_PAGE);
+    loopWithSlice(ZERO_VALUE, FILMS_PER_PAGE);
   }, [loopWithSlice, selectedGenre]);
 
   const handleShowMoreFilms = () => {
-    loopWithSlice(next, next + FILMS_PER_PAGE);
+    loopWithSlice(ZERO_VALUE, next + FILMS_PER_PAGE);
     setNext(next + FILMS_PER_PAGE);
   };
 

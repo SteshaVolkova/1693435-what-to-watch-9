@@ -4,8 +4,7 @@ import { useEffect, useState } from 'react';
 import LoadingScreen from '../loading-screen/loading-screen';
 import { useAppSelector } from '../../hooks';
 import { getCommentsLoadedDataStatus } from '../../store/commentc-data/selectors';
-
-const COMMENT_COLUMN_LENGTH = 2;
+import { COMMENT_COLUMN_LENGTH } from '../../const';
 
 type MovieReviewListProps = {
   reviews: FilmReview[],
