@@ -5,33 +5,14 @@ import { FilmReview } from '../../types/films';
 import MovieTabOverview from '../movie-tab-overview/movie-tab-overview';
 import MovieTabDetails from '../movie-tab-details/movie-tab-details';
 import MovieTabReview from '../movie-tab-review/movie-tab-review';
+import { movieTabs } from '../../const';
 
 type MovieTabsProps = {
     film: Film,
     reviews: FilmReview[],
 }
 
-type MovieTab = {
-  'id': number,
-  title: string
-}
-
 export default function MovieTabs({ film, reviews }:MovieTabsProps): JSX.Element {
-  const movieTabs: MovieTab[] = [
-    {
-      'id': 1,
-      'title': 'Overview',
-    },
-    {
-      'id': 2,
-      'title': 'Details',
-    },
-    {
-      'id': 3,
-      'title': 'Reviews',
-    },
-  ];
-
   const [isActive, setIsActive] = useState<number>(1);
   const hanldeOpenTab = (id: number) => {
     setIsActive(id);

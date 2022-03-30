@@ -1,3 +1,4 @@
+import { MovieTab } from './types/films';
 import { Star } from './types/rating-stars';
 
 export enum AppRoute {
@@ -62,6 +63,21 @@ export const MAX_COMMENT_LENGTH = 400;
 export const MIN_COMMENT_LENGTH = 50;
 
 export const MAX_GENRE_LENGTH = 10;
+
+export const movieTabs: MovieTab[] = [
+  {
+    'id': 1,
+    'title': 'Overview',
+  },
+  {
+    'id': 2,
+    'title': 'Details',
+  },
+  {
+    'id': 3,
+    'title': 'Reviews',
+  },
+];
 
 export const stars: Star[] = [
   {'id': 10},{'id': 9},{'id': 8},{'id': 7},{'id': 6},{'id': 5},{'id': 4},{'id': 3},{'id': 2},{'id': 1},
