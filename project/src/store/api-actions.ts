@@ -48,7 +48,7 @@ export const fetchPromoAction = createAsyncThunk(
   'data/setPromoFilm',
   async () => {
     try {
-      const {data} = await api.get<Film>(`${APIRoute.PromoFilm}/dsj`);
+      const {data} = await api.get<Film>(APIRoute.PromoFilm);
       store.dispatch(serverStatus(true));
       store.dispatch(setPromoFilm(data));
     } catch (error) {
