@@ -11,6 +11,7 @@ import { storeErrorData } from './store-error-data/store-error-data';
 import { getUserData } from './user-data/user-data';
 import { reviewSendStatusData } from './review-send-status/review-send-status';
 import { favoriteFilmsData } from './favorite-films-data/favorite-films-data';
+import { serverStatusData } from './server-status/server-status';
 
 export const rootReducer = combineReducers({
   [Namespace.user]: userProcess.reducer,
@@ -24,4 +25,5 @@ export const rootReducer = combineReducers({
   [Namespace.userData]: getUserData.reducer,
   [Namespace.reviewSendStatus]: reviewSendStatusData.reducer,
   [Namespace.favoriteFilms]: favoriteFilmsData.reducer,
+  [Namespace.serverStatus]: serverStatusData.reducer,
 });

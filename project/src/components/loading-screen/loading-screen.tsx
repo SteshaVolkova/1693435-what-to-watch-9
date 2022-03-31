@@ -1,13 +1,8 @@
+import './loading-screen.css';
+
 export default function LoadingScreen(): JSX.Element {
   return (
-    <div style={{
-      position: 'fixed',
-      top: '40%',
-      left: '45%',
-      backgroundColor: 'transparent',
-      borderRadius: '5px',
-    }}
-    >
+    <div className="loading-screen-container">
       <svg version="1.1" width={100} height={100} id="L2" xmlns="http://www.w3.org/2000/svg" xmlnsXlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
         viewBox="0 0 100 100" enableBackground="new 0 0 100 100" xmlSpace="preserve"
       >
@@ -33,6 +28,7 @@ export default function LoadingScreen(): JSX.Element {
           />
         </line>
       </svg>
+      <div><p>Loading data, please wait or try reloading the page.</p></div>
     </div>
   );
 }

@@ -18,6 +18,7 @@ import { errorData } from './store-error-data/store-error-data';
 import { userData } from './user-data/user-data';
 import { reviewSendStatus } from './review-send-status/review-send-status';
 import { loadFavoriteFilms } from './favorite-films-data/favorite-films-data';
+import { serverStatus } from './server-status/server-status';
 
 export const clearErrorAction = createAsyncThunk(
   'film/setError',
@@ -34,9 +35,11 @@ export const fetchFilmsAction = createAsyncThunk(
   async () => {
     try {
       const {data} = await api.get<Film[]>(APIRoute.Films);
+      store.dispatch(serverStatus(true));
       store.dispatch(loadFilms(data));
     } catch (error) {
       errorHandle(error);
+      store.dispatch(serverStatus(false));
     }
   },
 );
@@ -45,10 +48,12 @@ export const fetchPromoAction = createAsyncThunk(
   'data/setPromoFilm',
   async () => {
     try {
-      const {data} = await api.get<Film>(APIRoute.PromoFilm);
+      const {data} = await api.get<Film>(`${APIRoute.PromoFilm}/dsj`);
+      store.dispatch(serverStatus(true));
       store.dispatch(setPromoFilm(data));
     } catch (error) {
       errorHandle(error);
+      store.dispatch(serverStatus(false));
     }
   },
 );
@@ -58,9 +63,11 @@ export const fetchSimilarFilmsAction = createAsyncThunk(
   async (id: number | null) => {
     try {
       const {data} = await api.get<Film[]>(`${APIRoute.Films}/${id}/similar`);
+      store.dispatch(serverStatus(true));
       store.dispatch(setSimilarFilms(data));
     } catch (error) {
       errorHandle(error);
+      store.dispatch(serverStatus(false));
     }
   },
 );
@@ -70,9 +77,11 @@ export const fetchFavoriteFilm = createAsyncThunk(
   async () => {
     try {
       const {data} = await api.get<Film[]>(APIRoute.FavoriteFilms);
+      store.dispatch(serverStatus(true));
       store.dispatch(loadFavoriteFilms(data));
     } catch (error) {
       errorHandle(error);
+      store.dispatch(serverStatus(false));
     }
   },
 );
@@ -94,9 +103,11 @@ export const fetchCommentsAction = createAsyncThunk(
   async (id: number | null) => {
     try {
       const {data} = await api.get<FilmReview[]>(`${APIRoute.CommentsFilm}/${id}`);
+      store.dispatch(serverStatus(true));
       store.dispatch(loadComments(data));
     } catch (error) {
       errorHandle(error);
+      store.dispatch(serverStatus(false));
     }
   },
 );

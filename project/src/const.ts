@@ -48,6 +48,7 @@ export enum Namespace {
   postUserReview = 'POST_USER_REVIEW',
   setError = 'SET_ERROR',
   reviewSendStatus = 'REVIEW_SEND_STATUS',
+  serverStatus = 'SERVER_STATUS',
   selectedGenre = 'SELECTED_GENRE',
   user = 'USER',
   userData = 'USER_DATA',

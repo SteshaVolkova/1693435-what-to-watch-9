@@ -1,3 +1,4 @@
+import './error-message.css';
 import { useAppSelector } from '../../hooks';
 import { getError } from '../../store/store-error-data/selectors';
 
@@ -6,7 +7,7 @@ export default function ErrorMessage(): JSX.Element | null {
 
   if (error) {
     return (
-      <div
+      <div className='error-message'
         style={{
           position: 'fixed',
           top: '30px',
