@@ -1,5 +1,5 @@
 import { combineReducers } from '@reduxjs/toolkit';
-import { NameSpace } from '../const';
+import { Namespace } from '../const';
 import { userProcess } from './user-process/user-process';
 import { selectedGenre } from './selected-genre/selected-genre';
 import { filmsData } from './films-data/films-data';
@@ -13,15 +13,15 @@ import { reviewSendStatusData } from './review-send-status/review-send-status';
 import { favoriteFilmsData } from './favorite-films-data/favorite-films-data';
 
 export const rootReducer = combineReducers({
-  [NameSpace.user]: userProcess.reducer,
-  [NameSpace.selectedGenre]: selectedGenre.reducer,
-  [NameSpace.filmsData]: filmsData.reducer,
-  [NameSpace.commentsData]: commentsData.reducer,
-  [NameSpace.promoFilmData]: promoFilmData.reducer,
-  [NameSpace.similarFilmsData]: similarFilmsData.reducer,
-  [NameSpace.postUserReview]: postCommentData.reducer,
-  [NameSpace.setError]: storeErrorData.reducer,
-  [NameSpace.userData]: getUserData.reducer,
-  [NameSpace.reviewSendStatus]: reviewSendStatusData.reducer,
-  [NameSpace.favoriteFilms]: favoriteFilmsData.reducer,
+  [Namespace.user]: userProcess.reducer,
+  [Namespace.selectedGenre]: selectedGenre.reducer,
+  [Namespace.filmsData]: filmsData.reducer,
+  [Namespace.commentsData]: commentsData.reducer,
+  [Namespace.promoFilmData]: promoFilmData.reducer,
+  [Namespace.similarFilmsData]: similarFilmsData.reducer,
+  [Namespace.postUserReview]: postCommentData.reducer,
+  [Namespace.setError]: storeErrorData.reducer,
+  [Namespace.userData]: getUserData.reducer,
+  [Namespace.reviewSendStatus]: reviewSendStatusData.reducer,
+  [Namespace.favoriteFilms]: favoriteFilmsData.reducer,
 });

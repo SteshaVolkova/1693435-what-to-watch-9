@@ -73,12 +73,14 @@ export default function SignInPage(): JSX.Element {
           className="sign-in__form"
           onSubmit={handleSubmit}
         >
+          {(isPasswordError || isError) && <div className="sign-in__message"><p>Please enter a valid email address</p></div>}
           <div className="sign-in__fields">
             <div className="sign-in__field">
               <input
                 onFocus={focusInput}
                 ref={loginRef}
                 className="sign-in__input"
+                pattern="^([a-z0-9_-]+\.)*[a-z0-9_-]+@[a-z0-9_-]+(\.[a-z0-9_-]+)*\.[a-z]{2,6}$"
                 type="email"
                 placeholder="Email address"
                 name="user-email"
@@ -91,6 +93,7 @@ export default function SignInPage(): JSX.Element {
                 onFocus={focusPasswordInput}
                 onChange={handlePasswordValidate}
                 ref={passwordRef}
+                pattern="(?=.*\d)(?=.*[a-zA-Z]).*"
                 className="sign-in__input"
                 type="password"
                 placeholder="Password"
@@ -99,8 +102,6 @@ export default function SignInPage(): JSX.Element {
               />
               <label className="sign-in__label visually-hidden" htmlFor="user-password">Password</label>
             </div>
-            {isPasswordError && <><span>The password must not contain spaces and must contain at least one letter and number</span><br></br><br></br></>}
-            {isError && <span>Fill in all fields, please!</span>}
           </div>
           <div className="sign-in__submit">
             <button className="sign-in__btn" type="submit">Sign in</button>

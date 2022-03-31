@@ -1,4 +1,4 @@
-import { NameSpace } from '../../const';
+import { Namespace } from '../../const';
 import { State } from '../../types/state';
 
-export const getError = (state: State): string => state[NameSpace.setError].error;
+export const getError = (state: State): string => state[Namespace.setError].error;

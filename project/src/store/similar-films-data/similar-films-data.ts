@@ -1,5 +1,5 @@
 import { createSlice } from '@reduxjs/toolkit';
-import { NameSpace } from '../../const';
+import { Namespace } from '../../const';
 import { SimilarFilmsData } from '../../types/state';
 
 const initialState: SimilarFilmsData = {
@@ -8,7 +8,7 @@ const initialState: SimilarFilmsData = {
 };
 
 export const similarFilmsData = createSlice({
-  name: NameSpace.similarFilmsData,
+  name: Namespace.similarFilmsData,
   initialState,
   reducers: {
     setSimilarFilms: (state, action) => {

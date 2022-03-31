@@ -1,6 +1,6 @@
-import { NameSpace } from '../../const';
+import { Namespace } from '../../const';
 import { State } from '../../types/state';
 import { Film } from '../../types/films';
 
-export const getSumilarFilmsList = (state: State): Film[] => state[NameSpace.similarFilmsData].similarFilms;
-export const getSimilarLoadedDataStatus = (state: State): boolean => state[NameSpace.commentsData].isDataLoaded;
+export const getSumilarFilmsList = (state: State): Film[] => state[Namespace.similarFilmsData].similarFilms;
+export const getSimilarLoadedDataStatus = (state: State): boolean => state[Namespace.commentsData].isDataLoaded;
