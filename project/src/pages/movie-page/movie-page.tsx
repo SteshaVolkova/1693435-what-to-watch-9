@@ -3,9 +3,8 @@ import MoviePageTopBlock from '../../components/movie-page-top-block/movie-page-
 import SmallFilmCard from '../../components/small-film-card/small-film-card';
 import { useNavigate, useParams } from 'react-router-dom';
 import MovieTabs from '../../components/movie-tabs/movie-tabs';
-import { useAppSelector } from '../../hooks';
+import { useAppDispatch, useAppSelector } from '../../hooks';
 import { fetchCommentsAction, fetchSimilarFilmsAction } from '../../store/api-actions';
-import { store } from '../../store';
 import { useEffect } from 'react';
 import { AppRoute } from '../../const';
 import LoadingScreen from '../../components/loading-screen/loading-screen';
@@ -21,6 +20,7 @@ export default function MoviePage(): JSX.Element {
   const isDataLoadedSimilarList = useAppSelector(getSimilarLoadedDataStatus);
   const isDataLoadedFilmsList = useAppSelector(getFilmsLoadedDataStatus);
   const isDataLoadedCommentsList = useAppSelector(getCommentsLoadedDataStatus);
+  const dispatch = useAppDispatch();
   const params = useParams();
   const filmId = Number(params.id);
   const film = films[filmId - 1];
@@ -31,9 +31,9 @@ export default function MoviePage(): JSX.Element {
       navigate(AppRoute.NotFound);
       return;
     }
-    store.dispatch(fetchCommentsAction(film.id));
-    store.dispatch(fetchSimilarFilmsAction(film.id));
-  }, [film, navigate]);
+    dispatch(fetchCommentsAction(film.id));
+    dispatch(fetchSimilarFilmsAction(film.id));
+  }, [dispatch, film, navigate]);
 
   if (!film || !isDataLoadedSimilarList || !isDataLoadedFilmsList || !isDataLoadedCommentsList) {
     return (

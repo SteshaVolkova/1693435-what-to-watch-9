@@ -82,3 +82,7 @@ export const movieTabs: MovieTab[] = [
 export const stars: Star[] = [
   {'id': 10},{'id': 9},{'id': 8},{'id': 7},{'id': 6},{'id': 5},{'id': 4},{'id': 3},{'id': 2},{'id': 1},
 ];
+
+export const validatePassword = /^(?=.*\d)(?=.*[a-zA-Z]).*/;
+
+export const validateEmail = /[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+(?:[A-Z]{2}|ru|yahoo|yandex|com|org|net|gov|mil|biz|info|mobi|name|aero|jobs|museum|ua|in|bz|xxx|tel|place)\b/;
