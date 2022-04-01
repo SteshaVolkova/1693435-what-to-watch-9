@@ -7,16 +7,26 @@ type MovieTabOverviewProps = {
 export default function MovieTabOverview({film}: MovieTabOverviewProps): JSX.Element {
   const {rating, scoresCount, description, director, starring} = film;
 
+  const convertFilmRating = (overallRating: number) => {
+    if (overallRating >= 0 && overallRating < 3) {
+      return 'Bad';
+    } else if (overallRating >= 3 && overallRating < 5) {
+      return 'Normal';
+    } else if (overallRating >= 5 && overallRating < 8) {
+      return 'Good';
+    } else if (overallRating >= 8 && overallRating < 10) {
+      return 'Very good';
+    } else if (overallRating === 10) {
+      return 'Awesome';
+    }
+  };
+
   return (
     <>
       <div className="film-rating">
         <div className="film-rating__score">{rating}</div>
         <p className="film-rating__meta">
-          {(rating >= 0 && rating < 3) && <span className="film-rating__level">Bad</span>}
-          {(rating >= 3 && rating < 5) && <span className="film-rating__level">Normal</span>}
-          {(rating >= 5 && rating < 8) && <span className="film-rating__level">Good</span>}
-          {(rating >= 8 && rating < 10) && <span className="film-rating__level">Very good</span>}
-          {(rating === 10) && <span className="film-rating__level">Awesome</span>}
+          <span className="film-rating__level">{convertFilmRating(rating)}</span>
           <span className="film-rating__count">{`${scoresCount} ratings`}</span>
         </p>
       </div>

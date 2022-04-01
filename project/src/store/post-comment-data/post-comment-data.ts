@@ -1,5 +1,5 @@
 import { createSlice } from '@reduxjs/toolkit';
-import { NameSpace } from '../../const';
+import { Namespace } from '../../const';
 import { PostUserReview } from '../../types/state';
 
 const initialState: PostUserReview = {
@@ -11,7 +11,7 @@ const initialState: PostUserReview = {
 };
 
 export const postCommentData = createSlice({
-  name: NameSpace.postUserReview,
+  name: Namespace.postUserReview,
   initialState,
   reducers: {
     postUserReview: (state, action) => {

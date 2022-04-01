@@ -1,6 +1,5 @@
 import { useEffect, useState } from 'react';
-import { useAppSelector } from '../../hooks';
-import { store } from '../../store';
+import { useAppDispatch, useAppSelector } from '../../hooks';
 import { pushFavoriteFilm } from '../../store/api-actions';
 import { getFavoriteFilmsList } from '../../store/favorite-films-data/selectors';
 import { getAuthorizationStatus } from '../../store/user-process/selectors';
@@ -13,10 +12,11 @@ type AddToMyListButtonProps = {
 export default function AddToMyListButton({filmId}: AddToMyListButtonProps): JSX.Element {
   const favoriteFilms = useAppSelector(getFavoriteFilmsList);
   const authorizationStatus = useAppSelector(getAuthorizationStatus);
+  const dispatch = useAppDispatch();
   const [filmStatus, setFilmStatus] = useState(0);
 
   const handleToFavorite = (id: number, status: number) => {
-    store.dispatch(pushFavoriteFilm({id, status}));
+    dispatch(pushFavoriteFilm({id, status}));
   };
 
   useEffect(() => {

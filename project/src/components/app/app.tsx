@@ -15,10 +15,19 @@ import HistoryRouter from '../history-route/history-route';
 import browserHistory from '../../browser-history';
 import { getAuthorizationStatus } from '../../store/user-process/selectors';
 import { getFilmsLoadedDataStatus } from '../../store/films-data/selectors';
+import { getServerStatus } from '../../store/server-status/selectors';
+import ServerErorMessage from '../server-error-message/server-error-message';
 
 export default function App(): JSX.Element {
   const authorizationStatus = useAppSelector(getAuthorizationStatus);
   const isDataLoadedFilmsList = useAppSelector(getFilmsLoadedDataStatus);
+  const serverDataLoadingSattus = useAppSelector(getServerStatus);
+
+  if (!serverDataLoadingSattus) {
+    return (
+      <ServerErorMessage />
+    );
+  }
 
   if (isCheckedAuth(authorizationStatus) || !isDataLoadedFilmsList) {
     return (

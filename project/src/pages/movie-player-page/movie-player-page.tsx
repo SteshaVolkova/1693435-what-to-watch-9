@@ -77,7 +77,7 @@ export default function MoviePlayer(): JSX.Element {
             </progress>
             <div className="player__toggler" style ={{left: `${getRemainingPercent(film.runTime, currentTime)}%`}}>Toggler</div>
           </div>
-          <div className="player__time-value">{getRemainingTime(film.runTime, currentTime)}</div>
+          <div className="player__time-value">-{getRemainingTime(film.runTime, currentTime)}</div>
         </div>
 
         <div className="player__controls-row">

@@ -33,13 +33,13 @@ export enum APIRoute {
 
 export const TIMEOUT_SHOW_ERROR = 2000;
 
-export enum HTTP_CODE {
+export enum Httpcode {
   BAD_REQUEST = 400,
   UNAUTHORIZED = 401,
   NOT_FOUND = 404,
 }
 
-export enum NameSpace {
+export enum Namespace {
   filmsData = 'FILMS_DATA',
   commentsData = 'COMMENTS_DATA',
   promoFilmData = 'PROMO_FILM_DATA',
@@ -48,6 +48,7 @@ export enum NameSpace {
   postUserReview = 'POST_USER_REVIEW',
   setError = 'SET_ERROR',
   reviewSendStatus = 'REVIEW_SEND_STATUS',
+  serverStatus = 'SERVER_STATUS',
   selectedGenre = 'SELECTED_GENRE',
   user = 'USER',
   userData = 'USER_DATA',
@@ -82,3 +83,7 @@ export const movieTabs: MovieTab[] = [
 export const stars: Star[] = [
   {'id': 10},{'id': 9},{'id': 8},{'id': 7},{'id': 6},{'id': 5},{'id': 4},{'id': 3},{'id': 2},{'id': 1},
 ];
+
+export const validatePassword = /^(?=.*\d)(?=.*[a-zA-Z]).*/;
+
+export const validateEmail = /[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+(?:[A-Z]{2}|ru|yahoo|yandex|com|org|net|gov|mil|biz|info|mobi|name|aero|jobs|museum|ua|in|bz|xxx|tel|place)\b/;

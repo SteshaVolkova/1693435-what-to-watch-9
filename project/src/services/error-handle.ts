@@ -3,7 +3,8 @@ import { store } from '../store';
 import { errorData } from '../store/store-error-data/store-error-data';
 import { clearErrorAction } from '../store/api-actions';
 import { ErrorType } from '../types/error';
-import { HTTP_CODE } from '../const';
+import { Httpcode } from '../const';
+import { serverStatus } from '../store/server-status/server-status';
 
 export const errorHandle = (error: ErrorType): void => {
   if (!request.isAxiosError(error)) {
@@ -19,14 +20,14 @@ export const errorHandle = (error: ErrorType): void => {
 
   if (response) {
     switch (response.status) {
-      case HTTP_CODE.BAD_REQUEST:
+      case Httpcode.BAD_REQUEST:
         handleError(response.data.error);
         break;
-      case HTTP_CODE.UNAUTHORIZED:
+      case Httpcode.UNAUTHORIZED:
         handleError(response.data.error);
         break;
-      case HTTP_CODE.NOT_FOUND:
-        handleError(response.data.error);
+      case Httpcode.NOT_FOUND:
+        store.dispatch(serverStatus(false));
         break;
     }
   }

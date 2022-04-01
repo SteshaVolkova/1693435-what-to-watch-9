@@ -1,11 +1,10 @@
 import  './add-comment-form.css';
 import { FormEvent, useCallback, useEffect, useRef, useState } from 'react';
 import { postComment } from '../../store/api-actions';
-import { store } from '../../store';
 import {  useNavigate, useParams } from 'react-router-dom';
 import { AppRoute, MAX_COMMENT_LENGTH, MIN_COMMENT_LENGTH, stars } from '../../const';
 import React from 'react';
-import { useAppSelector } from '../../hooks';
+import { useAppDispatch, useAppSelector } from '../../hooks';
 import { reviewSendStatus } from '../../store/review-send-status/review-send-status';
 import { getReviewSendStatus } from '../../store/review-send-status/selectors';
 
@@ -14,6 +13,7 @@ export default function AddCommentForm(): JSX.Element {
   const [starRating, setStarRating] = useState<number>(0);
   const [isSending, setIsSending] = useState<boolean>(false);
   const [isDisabled, setIsDisabled] = useState<boolean>(true);
+  const dispatch = useAppDispatch();
   const textarea = useRef<HTMLTextAreaElement>(null);
   const sendStatus = useAppSelector(getReviewSendStatus);
   const navigate = useNavigate();
@@ -21,8 +21,8 @@ export default function AddCommentForm(): JSX.Element {
   const id = Number(params.id);
 
   useEffect (() => () => {
-    store.dispatch(reviewSendStatus('initial'));
-  }, []);
+    dispatch(reviewSendStatus('initial'));
+  }, [dispatch]);
 
   const handleRatingChange = (rating: number) => {
     setStarRating(rating);
@@ -50,7 +50,7 @@ export default function AddCommentForm(): JSX.Element {
     if (!isDisabled) {
       const comment  = textarea.current?.value || '';
       setCommentData(comment);
-      store.dispatch(postComment({id, comment, rating: starRating}));
+      dispatch(postComment({id, comment, rating: starRating}));
     }
   };
 

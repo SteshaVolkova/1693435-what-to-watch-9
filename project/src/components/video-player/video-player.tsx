@@ -9,7 +9,7 @@ type VideoPlayerProps = {
 }
 
 export default function VideoPlayer({autoPlay, film}: VideoPlayerProps): JSX.Element {
-  const {previewVideoLink, posterImage, id, name} = film;
+  const {previewVideoLink, previewImage, id, name} = film;
   const [timer, setTimer] = useState<NodeJS.Timeout | null>(null);
   const [isLoading, setIsLoading] = useState(true);
 
@@ -40,7 +40,7 @@ export default function VideoPlayer({autoPlay, film}: VideoPlayerProps): JSX.Ele
         <video
           ref={videoRef}
           src={previewVideoLink}
-          poster={posterImage}
+          poster={previewImage}
           muted
           autoPlay={autoPlay}
           onLoadedData={() => {
