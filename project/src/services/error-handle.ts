@@ -4,6 +4,7 @@ import { errorData } from '../store/store-error-data/store-error-data';
 import { clearErrorAction } from '../store/api-actions';
 import { ErrorType } from '../types/error';
 import { Httpcode } from '../const';
+import { serverStatus } from '../store/server-status/server-status';
 
 export const errorHandle = (error: ErrorType): void => {
   if (!request.isAxiosError(error)) {
@@ -26,7 +27,7 @@ export const errorHandle = (error: ErrorType): void => {
         handleError(response.data.error);
         break;
       case Httpcode.NOT_FOUND:
-        handleError(response.data.error);
+        store.dispatch(serverStatus(false));
         break;
     }
   }
