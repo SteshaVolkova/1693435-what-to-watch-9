@@ -87,6 +87,7 @@ export default function SignInPage(): JSX.Element {
             <div className="sign-in__field">
               <input
                 onChange={handleEmailValidate}
+                onFocus={() => setIsError(false)}
                 ref={loginRef}
                 className="sign-in__input"
                 type="email"
@@ -99,6 +100,7 @@ export default function SignInPage(): JSX.Element {
             <div className="sign-in__field">
               <input
                 onChange={handlePasswordValidate}
+                onFocus={() => setIsError(false)}
                 ref={passwordRef}
                 className="sign-in__input"
                 type="password"
