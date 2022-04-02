@@ -18,7 +18,7 @@ export default function ErrorMessage(): JSX.Element | null {
           borderRadius: '5px',
           zIndex: '2',
         }}
-      >
+      >z
         {error}
       </div>
     );

@@ -3,7 +3,7 @@ import thunk, { ThunkDispatch } from 'redux-thunk';
 import MockAdapter from 'axios-mock-adapter';
 import { configureMockStore } from '@jedmao/redux-mock-store';
 import { createAPI } from '../services/api';
-import { checkAuthAction, fetchFavoriteFilm, fetchFilmsAction, fetchPromoAction, fetchSimilarFilmsAction, loginAction, logoutAction } from './api-actions';
+import { checkAuthAction, fetchFilmsAction, fetchPromoAction, loginAction, logoutAction } from './api-actions';
 import { requireAuthorization } from './user-process/user-process';
 import { APIRoute } from '../const';
 import { State } from '../types/state';
@@ -11,9 +11,6 @@ import { makeFakeFilmsItem } from '../utils/mocks';
 import { loadFilms } from './films-data/films-data';
 import { AuthData } from '../types/auth-data';
 import { setPromoFilm } from './promo-film-data/promo-film-data';
-import { setSimilarFilms } from './similar-films-data/similar-films-data';
-import { datatype } from 'faker';
-import { loadFavoriteFilms } from './favorite-films-data/favorite-films-data';
 
 describe('Async actions', () => {
   const api = createAPI();
