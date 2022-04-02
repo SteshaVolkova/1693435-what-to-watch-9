@@ -48,7 +48,7 @@ export type UserData = {
 }
 
 export type ReviewSendStatusData = {
-  reviewSendStatus: ReviewSendStatus,
+  reviewSendStatusItem: ReviewSendStatus,
 }
 
 export type ServerStatusData = {

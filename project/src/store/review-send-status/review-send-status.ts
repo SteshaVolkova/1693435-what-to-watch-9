@@ -3,7 +3,7 @@ import { Namespace } from '../../const';
 import { ReviewSendStatusData } from '../../types/state';
 
 const initialState: ReviewSendStatusData = {
-  reviewSendStatus: 'initial',
+  reviewSendStatusItem: 'initial',
 };
 
 export const reviewSendStatusData = createSlice({
@@ -11,7 +11,7 @@ export const reviewSendStatusData = createSlice({
   initialState,
   reducers: {
     reviewSendStatus: (state, action) => {
-      state.reviewSendStatus = action.payload;
+      state.reviewSendStatusItem = action.payload;
     },
   },
 });

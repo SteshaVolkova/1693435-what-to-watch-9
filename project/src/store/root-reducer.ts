@@ -1,7 +1,7 @@
 import { combineReducers } from '@reduxjs/toolkit';
 import { Namespace } from '../const';
 import { userProcess } from './user-process/user-process';
-import { selectedGenre } from './selected-genre/selected-genre';
+import { selectedGenreData } from './selected-genre/selected-genre';
 import { filmsData } from './films-data/films-data';
 import { commentsData } from './commentc-data/commentc-data';
 import { promoFilmData } from './promo-film-data/promo-film-data';
@@ -15,7 +15,7 @@ import { serverStatusData } from './server-status/server-status';
 
 export const rootReducer = combineReducers({
   [Namespace.user]: userProcess.reducer,
-  [Namespace.selectedGenre]: selectedGenre.reducer,
+  [Namespace.selectedGenre]: selectedGenreData.reducer,
   [Namespace.filmsData]: filmsData.reducer,
   [Namespace.commentsData]: commentsData.reducer,
   [Namespace.promoFilmData]: promoFilmData.reducer,
