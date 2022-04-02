@@ -7,18 +7,7 @@ export default function ErrorMessage(): JSX.Element | null {
 
   if (error) {
     return (
-      <div className='error-message'
-        style={{
-          position: 'fixed',
-          top: '30px',
-          right: '30px',
-          padding: '10px',
-          backgroundColor: '#d96666',
-          color: 'white',
-          borderRadius: '5px',
-          zIndex: '2',
-        }}
-      >z
+      <div className='error-message'>
         {error}
       </div>
     );
