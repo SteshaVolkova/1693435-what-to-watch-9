@@ -6,7 +6,7 @@ const initialState: SelectedGenre = {
   selectedGenre: 'All genres',
 };
 
-export const selectedGenre = createSlice({
+export const selectedGenreData = createSlice({
   name: Namespace.selectedGenre,
   initialState,
   reducers: {
@@ -16,4 +16,4 @@ export const selectedGenre = createSlice({
   },
 });
 
-export const {updateSelectedGenre} = selectedGenre.actions;
+export const {updateSelectedGenre} = selectedGenreData.actions;
