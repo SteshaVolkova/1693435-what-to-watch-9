@@ -1,5 +1,5 @@
 import { createSlice } from '@reduxjs/toolkit';
-import { Namespace } from '../../const';
+import { NameSpace } from '../../const';
 import { SelectedGenre } from '../../types/state';
 
 const initialState: SelectedGenre = {
@@ -7,7 +7,7 @@ const initialState: SelectedGenre = {
 };
 
 export const selectedGenreData = createSlice({
-  name: Namespace.selectedGenre,
+  name: NameSpace.SelectedGenre,
   initialState,
   reducers: {
     updateSelectedGenre: (state, action) => {

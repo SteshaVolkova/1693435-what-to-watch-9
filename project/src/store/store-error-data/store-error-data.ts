@@ -1,5 +1,5 @@
 import { createSlice } from '@reduxjs/toolkit';
-import { Namespace } from '../../const';
+import { NameSpace } from '../../const';
 import { ErrorData } from '../../types/state';
 
 const initialState: ErrorData = {
@@ -7,7 +7,7 @@ const initialState: ErrorData = {
 };
 
 export const storeErrorData = createSlice({
-  name: Namespace.setError,
+  name: NameSpace.SetError,
   initialState,
   reducers: {
     errorData: (state, action) => {

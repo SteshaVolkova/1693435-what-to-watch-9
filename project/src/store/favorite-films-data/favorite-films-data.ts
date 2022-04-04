@@ -1,5 +1,5 @@
 import { createSlice } from '@reduxjs/toolkit';
-import { Namespace } from '../../const';
+import { NameSpace } from '../../const';
 import { FavoriteFilmsData } from '../../types/state';
 
 const initialState: FavoriteFilmsData = {
@@ -7,7 +7,7 @@ const initialState: FavoriteFilmsData = {
 };
 
 export const favoriteFilmsData = createSlice({
-  name: Namespace.favoriteFilms,
+  name: NameSpace.FavoriteFilms,
   initialState,
   reducers: {
     loadFavoriteFilms: (state, action) => {

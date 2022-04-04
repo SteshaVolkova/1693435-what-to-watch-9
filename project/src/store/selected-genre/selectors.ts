@@ -1,4 +1,4 @@
-import { Namespace } from '../../const';
+import { NameSpace } from '../../const';
 import { State } from '../../types/state';
 
-export const getSelectedGenre = (state: State): string => state[Namespace.selectedGenre].selectedGenre;
+export const getSelectedGenre = (state: State): string => state[NameSpace.SelectedGenre].selectedGenre;

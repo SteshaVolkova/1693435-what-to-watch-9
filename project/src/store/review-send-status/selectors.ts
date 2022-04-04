@@ -1,5 +1,5 @@
-import { Namespace } from '../../const';
+import { NameSpace } from '../../const';
 import { State } from '../../types/state';
 import { ReviewSendStatus } from '../../types/user-data';
 
-export const getReviewSendStatus = (state: State): ReviewSendStatus => state[Namespace.reviewSendStatus].reviewSendStatusItem;
+export const getReviewSendStatus = (state: State): ReviewSendStatus => state[NameSpace.ReviewSendStatus].reviewSendStatusItem;

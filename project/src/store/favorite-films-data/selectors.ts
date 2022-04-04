@@ -1,5 +1,5 @@
-import { Namespace } from '../../const';
+import { NameSpace } from '../../const';
 import { State } from '../../types/state';
 import { Film } from '../../types/films';
 
-export const getFavoriteFilmsList = (state: State): Film[] => state[Namespace.favoriteFilms].favoriteFilms;
+export const getFavoriteFilmsList = (state: State): Film[] => state[NameSpace.FavoriteFilms].favoriteFilms;

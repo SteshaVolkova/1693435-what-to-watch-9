@@ -1,5 +1,5 @@
 import { createSlice } from '@reduxjs/toolkit';
-import { Namespace } from '../../const';
+import { NameSpace } from '../../const';
 import { CommentsData } from '../../types/state';
 
 const initialState: CommentsData = {
@@ -8,7 +8,7 @@ const initialState: CommentsData = {
 };
 
 export const commentsData = createSlice({
-  name: Namespace.commentsData,
+  name: NameSpace.CommentsData,
   initialState,
   reducers: {
     loadComments: (state, action) => {

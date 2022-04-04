@@ -1,5 +1,5 @@
 import { createSlice } from '@reduxjs/toolkit';
-import { Namespace } from '../../const';
+import { NameSpace } from '../../const';
 import { PromoFilmData } from '../../types/state';
 
 const initialState: PromoFilmData = {
@@ -26,7 +26,7 @@ const initialState: PromoFilmData = {
 };
 
 export const promoFilmData = createSlice({
-  name: Namespace.promoFilmData,
+  name: NameSpace.PromoFilmData,
   initialState,
   reducers: {
     setPromoFilm: (state, action) => {

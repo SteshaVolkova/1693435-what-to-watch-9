@@ -33,25 +33,25 @@ export enum APIRoute {
 
 export const TIMEOUT_SHOW_ERROR = 2000;
 
-export enum Httpcode {
-  BAD_REQUEST = 400,
-  UNAUTHORIZED = 401,
-  NOT_FOUND = 404,
+export enum HttpCode {
+  BadRequest = 400,
+  Unauthorized = 401,
+  NotFound = 404,
 }
 
-export enum Namespace {
-  filmsData = 'FILMS_DATA',
-  commentsData = 'COMMENTS_DATA',
-  promoFilmData = 'PROMO_FILM_DATA',
-  similarFilmsData = 'SIMILAR_FILMS_DATA',
-  favoriteFilms  = 'FAVORITE_FILMS',
-  postUserReview = 'POST_USER_REVIEW',
-  setError = 'SET_ERROR',
-  reviewSendStatus = 'REVIEW_SEND_STATUS',
-  serverStatus = 'SERVER_STATUS',
-  selectedGenre = 'SELECTED_GENRE',
-  user = 'USER',
-  userData = 'USER_DATA',
+export enum NameSpace {
+  FilmsData = 'FILMS_DATA',
+  CommentsData = 'COMMENTS_DATA',
+  PromoFilmData = 'PROMO_FILM_DATA',
+  SimilarFilmsData = 'SIMILAR_FILMS_DATA',
+  FavoriteFilms  = 'FAVORITE_FILMS',
+  PostUserReview = 'POST_USER_REVIEW',
+  SetError = 'SET_ERROR',
+  ReviewSendStatus = 'REVIEW_SEND_STATUS',
+  ServerStatus = 'SERVER_STATUS',
+  SelectedGenre = 'SELECTED_GENRE',
+  User = 'USER',
+  UserData = 'USER_DATA',
 }
 
 export const ZERO_VALUE = 0;

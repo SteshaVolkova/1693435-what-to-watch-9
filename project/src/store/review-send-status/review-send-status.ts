@@ -1,5 +1,5 @@
 import { createSlice } from '@reduxjs/toolkit';
-import { Namespace } from '../../const';
+import { NameSpace } from '../../const';
 import { ReviewSendStatusData } from '../../types/state';
 
 const initialState: ReviewSendStatusData = {
@@ -7,7 +7,7 @@ const initialState: ReviewSendStatusData = {
 };
 
 export const reviewSendStatusData = createSlice({
-  name: Namespace.reviewSendStatus,
+  name: NameSpace.ReviewSendStatus,
   initialState,
   reducers: {
     reviewSendStatus: (state, action) => {
