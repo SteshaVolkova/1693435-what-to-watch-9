@@ -1,5 +1,5 @@
 import { createSlice } from '@reduxjs/toolkit';
-import { Namespace } from '../../const';
+import { NameSpace } from '../../const';
 import { UserData } from '../../types/state';
 
 const initialState: UserData = {
@@ -13,7 +13,7 @@ const initialState: UserData = {
 };
 
 export const getUserData = createSlice({
-  name: Namespace.userData,
+  name: NameSpace.UserData,
   initialState,
   reducers: {
     userData: (state, action) => {

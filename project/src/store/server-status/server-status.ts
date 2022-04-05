@@ -1,5 +1,5 @@
 import { createSlice } from '@reduxjs/toolkit';
-import { Namespace } from '../../const';
+import { NameSpace } from '../../const';
 import { ServerStatusData } from '../../types/state';
 
 const initialState: ServerStatusData = {
@@ -7,7 +7,7 @@ const initialState: ServerStatusData = {
 };
 
 export const serverStatusData = createSlice({
-  name: Namespace.serverStatus,
+  name: NameSpace.ServerStatus,
   initialState,
   reducers: {
     serverStatus: (state, action) => {

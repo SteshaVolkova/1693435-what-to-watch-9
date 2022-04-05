@@ -1,5 +1,5 @@
 import { createSlice } from '@reduxjs/toolkit';
-import { Namespace } from '../../const';
+import { NameSpace } from '../../const';
 import { FilmsData } from '../../types/state';
 
 const initialState: FilmsData = {
@@ -8,7 +8,7 @@ const initialState: FilmsData = {
 };
 
 export const filmsData = createSlice({
-  name: Namespace.filmsData,
+  name: NameSpace.FilmsData,
   initialState,
   reducers: {
     loadFilms: (state, action) => {

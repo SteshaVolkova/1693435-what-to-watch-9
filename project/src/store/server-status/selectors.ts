@@ -1,4 +1,4 @@
-import { Namespace } from '../../const';
+import { NameSpace } from '../../const';
 import { State } from '../../types/state';
 
-export const getServerStatus = (state: State): boolean => state[Namespace.serverStatus].status;
+export const getServerStatus = (state: State): boolean => state[NameSpace.ServerStatus].status;
